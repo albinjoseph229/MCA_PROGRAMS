@@ -1,0 +1,1302 @@
+Functions: Numeric Data, Character Conversion and Group functions
+•	Illustrate the different numeric functions using dual table (power, round, ceil, floor, abs, exp, greatest, least, mod, trunc, round, sign, sqrtetc)
+•	Illustrate the character functions (upper, lower, initcap, length, concat, ascii, substr, ltrim, rtrim, trim, translate, instr, chr,Lpad,Rpadetc) using the table Employee.
+•	Illustration of conversion functions- to_number, to_char(numberconversion), to_char(dateconversion)
+•	Count the total no. of Projects.
+•	Calculate the average salary of employees.
+•	Determine the maximum and minimum salary of employees. Rename the output as Max_Sal and Min_Sal respectively
+•	Count the number of employees drawing salary greater than
+$20,000.
+Data manipulations using date functions
+•	Provide a list of all projects which ended on January 2, 2014. Display the year and month of the starting date and the project number. Sort the result by project number. Name the derived columns YEAR and MONTH.
+•	List the number of months between start date and end date of each project.
+•	List the HireDate in the format ‘DD-Month-YY’.
+•	List the date , 15 days after today’s date.
+•	List all the employees who joined in the month of June.
+•	Illustrate the different date functions using dual table (to_date, Add_months, last_day, months_between, next_day, round etc.)
+•	Illustration of special date formats using to_char function (use of th,sp,spth)
+•	List all employees who were younger than 25 when they joined the company. List their employee number, employee name, and age when they joined the company. Name the derived column AGE. Sort the result by age and then by employee number
+	Set Operations(Create a new table named Extra_work_emp(First_name, Hourly_wages, workdept) . Insert some employees from employee table and some new employees in the new table.
+Execute the following Queries:
+•	Retrieve the names of all employees and extra work employees working in department no-D11
+•	Retrieve the names of employees who are also extra work employees.
+•	Retrieve the names of employees who are not extra work employees.
+
+-----------------------------------------------------------------------------------------
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select upper(name) from employee;
+select upper(name) from employee
+             *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier
+
+
+SQL> select upper(empname) from employee;
+
+UPPER(EMPNAME)
+------------------------------
+ARNOLD LEONARD AMON
+PHILIP VINCENT
+SHILVY K K
+ALFRIN LUIZ
+OSHINA ANTONY
+BINCY PAUL
+ANAMIKA PAUL
+ANEESH DENNY
+CHRISTEENA THOMAS
+JEFFIN DOMINIC
+JEWEL BIJOY
+
+UPPER(EMPNAME)
+------------------------------
+MELLOW REEBA THOMAS
+JUNAID K V
+JOHN VARGHESE
+ASHREENA HASSAN
+
+15 rows selected.
+
+SQL> select lower(empname) from employee;
+
+LOWER(EMPNAME)
+------------------------------
+arnold leonard amon
+philip vincent
+shilvy k k
+alfrin luiz
+oshina antony
+bincy paul
+anamika paul
+aneesh denny
+christeena thomas
+jeffin dominic
+jewel bijoy
+
+LOWER(EMPNAME)
+------------------------------
+mellow reeba thomas
+junaid k v
+john varghese
+ashreena hassan
+
+15 rows selected.
+
+SQL> select initcap(empname) from employee;
+
+INITCAP(EMPNAME)
+------------------------------
+Arnold Leonard Amon
+Philip Vincent
+Shilvy K K
+Alfrin Luiz
+Oshina Antony
+Bincy Paul
+Anamika Paul
+Aneesh Denny
+Christeena Thomas
+Jeffin Dominic
+Jewel Bijoy
+
+INITCAP(EMPNAME)
+------------------------------
+Mellow Reeba Thomas
+Junaid K V
+John Varghese
+Ashreena Hassan
+
+15 rows selected.
+
+SQL> select length(empname) from employee;
+
+LENGTH(EMPNAME)
+---------------
+             19
+             14
+             10
+             11
+             13
+             10
+             12
+             12
+             17
+             14
+             11
+
+LENGTH(EMPNAME)
+---------------
+             19
+             10
+             13
+             15
+
+15 rows selected.
+
+SQL> select ascii(empname) from employee;
+
+ASCII(EMPNAME)
+--------------
+            65
+            80
+            83
+            65
+            79
+            66
+            65
+            65
+            67
+            74
+            74
+
+ASCII(EMPNAME)
+--------------
+            77
+            74
+            74
+            65
+
+15 rows selected.
+
+SQL> select ltrim(empname) from employee;
+
+LTRIM(EMPNAME)
+------------------------------
+ARNOLD LEONARD AMON
+PHILIP VINCENT
+SHILVY K K
+ALFRIN LUIZ
+OSHINA ANTONY
+BINCY PAUL
+ANAMIKA PAUL
+ANEESH DENNY
+CHRISTEENA THOMAS
+JEFFIN DOMINIC
+JEWEL BIJOY
+
+LTRIM(EMPNAME)
+------------------------------
+MELLOW REEBA THOMAS
+JUNAID K V
+JOHN VARGHESE
+ASHREENA HASSAN
+
+15 rows selected.
+
+SQL> select rtrim(empname) from employee;
+
+RTRIM(EMPNAME)
+------------------------------
+ARNOLD LEONARD AMON
+PHILIP VINCENT
+SHILVY K K
+ALFRIN LUIZ
+OSHINA ANTONY
+BINCY PAUL
+ANAMIKA PAUL
+ANEESH DENNY
+CHRISTEENA THOMAS
+JEFFIN DOMINIC
+JEWEL BIJOY
+
+RTRIM(EMPNAME)
+------------------------------
+MELLOW REEBA THOMAS
+JUNAID K V
+JOHN VARGHESE
+ASHREENA HASSAN
+
+15 rows selected.
+
+SQL> select substr(empname,3,4) from employee;
+
+SUBS
+----
+NOLD
+ILIP
+ILVY
+FRIN
+HINA
+NCY
+AMIK
+EESH
+RIST
+FFIN
+WEL
+
+SUBS
+----
+LLOW
+NAID
+HN V
+HREE
+
+15 rows selected.
+
+SQL> select concat(empname) from employee;
+select concat(empname) from employee
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select concat(empname,empno) from employee;
+
+CONCAT(EMPNAME,EMPNO)
+----------------------------------------
+ARNOLD LEONARD AMONE0010
+PHILIP VINCENTE0020
+SHILVY K KE0030
+ALFRIN LUIZE0050
+OSHINA ANTONYE0060
+BINCY PAULE0070
+ANAMIKA PAULE0090
+ANEESH DENNYE0100
+CHRISTEENA THOMASE0130
+JEFFIN DOMINICE0140
+JEWEL BIJOYE0150
+
+CONCAT(EMPNAME,EMPNO)
+----------------------------------------
+MELLOW REEBA THOMASE0160
+JUNAID K VE0120
+JOHN VARGHESEE0170
+ASHREENA HASSANE0180
+
+15 rows selected.
+
+SQL> select ltrim(empname,'AR') from employee;
+
+LTRIM(EMPNAME,'AR')
+------------------------------
+NOLD LEONARD AMON
+PHILIP VINCENT
+SHILVY K K
+LFRIN LUIZ
+OSHINA ANTONY
+BINCY PAUL
+NAMIKA PAUL
+NEESH DENNY
+CHRISTEENA THOMAS
+JEFFIN DOMINIC
+JEWEL BIJOY
+
+LTRIM(EMPNAME,'AR')
+------------------------------
+MELLOW REEBA THOMAS
+JUNAID K V
+JOHN VARGHESE
+SHREENA HASSAN
+
+15 rows selected.
+
+SQL> select rtrim(empname,'As') from employee;
+
+RTRIM(EMPNAME,'AS')
+------------------------------
+ARNOLD LEONARD AMON
+PHILIP VINCENT
+SHILVY K K
+ALFRIN LUIZ
+OSHINA ANTONY
+BINCY PAUL
+ANAMIKA PAUL
+ANEESH DENNY
+CHRISTEENA THOMAS
+JEFFIN DOMINIC
+JEWEL BIJOY
+
+RTRIM(EMPNAME,'AS')
+------------------------------
+MELLOW REEBA THOMAS
+JUNAID K V
+JOHN VARGHESE
+ASHREENA HASSAN
+
+15 rows selected.
+
+SQL> select rtrim(empname,'AS') from employee;
+
+RTRIM(EMPNAME,'AS')
+------------------------------
+ARNOLD LEONARD AMON
+PHILIP VINCENT
+SHILVY K K
+ALFRIN LUIZ
+OSHINA ANTONY
+BINCY PAUL
+ANAMIKA PAUL
+ANEESH DENNY
+CHRISTEENA THOM
+JEFFIN DOMINIC
+JEWEL BIJOY
+
+RTRIM(EMPNAME,'AS')
+------------------------------
+MELLOW REEBA THOM
+JUNAID K V
+JOHN VARGHESE
+ASHREENA HASSAN
+
+15 rows selected.
+
+SQL> select trim('BINCY') from employee;
+
+TRIM(
+-----
+BINCY
+BINCY
+BINCY
+BINCY
+BINCY
+BINCY
+BINCY
+BINCY
+BINCY
+BINCY
+BINCY
+
+TRIM(
+-----
+BINCY
+BINCY
+BINCY
+BINCY
+
+15 rows selected.
+
+SQL> select trim(' A ') from employee;
+
+T
+-
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+
+T
+-
+A
+A
+A
+A
+
+15 rows selected.
+
+SQL> select instr(empname,'A') from employee;
+
+INSTR(EMPNAME,'A')
+------------------
+                 1
+                 0
+                 0
+                 1
+                 6
+                 8
+                 1
+                 1
+                10
+                 0
+                 0
+
+INSTR(EMPNAME,'A')
+------------------
+                12
+                 4
+                 7
+                 1
+
+15 rows selected.
+
+SQL> select chr(67) from employee;
+
+C
+-
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+
+C
+-
+C
+C
+C
+C
+
+15 rows selected.
+
+SQL> select chr(67),chr(115) from employee;
+
+C C
+- -
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+
+C C
+- -
+C s
+C s
+C s
+C s
+
+15 rows selected.
+
+SQL> select chr(67),chr(115) from employee;
+
+C C
+- -
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+C s
+
+C C
+- -
+C s
+C s
+C s
+C s
+
+15 rows selected.
+
+SQL> select Lpad('empname',20,'*') from employee;
+
+LPAD('EMPNAME',20,'*
+--------------------
+*************empname
+*************empname
+*************empname
+*************empname
+*************empname
+*************empname
+*************empname
+*************empname
+*************empname
+*************empname
+*************empname
+
+LPAD('EMPNAME',20,'*
+--------------------
+*************empname
+*************empname
+*************empname
+*************empname
+
+15 rows selected.
+
+SQL> select Rpad('empname',20,'*') from employee;
+
+RPAD('EMPNAME',20,'*
+--------------------
+empname*************
+empname*************
+empname*************
+empname*************
+empname*************
+empname*************
+empname*************
+empname*************
+empname*************
+empname*************
+empname*************
+
+RPAD('EMPNAME',20,'*
+--------------------
+empname*************
+empname*************
+empname*************
+empname*************
+
+15 rows selected.
+
+SQL> select Rpad(empname,20,'*') from employee;
+
+RPAD(EMPNAME,20,'*')
+--------------------
+ARNOLD LEONARD AMON*
+PHILIP VINCENT******
+SHILVY K K**********
+ALFRIN LUIZ*********
+OSHINA ANTONY*******
+BINCY PAUL**********
+ANAMIKA PAUL********
+ANEESH DENNY********
+CHRISTEENA THOMAS***
+JEFFIN DOMINIC******
+JEWEL BIJOY*********
+
+RPAD(EMPNAME,20,'*')
+--------------------
+MELLOW REEBA THOMAS*
+JUNAID K V**********
+JOHN VARGHESE*******
+ASHREENA HASSAN*****
+
+15 rows selected.
+
+SQL> select Lpad(empname,20,'*') from employee;
+
+LPAD(EMPNAME,20,'*')
+--------------------
+*ARNOLD LEONARD AMON
+******PHILIP VINCENT
+**********SHILVY K K
+*********ALFRIN LUIZ
+*******OSHINA ANTONY
+**********BINCY PAUL
+********ANAMIKA PAUL
+********ANEESH DENNY
+***CHRISTEENA THOMAS
+******JEFFIN DOMINIC
+*********JEWEL BIJOY
+
+LPAD(EMPNAME,20,'*')
+--------------------
+*MELLOW REEBA THOMAS
+**********JUNAID K V
+*******JOHN VARGHESE
+*****ASHREENA HASSAN
+
+15 rows selected.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL CHAR(10)
+ EMPNAME                                            VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ MOBILE                                             VARCHAR2(10)
+ HIRE_DATE                                          DATE
+ JOB                                                VARCHAR2(15)
+ EDLEVEL                                            NUMBER(38)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+ SALARY                                             NUMBER(10,2)
+ BONUS                                              NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+
+SQL> select HIRE_DATE,TO_CHAR(HIREDATE,'DAY') FROM EMPLOYEE;
+select HIRE_DATE,TO_CHAR(HIREDATE,'DAY') FROM EMPLOYEE
+                         *
+ERROR at line 1:
+ORA-00904: "HIREDATE": invalid identifier
+
+
+SQL> select HIRE_DATE,TO_CHAR(HIRE_DATE,'DAY') FROM EMPLOYEE;
+
+HIRE_DATE TO_CHAR(H
+--------- ---------
+01-DEC-00 FRIDAY
+10-SEP-02 TUESDAY
+19-JUN-04 SATURDAY
+29-MAR-06 WEDNESDAY
+06-JAN-08 SUNDAY
+15-OCT-09 THURSDAY
+25-JUL-11 MONDAY
+03-MAY-13 FRIDAY
+02-DEC-99 THURSDAY
+10-SEP-03 WEDNESDAY
+19-JUN-07 TUESDAY
+
+HIRE_DATE TO_CHAR(H
+--------- ---------
+28-MAR-11 MONDAY
+19-NOV-16 SATURDAY
+04-JAN-15 SUNDAY
+15-OCT-09 THURSDAY
+
+15 rows selected.
+
+SQL> SELECT * FROM PROJECTS;
+SELECT * FROM PROJECTS
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT * FROM PROJECT;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+
+SQL> SELECT COUT(PROJNO) FROM PROJECT;
+SELECT COUT(PROJNO) FROM PROJECT
+       *
+ERROR at line 1:
+ORA-00904: "COUT": invalid identifier
+
+
+SQL> SELECT COUNT(PROJNO) FROM PROJECT;
+
+COUNT(PROJNO)
+-------------
+           17
+
+SQL> SELECT AVG(SALARY) FORM EMPLOYEES;
+SELECT AVG(SALARY) FORM EMPLOYEES
+                        *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT AVG(SALARY) FROM EMPLOYEES;
+SELECT AVG(SALARY) FROM EMPLOYEES
+                        *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT AVG(SALARY) FROM EMPLOYEE;
+
+AVG(SALARY)
+-----------
+ 38117.6667
+
+SQL> SELECT MAX(SALARY) FROM EMPLOYEE;
+
+MAX(SALARY)
+-----------
+     152750
+
+SQL> SELECT MIN(SALARY) FROM EMPLOYEE;
+
+MIN(SALARY)
+-----------
+      21340
+
+SQL> SELCT COUNT(SALARY) FROM EMPLOYEE WHERE SALARY>2000;
+SP2-0734: unknown command beginning "SELCT COUN..." - rest of line ignored.
+SQL> SELECT COUNT(SALARY) FROM EMPLOYEE WHERE SALARY>2000;
+
+COUNT(SALARY)
+-------------
+           15
+
+SQL> SELECT COUNT(SALARY),EMPNAME FROM EMPLOYEE WHERE SALARY>2000;
+SELECT COUNT(SALARY),EMPNAME FROM EMPLOYEE WHERE SALARY>2000
+                     *
+ERROR at line 1:
+ORA-00937: not a single-group group function
+
+
+SQL> SELECT COUNT(SALARY) FROM EMPLOYEE WHERE SALARY>2000;
+
+COUNT(SALARY)
+-------------
+           15
+
+SQL> SELECT owner, table_name FROM dba_tables
+  2  ;
+SELECT owner, table_name FROM dba_tables
+                              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select owner, count(*) from dba_tables;
+select owner, count(*) from dba_tables
+                            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT COUNT(*) FROM USER_TABLES;
+
+  COUNT(*)
+----------
+         8
+
+SQL> SELECT TO_NUMBER(MOBILE) FROM EMPLOYEE;
+
+TO_NUMBER(MOBILE)
+-----------------
+       9445876534
+       9445976535
+       9445976538
+       9445976541
+       9445976544
+       9445976547
+       9445976550
+       9445976553
+       9445976562
+       9445976565
+       9445976568
+
+TO_NUMBER(MOBILE)
+-----------------
+       9466976556
+       9445976559
+       9466976557
+       9466976558
+
+15 rows selected.
+
+SQL> SELECT MAX(SALARY) AS Max_Salary FROM EMPLOYEE;
+
+MAX_SALARY
+----------
+    152750
+
+SQL> SELECT MIN(SALARY) AS MIN_Salary FROM EMPLOYEE;
+
+MIN_SALARY
+----------
+     21340
+
+SQL> SELECT COUNT(SALARY) FROM EMPLOYEE WHERE SALARY>20000;
+
+COUNT(SALARY)
+-------------
+           15
+
+SQL> SELECT COUNT(SALARY) FROM EMPLOYEE WHERE SALARY>30000;
+
+COUNT(SALARY)
+-------------
+            6
+
+SQL> SELECT * FROM PROJECT WHERE STDDATE='02-JAN-2014';
+SELECT * FROM PROJECT WHERE STDDATE='02-JAN-2014'
+                            *
+ERROR at line 1:
+ORA-00904: "STDDATE": invalid identifier
+
+
+SQL> SELECT * FROM PROJECT;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+
+SQL> SELECT * FROM PROJECT WHERE STDATE='02-JAN-2014';
+
+no rows selected
+
+SQL> SELECT * FROM PROJECT WHERE STDATE='24-JAN-17';
+
+no rows selected
+
+SQL> SELECT * FROM PROJECT WHERE STDATE='24-JAN-2017';
+
+no rows selected
+
+SQL> SELECT * FROM PROJECT WHERE STDATE='24-JUN-2017';
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDDATE,'YYYY') TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017';
+SELECT PROJNO,TO_CHAR(STDDATE,'YYYY') TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017'
+                                             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT PROJNO,TO_CHAR(STDDATE,'YYYY'),TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017';
+SELECT PROJNO,TO_CHAR(STDDATE,'YYYY'),TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017'
+                      *
+ERROR at line 1:
+ORA-00904: "STDDATE": invalid identifier
+
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'YYYY'),TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017';
+
+PROJNO     TO_C TO_CHAR(S
+---------- ---- ---------
+AD3100     2017 JUNE
+AD3111     2017 JUNE
+AD3112     2017 JUNE
+MA2110     2017 JUNE
+OP1000     2017 JUNE
+OP1010     2017 JUNE
+OP2000     2017 JUNE
+OP2010     2017 JUNE
+OP2012     2017 JUNE
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'YEAR'),TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017';
+
+PROJNO     TO_CHAR(STDATE,'YEAR')                     TO_CHAR(S
+---------- ------------------------------------------ ---------
+AD3100     TWENTY SEVENTEEN                           JUNE
+AD3111     TWENTY SEVENTEEN                           JUNE
+AD3112     TWENTY SEVENTEEN                           JUNE
+MA2110     TWENTY SEVENTEEN                           JUNE
+OP1000     TWENTY SEVENTEEN                           JUNE
+OP1010     TWENTY SEVENTEEN                           JUNE
+OP2000     TWENTY SEVENTEEN                           JUNE
+OP2010     TWENTY SEVENTEEN                           JUNE
+OP2012     TWENTY SEVENTEEN                           JUNE
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'YEAR'),TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017' ORDER BY PROJNO;
+
+PROJNO     TO_CHAR(STDATE,'YEAR')                     TO_CHAR(S
+---------- ------------------------------------------ ---------
+AD3100     TWENTY SEVENTEEN                           JUNE
+AD3111     TWENTY SEVENTEEN                           JUNE
+AD3112     TWENTY SEVENTEEN                           JUNE
+MA2110     TWENTY SEVENTEEN                           JUNE
+OP1000     TWENTY SEVENTEEN                           JUNE
+OP1010     TWENTY SEVENTEEN                           JUNE
+OP2000     TWENTY SEVENTEEN                           JUNE
+OP2010     TWENTY SEVENTEEN                           JUNE
+OP2012     TWENTY SEVENTEEN                           JUNE
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'YEAR')YEAR,TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017' ORDER BY PROJNO;
+
+PROJNO     YEAR                                       TO_CHAR(S
+---------- ------------------------------------------ ---------
+AD3100     TWENTY SEVENTEEN                           JUNE
+AD3111     TWENTY SEVENTEEN                           JUNE
+AD3112     TWENTY SEVENTEEN                           JUNE
+MA2110     TWENTY SEVENTEEN                           JUNE
+OP1000     TWENTY SEVENTEEN                           JUNE
+OP1010     TWENTY SEVENTEEN                           JUNE
+OP2000     TWENTY SEVENTEEN                           JUNE
+OP2010     TWENTY SEVENTEEN                           JUNE
+OP2012     TWENTY SEVENTEEN                           JUNE
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'YEAR')YEAR,TO_CHAR(STDATE,'MONTH')MONTH FROM PROJECT WHERE STDATE='24-JUN-2017' ORDER BY PROJNO;
+
+PROJNO     YEAR                                       MONTH
+---------- ------------------------------------------ ---------
+AD3100     TWENTY SEVENTEEN                           JUNE
+AD3111     TWENTY SEVENTEEN                           JUNE
+AD3112     TWENTY SEVENTEEN                           JUNE
+MA2110     TWENTY SEVENTEEN                           JUNE
+OP1000     TWENTY SEVENTEEN                           JUNE
+OP1010     TWENTY SEVENTEEN                           JUNE
+OP2000     TWENTY SEVENTEEN                           JUNE
+OP2010     TWENTY SEVENTEEN                           JUNE
+OP2012     TWENTY SEVENTEEN                           JUNE
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'DAY')YEAR,TO_CHAR(STDATE,'MONTH')MONTH FROM PROJECT WHERE STDATE='24-JUN-2017' ORDER BY PROJNO;
+
+PROJNO     YEAR      MONTH
+---------- --------- ---------
+AD3100     SATURDAY  JUNE
+AD3111     SATURDAY  JUNE
+AD3112     SATURDAY  JUNE
+MA2110     SATURDAY  JUNE
+OP1000     SATURDAY  JUNE
+OP1010     SATURDAY  JUNE
+OP2000     SATURDAY  JUNE
+OP2010     SATURDAY  JUNE
+OP2012     SATURDAY  JUNE
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'DAY')DAY,TO_CHAR(STDATE,'MONTH')MONTH FROM PROJECT WHERE STDATE='24-JUN-2017' ORDER BY PROJNO;
+
+PROJNO     DAY       MONTH
+---------- --------- ---------
+AD3100     SATURDAY  JUNE
+AD3111     SATURDAY  JUNE
+AD3112     SATURDAY  JUNE
+MA2110     SATURDAY  JUNE
+OP1000     SATURDAY  JUNE
+OP1010     SATURDAY  JUNE
+OP2000     SATURDAY  JUNE
+OP2010     SATURDAY  JUNE
+OP2012     SATURDAY  JUNE
+
+9 rows selected.
+
+SQL> SELECT PROJNO,TO_CHAR(STDATE,'MM'),TO_CHAR(STDATE,'MONTH') FROM PROJECT WHERE STDATE='24-JUN-2017';
+
+PROJNO     TO TO_CHAR(S
+---------- -- ---------
+AD3100     06 JUNE
+AD3111     06 JUNE
+AD3112     06 JUNE
+MA2110     06 JUNE
+OP1000     06 JUNE
+OP1010     06 JUNE
+OP2000     06 JUNE
+OP2010     06 JUNE
+OP2012     06 JUNE
+
+9 rows selected.
+
+SQL> SELECT MONTHS BETWEEN(STDATE,ENDDATE) AS DURATION FROM PROJECTS;
+SELECT MONTHS BETWEEN(STDATE,ENDDATE) AS DURATION FROM PROJECTS
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT MONTHS_BETWEEN(STDATE,ENDDATE) AS DURATION FROM PROJECTS;
+SELECT MONTHS_BETWEEN(STDATE,ENDDATE) AS DURATION FROM PROJECTS
+                                                       *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT MONTHS_BETWEEN(STDATE,ENDDATE) AS DURATION FROM PROJECT;
+
+  DURATION
+----------
+-13.032258
+-16.967742
+-4.9354839
+-13.032258
+       -19
+       -12
+-13.032258
+-10.096774
+       -12
+-3.9354839
+-9.5483871
+
+  DURATION
+----------
+        -9
+-37.935484
+-13.032258
+-13.032258
+-12.903226
+-49.032258
+
+17 rows selected.
+
+SQL> SELECT MONTHS_BETWEEN(ENDDATE,STDATE) AS DURATION FROM PROJECT;
+
+  DURATION
+----------
+13.0322581
+16.9677419
+4.93548387
+13.0322581
+        19
+        12
+13.0322581
+10.0967742
+        12
+3.93548387
+ 9.5483871
+
+  DURATION
+----------
+         9
+37.9354839
+13.0322581
+13.0322581
+12.9032258
+49.0322581
+
+17 rows selected.
+
+SQL> SELECT HIREDATE,TO_CHAR(HIREDATE,'DD'),TO_CHAR(HIREDATE,'MONTH'),TO_CHAR(HIREDATE,'YY') FROM PROJECT;
+SELECT HIREDATE,TO_CHAR(HIREDATE,'DD'),TO_CHAR(HIREDATE,'MONTH'),TO_CHAR(HIREDATE,'YY') FROM PROJECT
+                                                                         *
+ERROR at line 1:
+ORA-00904: "HIREDATE": invalid identifier
+
+
+SQL> SELECT * FROM PROJECT;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+
+SQL> SELECT HIREDATE,TO_CHAR(STDATE,'DD'),TO_CHAR(STDATE,'MONTH'),TO_CHAR(STDATE,'YY') FROM PROJECT;
+SELECT HIREDATE,TO_CHAR(STDATE,'DD'),TO_CHAR(STDATE,'MONTH'),TO_CHAR(STDATE,'YY') FROM PROJECT
+       *
+ERROR at line 1:
+ORA-00904: "HIREDATE": invalid identifier
+
+
+SQL> SELECT STDATE,TO_CHAR(STDATE,'DD'),TO_CHAR(STDATE,'MONTH'),TO_CHAR(STDATE,'YY') FROM PROJECT;
+
+STDATE    TO TO_CHAR(S TO
+--------- -- --------- --
+24-JUN-17 24 JUNE      17
+23-JUN-16 23 JUNE      16
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+22-NOV-17 22 NOVEMBER  17
+24-MAY-18 24 MAY       18
+24-JUN-17 24 JUNE      17
+22-SEP-17 22 SEPTEMBER 17
+24-APR-18 24 APRIL     18
+24-JUN-19 24 JUNE      19
+05-FEB-19 05 FEBRUARY  19
+
+STDATE    TO TO_CHAR(S TO
+--------- -- --------- --
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+25-JUL-18 25 JULY      18
+24-JUN-17 24 JUNE      17
+
+17 rows selected.
+
+SQL> SELECT STDATE,TO_CHAR(STDATE,'DD')DAY,TO_CHAR(STDATE,'MONTH')MONTH,TO_CHAR(STDATE,'YY')YEAR FROM PROJECT;
+
+STDATE    DA MONTH     YE
+--------- -- --------- --
+24-JUN-17 24 JUNE      17
+23-JUN-16 23 JUNE      16
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+22-NOV-17 22 NOVEMBER  17
+24-MAY-18 24 MAY       18
+24-JUN-17 24 JUNE      17
+22-SEP-17 22 SEPTEMBER 17
+24-APR-18 24 APRIL     18
+24-JUN-19 24 JUNE      19
+05-FEB-19 05 FEBRUARY  19
+
+STDATE    DA MONTH     YE
+--------- -- --------- --
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+24-JUN-17 24 JUNE      17
+25-JUL-18 25 JULY      18
+24-JUN-17 24 JUNE      17
+
+17 rows selected.
+
+SQL> SELECT SYSDATE+15 FROM DUAL;
+
+SYSDATE+1
+---------
+25-AUG-23
+
+SQL> SELECT HIREDATE,TO_CHAR(STDATE,'DD'),TO_CHAR(STDATE,'MONTH'),TO_CHAR(STDATE,'YY') FROM EMPLOYEE;
+SELECT HIREDATE,TO_CHAR(STDATE,'DD'),TO_CHAR(STDATE,'MONTH'),TO_CHAR(STDATE,'YY') FROM EMPLOYEE
+                                                                     *
+ERROR at line 1:
+ORA-00904: "STDATE": invalid identifier
+
+
+SQL> SELECT HIREDATE,TO_CHAR(HIREDATE,'DD'),TO_CHAR(HIREDATE,'MONTH'),TO_CHAR(HIREDATE,'YY') FROM EMPLOYEE;
+SELECT HIREDATE,TO_CHAR(HIREDATE,'DD'),TO_CHAR(HIREDATE,'MONTH'),TO_CHAR(HIREDATE,'YY') FROM EMPLOYEE
+                                                                         *
+ERROR at line 1:
+ORA-00904: "HIREDATE": invalid identifier
+
+
+SQL> SELECT HIRE_DATE,TO_CHAR(HIRE_DATE,'DD'),TO_CHAR(HIRE_DATE,'MONTH'),TO_CHAR(HIRE_DATE,'YY') FROM EMPLOYEE;
+
+HIRE_DATE TO TO_CHAR(H TO
+--------- -- --------- --
+01-DEC-00 01 DECEMBER  00
+10-SEP-02 10 SEPTEMBER 02
+19-JUN-04 19 JUNE      04
+29-MAR-06 29 MARCH     06
+06-JAN-08 06 JANUARY   08
+15-OCT-09 15 OCTOBER   09
+25-JUL-11 25 JULY      11
+03-MAY-13 03 MAY       13
+02-DEC-99 02 DECEMBER  99
+10-SEP-03 10 SEPTEMBER 03
+19-JUN-07 19 JUNE      07
+
+HIRE_DATE TO TO_CHAR(H TO
+--------- -- --------- --
+28-MAR-11 28 MARCH     11
+19-NOV-16 19 NOVEMBER  16
+04-JAN-15 04 JANUARY   15
+15-OCT-09 15 OCTOBER   09
+
+15 rows selected.
+
+SQL> SELECT EMPNO,EMPNAME HIRE_DATE FROM EMPLOYEE WHERE TO_CHAR(HIRE_DATE,'MON'='JUN');
+SELECT EMPNO,EMPNAME HIRE_DATE FROM EMPLOYEE WHERE TO_CHAR(HIRE_DATE,'MON'='JUN')
+                                                                          *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> SELECT EMPNO,EMPNAME HIRE_DATE FROM EMPLOYEE WHERE TO_CHAR(HIRE_DATE,'MON')='JUN';
+
+EMPNO      HIRE_DATE
+---------- ------------------------------
+E0030      SHILVY K K
+E0150      JEWEL BIJOY
+
+SQL> SELECT SYS_DATE TO_CHAR(TO_DATE('03/02/2002')) FROM DUAL;
+SELECT SYS_DATE TO_CHAR(TO_DATE('03/02/2002')) FROM DUAL
+                       *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT SYS_DATE TO_CHAR(TO_DATE('03/02/2002'))FROM DUAL;
+SELECT SYS_DATE TO_CHAR(TO_DATE('03/02/2002'))FROM DUAL
+                       *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT SYS_DATE,TO_CHAR(TO_DATE('03/02/2002'))FROM DUAL;
+SELECT SYS_DATE,TO_CHAR(TO_DATE('03/02/2002'))FROM DUAL
+       *
+ERROR at line 1:
+ORA-00904: "SYS_DATE": invalid identifier
+
+
+SQL> SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2002'))FROM DUAL;
+SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2002'))FROM DUAL
+                               *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> SELECT SYSDATE,TO_CHAR(TO_DATE('3/02/2002'))FROM DUAL;
+SELECT SYSDATE,TO_CHAR(TO_DATE('3/02/2002'))FROM DUAL
+                               *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> SELECT SYSDATE,TO_CHAR(TO_DATE('3/2/2002'))FROM DUAL;
+SELECT SYSDATE,TO_CHAR(TO_DATE('3/2/2002'))FROM DUAL
+                               *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2022'))FROM DUAL;
+SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2022'))FROM DUAL
+                               *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2022','DDTH'))FROM DUAL;
+SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2022','DDTH'))FROM DUAL
+                               *
+ERROR at line 1:
+ORA-01830: date format picture ends before converting entire input string
+
+
+SQL> SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2022','ddth'))FROM DUAL;
+SELECT SYSDATE,TO_CHAR(TO_DATE('03/02/2022','ddth'))FROM DUAL
+                               *
+ERROR at line 1:
+ORA-01830: date format picture ends before converting entire input string
+
+
+SQL>

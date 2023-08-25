@@ -1,0 +1,980 @@
+DATE:03/08/2023
+
+Retrieval  of  data  (Simple select query and select with where options (include all relational and logical operators)
+
+•	List details of all employees.
+•	List employee number, employee name, date of birth, and salary for all employees who make more than 30,000 a month. Sequence the results in descending order by salary.
+•	List name and the department number for all employees. The listing should be ordered by descending department numbers. Within the same department, the employee names should be sorted in descending order.
+•	List the different education levels in the company in descending order. List only one occurrence of duplicate result rows.
+•	List employees, by employee number, and their assigned projects, by project number. Display only those employees with an employee number less than or equal to E0100. Sort the result rows by employee number.
+•	List employee name, salary, and bonus of all male employees.
+•	List employee name, salary, and commission for all employees with a salary greater than 20,000 and hired after 2004.
+•	List employee name, salary, bonus, and commission for all employees with a salary greater than 22,000 and a bonus of 400, or for all employees with a bonus of 500 and a commission lower than 1,900. The list should be ordered by employee name.
+•	List employee name, salary, bonus, and commission for all employees with a salary greater than 22,000, a bonus of 400 or 500, and a commission less than 1,900. The list should be ordered by employee name.
+•	Using the EMP_PROJ table, for all projects that have a project number beginning with AD , list the following:
+Project number Employee No Employee Time
+Order the list by employee time within project number.
+•	List manager number and department number for all departments to which a manager has been assigned. The list should be ordered by manager number.
+•	List employee number, name, salary, and bonus for all employees that have a bonus ranging from 800 to 1,000. Sort the report by employee number within bonus, lowest bonus first.
+ 
+•	List employee number, name, salary, and department number for all employees in departments A00 through C01 (inclusive). Order the results alphabetically by employee name and employee number.
+•	List all projects that have SUPPORT as part of the project name. Order the results by project number.
+•	List all departments that have a 1 as the middle character in the department number. Order the results by department number.
+•	List the names and salary of the five highest paid employees.
+•	List the names and salary of the five highest paid non-manager, non-president employee.
+
+
+
+
+LAB SESSION
+-----------
+SQL> select * from employee;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08
+MANAGER                 16 F 12-MAY-87      32250       4600       2580
+
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09
+MANAGER                 16 F 30-MAR-80      36170       3700       2893
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11
+MANAGER                 16 F 19-MAR-78      29750       5600       2380
+
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13
+MANAGER                 14 M 22-OCT-93      26150       5500       2092
+
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99
+ANALYST                 16 F 20-JUL-82      23800       1500       1904
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03
+ANALYST                 18 M 23-NOV-82      28420       2600       2274
+
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07
+DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11
+DESIGNER                17 F 14-FEB-82      22250       2400       1780
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16
+CLERK                   14 M 22-AUG-97      29250       1600       2340
+
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15
+DESIGNER                16 M 10-NOV-87      24680       2500       1974
+
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09
+DESIGNER                17 F 26-DEC-85      21340       2500       1707
+
+
+15 rows selected.
+
+SQL> set linesize 150;
+SQL> select * from employee;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB                EDLEVEL G DOB           SALARY     BONUS        COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00 PRESIDENT               18 M 19-MAY-67     152750     10000      14220
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02 MANAGER                 18 M 07-DEC-76      41250      4800        3300
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04 MANAGER                 20 F 15-MAR-78      38250      4800        3060
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06 MANAGER                 16 F 20-AUG-82      40175      5800        3214
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08 MANAGER                 16 F 12-MAY-87      32250      4600        2580
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09 MANAGER                 16 F 30-MAR-80      36170      3700        2893
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11 MANAGER                 16 F 19-MAR-78      29750      5600        2380
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13 MANAGER                 14 M 22-OCT-93      26150      5500        2092
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99 ANALYST                 16 F 20-JUL-82      23800      1500        1904
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03 ANALYST                 18 M 23-NOV-82      28420      2600        2274
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07 DESIGNER                16 M 21-MAR-84      25280      2500        2022
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB                EDLEVEL G DOB           SALARY     BONUS        COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11 DESIGNER                17 F 14-FEB-82      22250      2400        1780
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16 CLERK                   14 M 22-AUG-97      29250      1600        2340
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15 DESIGNER                16 M 10-NOV-87      24680      2500        1974
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09 DESIGNER                17 F 26-DEC-85      21340      2500        1707
+
+15 rows selected.
+
+SQL> select * from testemp;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0111      SMITH                          C01   06-JUN-15      25000          0
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+
+SQL> delete table testemp;
+delete table testemp
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> delete testemp;
+
+3 rows deleted.
+
+SQL> drop  testemp;
+drop  testemp
+      *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop table testemp;
+
+Table dropped.
+
+SQL> select * from employees;
+select * from employees
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from employee;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00 PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02 MANAGER                 18 M 07-DEC-76      41250       4800       3300
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04 MANAGER                 20 F 15-MAR-78      38250       4800       3060
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06 MANAGER                 16 F 20-AUG-82      40175       5800       3214
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08 MANAGER                 16 F 12-MAY-87      32250       4600       2580
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09 MANAGER                 16 F 30-MAR-80      36170       3700       2893
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11 MANAGER                 16 F 19-MAR-78      29750       5600       2380
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13 MANAGER                 14 M 22-OCT-93      26150       5500       2092
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99 ANALYST                 16 F 20-JUL-82      23800       1500       1904
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03 ANALYST                 18 M 23-NOV-82      28420       2600       2274
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07 DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11 DESIGNER                17 F 14-FEB-82      22250       2400       1780
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16 CLERK                   14 M 22-AUG-97      29250       1600       2340
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15 DESIGNER                16 M 10-NOV-87      24680       2500       1974
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09 DESIGNER                17 F 26-DEC-85      21340       2500       1707
+
+15 rows selected.
+     select
+SQL> select empno,empname,dob,salry from employee where salary>30000 desc;
+select empno,empname,dob,salry from employee where salary>30000 desc
+
+   *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select empno,empname,dob,salry from employee where salary>30000;
+select empno,empname,dob,salry from employee where salary>30000
+                         *
+ERROR at line 1:
+ORA-00904: "SALRY": invalid identifier
+
+
+SQL> select empno,empname,dob,salary from employee where salary>30000;
+
+EMPNO      EMPNAME                        DOB           SALARY
+---------- ------------------------------ --------- ----------
+E0010      ARNOLD LEONARD AMON            19-MAY-67     152750
+E0020      PHILIP VINCENT                 07-DEC-76      41250
+E0030      SHILVY K K                     15-MAR-78      38250
+E0050      ALFRIN LUIZ                    20-AUG-82      40175
+E0060      OSHINA ANTONY                  12-MAY-87      32250
+E0070      BINCY PAUL                     30-MAR-80      36170
+
+6 rows selected.
+
+SQL>
+SQL> select empno,empname,dob,salary from employee where salary>30000 order by salary desc;
+
+EMPNO      EMPNAME                        DOB           SALARY
+---------- ------------------------------ --------- ----------
+E0010      ARNOLD LEONARD AMON            19-MAY-67     152750
+E0020      PHILIP VINCENT                 07-DEC-76      41250
+E0050      ALFRIN LUIZ                    20-AUG-82      40175
+E0030      SHILVY K K                     15-MAR-78      38250
+E0070      BINCY PAUL                     30-MAR-80      36170
+E0060      OSHINA ANTONY                  12-MAY-87      32250
+
+6 rows selected.
+
+SQL> select empname,depno from employee order by depno,empname desc;
+
+EMPNAME                        DEPNO
+------------------------------ -----
+JUNAID K V                     A00
+ARNOLD LEONARD AMON            A00
+PHILIP VINCENT                 B01
+SHILVY K K                     C01
+JEFFIN DOMINIC                 C01
+CHRISTEENA THOMAS              C01
+OSHINA ANTONY                  D11
+MELLOW REEBA THOMAS            D11
+JOHN VARGHESE                  D11
+JEWEL BIJOY                    D11
+ASHREENA HASSAN                D11
+
+EMPNAME                        DEPNO
+------------------------------ -----
+BINCY PAUL                     D21
+ALFRIN LUIZ                    E01
+ANAMIKA PAUL                   E11
+ANEESH DENNY                   E21
+
+15 rows selected.
+
+SQL> select empname,depno from employee order by depno desc,empname desc;
+
+EMPNAME                        DEPNO
+------------------------------ -----
+ANEESH DENNY                   E21
+ANAMIKA PAUL                   E11
+ALFRIN LUIZ                    E01
+BINCY PAUL                     D21
+OSHINA ANTONY                  D11
+MELLOW REEBA THOMAS            D11
+JOHN VARGHESE                  D11
+JEWEL BIJOY                    D11
+ASHREENA HASSAN                D11
+SHILVY K K                     C01
+JEFFIN DOMINIC                 C01
+
+EMPNAME                        DEPNO
+------------------------------ -----
+CHRISTEENA THOMAS              C01
+PHILIP VINCENT                 B01
+JUNAID K V                     A00
+ARNOLD LEONARD AMON            A00
+
+15 rows selected.
+
+SQL> select distinct edlevel from employee order by edlevel desc;
+
+   EDLEVEL
+----------
+        20
+        18
+        17
+        16
+        14
+
+SQL> select empno from employee
+  2  ;
+
+EMPNO
+----------
+E0010
+E0020
+E0030
+E0050
+E0060
+E0070
+E0090
+E0100
+E0120
+E0130
+E0140
+
+EMPNO
+----------
+E0150
+E0160
+E0170
+E0180
+
+15 rows selected.
+
+SQL> select * from project;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+
+SQL> select empno from employee(projno from project) where empno<='E0100';
+select empno from employee(projno from project) where empno<='E0100'
+                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select empno,projno from emp_proj where empno<='E0100' order by empno;
+select empno,projno from emp_proj where empno<='E0100' order by empno
+                                        *
+ERROR at line 1:
+ORA-00904: "EMPNO": invalid identifier
+
+
+SQL> select * from emp_proj;
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+AD3100     E0010      .5
+AD3110     E0070      .5
+AD3111     E0200      .25
+AD3112     E0120      .5
+AD3113     E0120      .5
+IF1000     E0030      .5
+IF2000     E0030      1
+MA2100     E0010      1
+MA2110     E0060      .25
+MA2111     E0020      .5
+MA2112     E0050      1
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+OP1000     E0050      1
+OP1010     E0050      .5
+OP2000     E0100      .75
+OP2012     E020       .25
+PL2100     E0040      1
+
+16 rows selected.
+
+SQL> select emp_no,proj_no from emp_proj where emp_no<='E0100' order by emp_no;
+
+EMP_NO     PROJ_NO
+---------- ----------
+E0010      AD3100
+E0010      MA2100
+E0020      MA2111
+E0030      IF1000
+E0030      IF2000
+E0040      PL2100
+E0050      OP1000
+E0050      MA2112
+E0050      OP1010
+E0060      MA2110
+E0070      AD3110
+
+EMP_NO     PROJ_NO
+---------- ----------
+E0100      OP2000
+
+12 rows selected.
+
+SQL> select empno,salary,bonus from employee where gender='M';
+
+EMPNO          SALARY      BONUS
+---------- ---------- ----------
+E0010          152750      10000
+E0020           41250       4800
+E0100           26150       5500
+E0140           28420       2600
+E0150           25280       2500
+E0120           29250       1600
+E0170           24680       2500
+
+7 rows selected.
+
+SQL>                                employee where gender='M';                  select empno,salary,bonus from employee where gender='M';empno,salary,bonus select empno,salary,bonus from employee where gender='M';                   alar
+
+EMPNO          SALARY      BONUS
+---------- ---------- ----------
+E0010          152750      10000
+E0020           41250       4800
+E0100           26150       5500
+E0140           28420       2600
+E0150           25280       2500
+E0120           29250       1600
+E0170           24680       2500
+
+7 rows selected.
+
+SQL> select empname,salary,comm from employee where salary salary>20000 and hire_date>2004;
+select empname,salary,comm from employee where salary salary>20000 and hire_date>2004
+                                                      *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select empname,salary,comm from employee where salary salary>20000 and hire_date>'31-dec-04';
+select empname,salary,comm from employee where salary salary>20000 and hire_date>'31-dec-04'
+                                                      *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select empname,salary,comm from employee where salary>20000 and hire_date>'31-dec-04';
+
+EMPNAME                            SALARY       COMM
+------------------------------ ---------- ----------
+ALFRIN LUIZ                         40175       3214
+OSHINA ANTONY                       32250       2580
+BINCY PAUL                          36170       2893
+ANAMIKA PAUL                        29750       2380
+ANEESH DENNY                        26150       2092
+JEWEL BIJOY                         25280       2022
+MELLOW REEBA THOMAS                 22250       1780
+JUNAID K V                          29250       2340
+JOHN VARGHESE                       24680       1974
+ASHREENA HASSAN                     21340       1707
+
+10 rows selected.
+
+SQL> select empname,salary,comm,hire_date from employee where salary>20000 and hire_date>'31-dec-04';
+
+EMPNAME                            SALARY       COMM HIRE_DATE
+------------------------------ ---------- ---------- ---------
+ALFRIN LUIZ                         40175       3214 29-MAR-06
+OSHINA ANTONY                       32250       2580 06-JAN-08
+BINCY PAUL                          36170       2893 15-OCT-09
+ANAMIKA PAUL                        29750       2380 25-JUL-11
+ANEESH DENNY                        26150       2092 03-MAY-13
+JEWEL BIJOY                         25280       2022 19-JUN-07
+MELLOW REEBA THOMAS                 22250       1780 28-MAR-11
+JUNAID K V                          29250       2340 19-NOV-16
+JOHN VARGHESE                       24680       1974 04-JAN-15
+ASHREENA HASSAN                     21340       1707 15-OCT-09
+
+10 rows selected.
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus>400 or bonus>500 and comm<1900 order by empname;
+
+EMPNAME                            SALARY      BONUS       COMM
+------------------------------ ---------- ---------- ----------
+ALFRIN LUIZ                         40175       5800       3214
+ANAMIKA PAUL                        29750       5600       2380
+ANEESH DENNY                        26150       5500       2092
+ARNOLD LEONARD AMON                152750      10000      14220
+ASHREENA HASSAN                     21340       2500       1707
+BINCY PAUL                          36170       3700       2893
+CHRISTEENA THOMAS                   23800       1500       1904
+JEFFIN DOMINIC                      28420       2600       2274
+JEWEL BIJOY                         25280       2500       2022
+JOHN VARGHESE                       24680       2500       1974
+JUNAID K V                          29250       1600       2340
+
+EMPNAME                            SALARY      BONUS       COMM
+------------------------------ ---------- ---------- ----------
+MELLOW REEBA THOMAS                 22250       2400       1780
+OSHINA ANTONY                       32250       4600       2580
+PHILIP VINCENT                      41250       4800       3300
+SHILVY K K                          38250       4800       3060
+
+15 rows selected.
+
+SQL> select * from emp_proj;
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+AD3100     E0010      .5
+AD3110     E0070      .5
+AD3111     E0200      .25
+AD3112     E0120      .5
+AD3113     E0120      .5
+IF1000     E0030      .5
+IF2000     E0030      1
+MA2100     E0010      1
+MA2110     E0060      .25
+MA2111     E0020      .5
+MA2112     E0050      1
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+OP1000     E0050      1
+OP1010     E0050      .5
+OP2000     E0100      .75
+OP2012     E020       .25
+PL2100     E0040      1
+
+16 rows selected.
+
+SQL> select * from emp_proj where emp_no like 'AD%';
+
+no rows selected
+
+SQL> select proj_no,emp_no,emp_time from emp_proj where emp_no like 'AD%';
+
+no rows selected
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus=400 or bonus=500 and comm<1900 order by empname;
+
+no rows selected
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus=400 or bonus=4800 and comm<1900 order by empname;
+
+no rows selected
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus=5500 or bonus=4800 and comm<1900 order by empname;
+
+EMPNAME                            SALARY      BONUS       COMM
+------------------------------ ---------- ---------- ----------
+ANEESH DENNY                        26150       5500       2092
+
+SQL> select proj_no,emp_no,emp_time from emp_proj where emp_no like 'AD%' order by emp_time_proj_no;
+select proj_no,emp_no,emp_time from emp_proj where emp_no like 'AD%' order by emp_time_proj_no
+
+*
+ERROR at line 1:
+ORA-00904: "EMP_TIME_PROJ_NO": invalid identifier
+
+
+SQL> select proj_no,emp_no,emp_time from emp_proj where emp_no like 'AD%' order by emp_time,proj_no;
+
+no rows selected
+
+SQL> select empname,salary,bonus,comm from employee where(salary>20000 and bonus=5500) or (bonus=4800 and comm<1900) order by empname;
+
+EMPNAME                            SALARY      BONUS       COMM
+------------------------------ ---------- ---------- ----------
+ANEESH DENNY                        26150       5500       2092
+
+SQL> select empname,salary,bonus,comm from employee where(salary>20000 and bonus=550) or (bonus=4800 and comm<1900) order by empname;
+
+no rows selected
+
+SQL> select proj_no,emp_no,emp_time from emp_proj where emp_no like('AD%') order by emp_time,proj_no;
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from emp_proj;
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+AD3100     E0010      .5
+AD3110     E0070      .5
+AD3111     E0200      .25
+AD3112     E0120      .5
+AD3113     E0120      .5
+IF1000     E0030      .5
+IF2000     E0030      1
+MA2100     E0010      1
+MA2110     E0060      .25
+MA2111     E0020      .5
+MA2112     E0050      1
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+OP1000     E0050      1
+OP1010     E0050      .5
+OP2000     E0100      .75
+OP2012     E020       .25
+PL2100     E0040      1
+
+16 rows selected.
+
+SQL> select proj_no,emp_no,emp_time from emp_proj where emp_no like('AD%') order by emp_time;
+
+no rows selected
+
+SQL> select proj_no,emp_no,emp_time from emp_proj where emp_no like('AD%') order by emp_no;
+
+no rows selected
+
+SQL> select proj_no,emp_no,emp_time from emp_proj where proj_no like('AD%') order by emp_time,proj_no;
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+AD3111     E0200      .25
+AD3100     E0010      .5
+AD3110     E0070      .5
+AD3112     E0120      .5
+AD3113     E0120      .5
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus=550 or (bonus=4800 and comm<1900) order by empname;
+
+no rows selected
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus=550 OR (bonus=4800 and comm<1900) order by empname;
+
+no rows selected
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus=550 OR (bonus=2500 and comm<1900) order by empname;
+
+EMPNAME                            SALARY      BONUS       COMM
+------------------------------ ---------- ---------- ----------
+ASHREENA HASSAN                     21340       2500       1707
+
+SQL> select empname,salary,bonus,comm from employee where salary>20000 and bonus=5500 OR (bonus=2500 and comm<1900) order by empname;
+
+EMPNAME                            SALARY      BONUS       COMM
+------------------------------ ---------- ---------- ----------
+ANEESH DENNY                        26150       5500       2092
+ASHREENA HASSAN                     21340       2500       1707
+
+SQL>
+SQL> select * from department;
+
+DEPNO DEPTNAME                            LOCATION
+----- ----------------------------------- ---------------
+A00   COMPUTER SERVICE DIVISION           KOCHI
+B01   PLANNING                            BANGALORE
+C01   INFORMATION CENTER                  KOCHI
+D01   DEVELOPMENT CENTER                  KOCHI
+D11   MANUFACTURING SYSTEMS               CHENNAI
+D21   ADMINISTRATION SYSTEMS              BANGALORE
+E01   SUPPORT SERVICES                    CHENNAI
+E11   OPERATIONS                          BANGALORE
+E21   SOFTWARE SUPPORT                    KOCHI
+
+9 rows selected.
+
+SQL> select * from employee;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB     EDLEVEL G DOB            SALARY      BONUS       COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00 PRESIDEN     18 M 19-MAY-67      152750      10000      14220
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02 MANAGER      18 M 07-DEC-76       41250       4800       3300
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04 MANAGER      20 F 15-MAR-78       38250       4800       3060
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06 MANAGER      16 F 20-AUG-82       40175       5800       3214
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08 MANAGER      16 F 12-MAY-87       32250       4600       2580
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09 MANAGER      16 F 30-MAR-80       36170       3700       2893
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11 MANAGER      16 F 19-MAR-78       29750       5600       2380
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13 MANAGER      14 M 22-OCT-93       26150       5500       2092
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99 ANALYST      16 F 20-JUL-82       23800       1500       1904
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03 ANALYST      18 M 23-NOV-82       28420       2600       2274
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07 DESIGNER     16 M 21-MAR-84       25280       2500       2022
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB     EDLEVEL G DOB            SALARY      BONUS       COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11 DESIGNER     17 F 14-FEB-82       22250       2400       1780
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16 CLERK        14 M 22-AUG-97       29250       1600       2340
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15 DESIGNER     16 M 10-NOV-87       24680       2500       1974
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09 DESIGNER     17 F 26-DEC-85       21340       2500       1707
+
+15 rows selected.
+
+SQL> SELECT EMPNO AS MANAGERNO,DEPNO AS DEPARTMENTNO FROM EMPLOYEE ORDER BY MANAGERNO;
+
+MANAGERNO  DEPAR
+---------- -----
+E0010      A00
+E0020      B01
+E0030      C01
+E0050      E01
+E0060      D11
+E0070      D21
+E0090      E11
+E0100      E21
+E0120      A00
+E0130      C01
+E0140      C01
+
+MANAGERNO  DEPAR
+---------- -----
+E0150      D11
+E0160      D11
+E0170      D11
+E0180      D11
+
+15 rows selected.
+
+SQL> SELECT EMPNO,EMPNAME,SALARY,BONUS FROM EMPLOYEE
+WHERE BONUS BETWEEN 800 AND 1000 ORDER BY BONUS DESC,EMPNO;
+
+no rows selected
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00 PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02 MANAGER                 18 M 07-DEC-76      41250       4800       3300
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04 MANAGER                 20 F 15-MAR-78      38250       4800       3060
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06 MANAGER                 16 F 20-AUG-82      40175       5800       3214
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08 MANAGER                 16 F 12-MAY-87      32250       4600       2580
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09 MANAGER                 16 F 30-MAR-80      36170       3700       2893
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11 MANAGER                 16 F 19-MAR-78      29750       5600       2380
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13 MANAGER                 14 M 22-OCT-93      26150       5500       2092
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99 ANALYST                 16 F 20-JUL-82      23800       1500       1904
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03 ANALYST                 18 M 23-NOV-82      28420       2600       2274
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07 DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+---------- ------------------------------ ----- ---------- --------- --------------- ---------- - --------- ---------- ---------- ----------
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11 DESIGNER                17 F 14-FEB-82      22250       2400       1780
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16 CLERK                   14 M 22-AUG-97      29250       1600       2340
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15 DESIGNER                16 M 10-NOV-87      24680       2500       1974
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09 DESIGNER                17 F 26-DEC-85      21340       2500       1707
+
+15 rows selected.
+
+SQL> SELECT EMPNO,EMPNAME,SALARY,BONUS FROM EMPLOYEE WHERE BONUS BETWEEN 1500 AND 3000 ORDER BY BONUS DESC,EMPNO;
+
+EMPNO      EMPNAME                            SALARY      BONUS
+---------- ------------------------------ ---------- ----------
+E0140      JEFFIN DOMINIC                      28420       2600
+E0150      JEWEL BIJOY                         25280       2500
+E0170      JOHN VARGHESE                       24680       2500
+E0180      ASHREENA HASSAN                     21340       2500
+E0160      MELLOW REEBA THOMAS                 22250       2400
+E0120      JUNAID K V                          29250       1600
+E0130      CHRISTEENA THOMAS                   23800       1500
+
+7 rows selected.
+
+SQL> SELECT EMPNO,EMPNAME,SALARY,BONUS FROM EMPLOYEE WHERE BONUS BETWEEN 1500 AND 3000 ORDER BY BONUS ASC,EMPNO;
+
+EMPNO      EMPNAME                            SALARY      BONUS
+---------- ------------------------------ ---------- ----------
+E0130      CHRISTEENA THOMAS                   23800       1500
+E0120      JUNAID K V                          29250       1600
+E0160      MELLOW REEBA THOMAS                 22250       2400
+E0150      JEWEL BIJOY                         25280       2500
+E0170      JOHN VARGHESE                       24680       2500
+E0180      ASHREENA HASSAN                     21340       2500
+E0140      JEFFIN DOMINIC                      28420       2600
+
+7 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT EMPNO,EMPNAME,SALARY,DEPNO FROM EMPLOYEE WHERE DEPNO BETWEEN 'A00' AND 'C01';
+
+EMPNO      EMPNAME                            SALARY DEPNO
+---------- ------------------------------ ---------- -----
+E0010      ARNOLD LEONARD AMON                152750 A00
+E0020      PHILIP VINCENT                      41250 B01
+E0030      SHILVY K K                          38250 C01
+E0130      CHRISTEENA THOMAS                   23800 C01
+E0140      JEFFIN DOMINIC                      28420 C01
+E0120      JUNAID K V                          29250 A00
+
+6 rows selected.
+
+SQL> SELECT EMPNO,EMPNAME,SALARY,DEPNO FROM EMPLOYEE WHERE DEPNO BETWEEN 'A00' AND 'C01' ORDER BY EMPNAME,EMPNO;
+
+EMPNO      EMPNAME                            SALARY DEPNO
+---------- ------------------------------ ---------- -----
+E0010      ARNOLD LEONARD AMON                152750 A00
+E0130      CHRISTEENA THOMAS                   23800 C01
+E0140      JEFFIN DOMINIC                      28420 C01
+E0120      JUNAID K V                          29250 A00
+E0020      PHILIP VINCENT                      41250 B01
+E0030      SHILVY K K                          38250 C01
+
+6 rows selected.
+
+SQL> SELECT * FROM EMP_PROJ;
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+AD3100     E0010      .5
+AD3110     E0070      .5
+AD3111     E0200      .25
+AD3112     E0120      .5
+AD3113     E0120      .5
+IF1000     E0030      .5
+IF2000     E0030      1
+MA2100     E0010      1
+MA2110     E0060      .25
+MA2111     E0020      .5
+MA2112     E0050      1
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+OP1000     E0050      1
+OP1010     E0050      .5
+OP2000     E0100      .75
+OP2012     E020       .25
+PL2100     E0040      1
+
+16 rows selected.
+
+SQL> SELECT * FROM PROJECT;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+     SELECT * FROM PROJECT;
+SQL> SELECT * FROM PROJECT WHERE PROJNAME LIKE()
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+
+SQL> SELECT * FROM PROJECT WHERE PROJNAME LIKE('SUPPORT');
+
+no rows selected
+
+SQL> SELECT * FROM PROJECT WHERE PROJNAME LIKE '%SUPPORT%' ORDER BY PROJNO;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> -- Assuming the department number is a 3-digit string
+SQL> SELECT * FROM departments
+  2  WHERE SUBSTRING(department_number, 2, 1) = '1'
+  3  ORDER BY department_number;
+SELECT * FROM departments
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT * FROM DEPARTMENT WHERE DEPNO LIKE '__1__' ORDER BY DEPNO;
+
+DEPNO DEPTNAME                            LOCATION
+----- ----------------------------------- ---------------
+B01   PLANNING                            BANGALORE
+C01   INFORMATION CENTER                  KOCHI
+D01   DEVELOPMENT CENTER                  KOCHI
+D11   MANUFACTURING SYSTEMS               CHENNAI
+D21   ADMINISTRATION SYSTEMS              BANGALORE
+E01   SUPPORT SERVICES                    CHENNAI
+E11   OPERATIONS                          BANGALORE
+E21   SOFTWARE SUPPORT                    KOCHI
+
+8 rows selected.
+
+SQL> SELECT EMPNAME,SALARY FROM EMPLOYEE WHERE ROWNUM>5 ORDER BY SALARY;
+
+
+no rows selected
+
+SQL> SELECT EMPNAME,SALARY FROM EMPLOYEE WHERE ROWNUM<=5 ORDER BY SALARYDESC;
+SELECT EMPNAME,SALARY FROM EMPLOYEE WHERE ROWNUM<=5 ORDER BY SALARYDESC
+                                                             *
+ERROR at line 1:
+ORA-00904: "SALARYDESC": invalid identifier
+
+
+SQL> SELECT EMPNAME,SALARY FROM EMPLOYEE WHERE ROWNUM<=5 ORDER BY SALARY DESC;
+
+EMPNAME                            SALARY
+------------------------------ ----------
+ARNOLD LEONARD AMON                152750
+PHILIP VINCENT                      41250
+ALFRIN LUIZ                         40175
+SHILVY K K                          38250
+OSHINA ANTONY                       32250
+
+SQL> SELECT EMPNAME,SALARY FROM EMPLOYEE WHERE ROWNUM<=5 AND JOB!='MANAGER' OR 'PRESIDENT' ORDER BY SALARY DESC;
+SELECT EMPNAME,SALARY FROM EMPLOYEE WHERE ROWNUM<=5 AND JOB!='MANAGER' OR 'PRESIDENT' ORDER BY SALARY DESC
+
+              *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT EMPNAME,SALARY FROM EMPLOYEE WHERE JOB NOT IN('MANAGER','PRESIDENT') ORDER BY SALARY DESC;
+
+EMPNAME                            SALARY
+------------------------------ ----------
+JUNAID K V                          29250
+JEFFIN DOMINIC                      28420
+JEWEL BIJOY                         25280
+JOHN VARGHESE                       24680
+CHRISTEENA THOMAS                   23800
+MELLOW REEBA THOMAS                 22250
+ASHREENA HASSAN                     21340
+
+7 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL>
+
+
+
+

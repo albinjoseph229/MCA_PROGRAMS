@@ -1,0 +1,367 @@
+20/07/2023
+
+constraints
+-primary key
+-not null
+-default
+-check
+-unique
+
+Enter user-name: mca
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select * from students;
+select * from students
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> clear;
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2) not null), marks number(4,2));
+create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2) not null), marks number(4,2))
+                                                                                                             *
+ERROR at line 1:
+ORA-00922: missing or invalid option
+
+
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2) not null, marks number(4,2));
+
+Table created.
+
+SQL> desc stiudents;
+ERROR:
+ORA-04043: object stiudents does not exist
+
+
+SQL> desc students;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                   NOT NULL NUMBER(3)
+ SNAME                                     NOT NULL VARCHAR2(20)
+ GENDER                                    NOT NULL VARCHAR2(2)
+ MARKS                                              NUMBER(4,2)
+
+SQL> insert into students values(01,'albin','M','80');
+
+1 row created.
+
+SQL> select * from  students;
+
+   ROLL_NO SNAME                GE      MARKS
+---------- -------------------- -- ----------
+         1 albin                M          80
+
+SQL> drop table students;
+
+Table dropped.
+
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) default);
+create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) default)
+                                                                                                                              *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) default 50);
+
+Table created.
+
+SQL> insert into students values(01,'albin','M','80');
+
+1 row created.
+
+SQL> select * from  students;
+
+   ROLL_NO SNAME                GE      MARKS
+---------- -------------------- -- ----------
+         1 albin                M          80
+
+SQL> insert into students values(02,'albin','M');
+insert into students values(02,'albin','M')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into students(roll_no,sname,gender) values(02,'albin','M');
+
+1 row created.
+
+SQL> select * from  students;
+
+   ROLL_NO SNAME                GE      MARKS
+---------- -------------------- -- ----------
+         1 albin                M          80
+         2 albin                M          50
+
+SQL> drop table students;
+
+Table dropped.
+
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) check mark>50);
+create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) check mark>50)
+                                                                                                                             *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) check(mark>50));
+create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) check(mark>50))
+                                                                                                                                     *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) not null,gender varchar2(2), marks number(4,2) check(marks>50));
+
+Table created.
+
+SQL> insert into students values(02,'albin','M',40);
+insert into students values(02,'albin','M',40)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA.SYS_C0013062) violated
+
+
+SQL> insert into students values(02,'albin','M',60);
+
+1 row created.
+
+SQL> insert into students(roll_no,sname,gender) values(02,'albin','M');
+insert into students(roll_no,sname,gender) values(02,'albin','M')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA.SYS_C0013063) violated
+
+
+SQL> insert into students(roll_no,sname,gender) values(01,'albin','M');
+
+1 row created.
+
+SQL> select * from  students;
+
+   ROLL_NO SNAME                GE      MARKS
+---------- -------------------- -- ----------
+         2 albin                M          60
+         1 albin                M
+
+SQL> drop table students;
+
+Table dropped.
+
+SQL> create table students(roll_no number(3) primary key, sname varchar2(20) unique,gender varchar2(2), marks number(4,2) check(marks>50));
+
+Table created.
+
+SQL> insert into students(roll_no,sname,gender) values(01,'albin','M');
+
+1 row created.
+
+SQL> insert into students(roll_no,sname,gender) values(02,'albin','M');
+insert into students(roll_no,sname,gender) values(02,'albin','M')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA.SYS_C0013066) violated
+
+
+SQL> drop table students;
+
+Table dropped.
+
+SQL> craete table department(DeptNo Char(5) primary key check(DepNo like"D%"), DepName varchar2(35), Location varchar2(15));
+SP2-0734: unknown command beginning "craete tab..." - rest of line ignored.
+SQL> create table department(DeptNo Char(5) primary key check(DepNo like"D%"), DepName varchar2(35), Location varchar2(15));
+create table department(DeptNo Char(5) primary key check(DepNo like"D%"), DepName varchar2(35), Location varchar2(15))
+                                                                        *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> create table department(DeptNo Char(5) primary key check(DepNo like ^S"D%"), DepName varchar2(35), Location varchar2(15));
+create table department(DeptNo Char(5) primary key check(DepNo like "D%"), DepName varchar2(35), Location varchar2(15))
+                                                                    *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> create table department(DeptNo Char(5) primary key check(DepNo like "D%"), DepName varchar2(35), Location varchar2(15));
+create table department(DeptNo Char(5) primary key check(DepNo like "D%"), DepName varchar2(35), Location varchar2(15))
+                                                                         *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> create table department(DepNo Char(5) primary key check(DepNo like "D%"), DepName varchar2(35), Location varchar2(15));
+create table department(DepNo Char(5) primary key check(DepNo like "D%"), DepName varchar2(35), Location varchar2(15))
+                                                                        *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> create table department(DepNo Char(5) primary key check(DepNo like 'D%'), DepName varchar2(35), Location varchar2(15));
+create table department(DepNo Char(5) primary key check(DepNo like 'D%'), DepName varchar2(35), Location varchar2(15))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table Department(DepNo Char(5) primary key check(DepNo like 'D%'), DepName varchar2(35), Location varchar2(15));
+create table Department(DepNo Char(5) primary key check(DepNo like 'D%'), DepName varchar2(35), Location varchar2(15))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table Departments(DepNo Char(5) primary key check(DepNo like 'D%'), DepName varchar2(35), Location varchar2(15));
+
+Table created.
+
+SQL> select * from course
+  2  ;
+select * from course
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table course(cid varchar(5) primary key check(cid like 'c%'), cname varchar2(25), duration varchar2(15));
+
+Table created.
+
+SQL> create table students(roll_no number(3) primary key,cid varchar2(5) references course(cid), sname varchar2(20) not unique,gender varchar2(2), marks number(4,2) check(marks>50));
+create table students(roll_no number(3) primary key,cid varchar2(5) references course(cid), sname varchar2(20) not unique,gender varchar2(2), marks number(4,2) check(marks>50))
+                                                                                                                   *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> create table students(roll_no number(3) primary key,cid varchar2(5) references course(cid), sname varchar2(20) unique,gender varchar2(2), marks number(4,2) check(marks>50));
+
+Table created.
+
+SQL> desc students;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                   NOT NULL NUMBER(3)
+ CID                                                VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              NUMBER(4,2)
+
+SQL> insert into students values(100,'c1','albin','M','70');
+insert into students values(100,'c1','albin','M','70')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013074) violated - parent key not
+found
+
+
+SQL> insert into students values(01,'c1','albin','M','70');
+insert into students values(01,'c1','albin','M','70')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013074) violated - parent key not
+found
+
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(5)
+ CNAME                                              VARCHAR2(25)
+ DURATION                                           VARCHAR2(15)
+
+SQL> insert into course values('c1','MCA','6 months');
+
+1 row created.
+
+SQL> insert into students values(01,'c1','albin','M','70');
+
+1 row created.
+
+SQL> select * from course;
+
+CID   CNAME                     DURATION
+----- ------------------------- ---------------
+c1    MCA                       6 months
+
+SQL> select * from students;
+
+   ROLL_NO CID   SNAME                GE      MARKS
+---------- ----- -------------------- -- ----------
+         1 c1    albin                M          70
+
+SQL> drop table Employee;
+
+Table dropped.
+
+SQL> drop table employee;
+drop table employee
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table employee(EmpNo char(10) Primary key Check(EmpNo like 'E%'),EmpName varchar2(20),DepNo cahr(5) reference Departments(DepNo), Mobile char(12), Hire_Date date, job varchar2(15), EDlevel smallint, Gender Char(1) check (gender in ('F','M')),DOB date, salary number(10,2) check (salary>0), bonus number(10,2),comm number(10,2));
+create table employee(EmpNo char(10) Primary key Check(EmpNo like 'E%'),EmpName varchar2(20),DepNo cahr(5) reference Departments(DepNo), Mobile char(12), Hire_Date date, job varchar2(15), EDlevel smallint, Gender Char(1) check (gender in ('F','M')),DOB date, salary number(10,2) check (salary>0), bonus number(10,2),comm number(10,2))
+                                                                                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table employee(EmpNo char(10) Primary key Check(EmpNo like 'E%'),EmpName varchar2(20),DepNo char(5) reference Departments(DepNo), Mobile char(12), Hire_Date date, job varchar2(15), EDlevel smallint, Gender Char(1) check (gender in ('F','M')),DOB date, salary number(10,2) check (salary>0), bonus number(10,2),comm number(10,2));
+create table employee(EmpNo char(10) Primary key Check(EmpNo like 'E%'),EmpName varchar2(20),DepNo char(5) reference Departments(DepNo), Mobile char(12), Hire_Date date, job varchar2(15), EDlevel smallint, Gender Char(1) check (gender in ('F','M')),DOB date, salary number(10,2) check (salary>0), bonus number(10,2),comm number(10,2))
+                                                                                                           *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table employee(EmpNo char(10) Primary key Check(EmpNo like 'E%'),EmpName varchar2(20),DepNo char(5) references Departments(DepNo), Mobile char(12), Hire_Date date, job varchar2(15), EDlevel smallint, Gender Char(1) check (gender in ('F','M')),DOB date,salary number(10,2) check (salary>0), bonus number(10,2),comm number(10,2));
+
+Table created.
+
+SQL> desc students;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                   NOT NULL NUMBER(3)
+ CID                                                VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              NUMBER(4,2)
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL CHAR(10)
+ EMPNAME                                            VARCHAR2(20)
+ DEPNO                                              CHAR(5)
+ MOBILE                                             CHAR(12)
+ HIRE_DATE                                          DATE
+ JOB                                                VARCHAR2(15)
+ EDLEVEL                                            NUMBER(38)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+ SALARY                                             NUMBER(10,2)
+ BONUS                                              NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+
+SQL> desc Departments;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPNO                                     NOT NULL CHAR(5)
+ DEPNAME                                            VARCHAR2(35)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(5)
+ CNAME                                              VARCHAR2(25)
+ DURATION                                           VARCHAR2(15)
+
+SQL>

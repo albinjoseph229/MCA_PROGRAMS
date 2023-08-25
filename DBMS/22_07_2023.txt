@@ -1,0 +1,688 @@
+Enter user-name: mca
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPNO                                     NOT NULL CHAR(5)
+ DEPTNAME                                           VARCHAR2(35)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> desc employee;
+ERROR:
+ORA-04043: object employee does not exist
+
+
+SQL> Create table Employee(EmpNo char(10),EmpName varchar2(30),DeptNo char(5),Mobile char(12),Hire_date date,Job varchar2(15),Edlevel SmallInt,Gender Char(1),DOB Date,Salary Number(10,2),Bonus Number(10,2),Comm Number(10,2),constraint pemp primary key(EmpNo),constraint cemp check (empno like 'E%'),constraint frgnD foreign key(deptNo) references Department (DeptNo),constraint gchck check (gender like 'F''M'),constraint slry check(salary>0));
+Create table Employee(EmpNo char(10),EmpName varchar2(30),DeptNo char(5),Mobile char(12),Hire_date date,Job varchar2(15),Edlevel SmallInt,Gender Char(1),DOB Date,Salary Number(10,2),Bonus Number(10,2),Comm Number(10,2),constraint pemp primary key(EmpNo),constraint cemp check (empno like 'E%'),constraint frgnD foreign key(deptNo) references Department (DeptNo),constraint gchck check (gender like 'F''M'),constraint slry check(salary>0))
+
+
+                                                                                                                  *
+ERROR at line 1:
+ORA-00904: "DEPTNO": invalid identifier
+
+
+SQL> Create table Employee(EmpNo char(10),EmpName varchar2(30),DepNo char(5),Mobile char(12),Hire_date date,Job varchar2(15),Edlevel SmallInt,Gender Char(1),DOB Date,Salary Number(10,2),Bonus Number(10,2),Comm Number(10,2),constraint pemp primary key(EmpNo),constraint cemp check (empno like 'E%'),constraint frgnD foreign key(deptNo) references Department (DepNo),constraint gchck check (gender like 'F''M'),constraint slry check(salary>0));
+Create table Employee(EmpNo char(10),EmpName varchar2(30),DepNo char(5),Mobile char(12),Hire_date date,Job varchar2(15),Edlevel SmallInt,Gender Char(1),DOB Date,Salary Number(10,2),Bonus Number(10,2),Comm Number(10,2),constraint pemp primary key(EmpNo),constraint cemp check (empno like 'E%'),constraint frgnD foreign key(deptNo) references Department (DepNo),constraint gchck check (gender like 'F''M'),constraint slry check(salary>0))
+
+
+                                                                                  *
+ERROR at line 1:
+ORA-00904: "DEPTNO": invalid identifier
+
+
+SQL> Create table Employee(EmpNo char(10),EmpName varchar2(30),DepNo char(5),Mobile char(12),Hire_date date,Job varchar2(15),Edlevel SmallInt,Gender Char(1),DOB Date,Salary Number(10,2),Bonus Number(10,2),Comm Number(10,2),constraint pemp primary key(EmpNo),constraint cemp check (empno like 'E%'),constraint frgnD foreign key(depNo) references Department (DepNo),constraint gchck check (gender like 'F''M'),constraint slry check(salary>0));
+
+Table created.
+
+SQL>  create table project (ProjNo char(10) primary key,ProjName varchar2(30),DeptNo char(5),ResEmp char(10),StDate Date,EndDate Date,foreign key(DepNo) references Department(DeptNo), foreign key(ResEmp) references Employee(EmpNo));
+ create table project (ProjNo char(10) primary key,ProjName varchar2(30),DeptNo char(5),ResEmp char(10),StDate Date,EndDate Date,foreign key(DepNo) references Department(DeptNo), foreign key(ResEmp) references Employee(EmpNo))
+
+                     *
+ERROR at line 1:
+ORA-00904: "DEPNO": invalid identifier
+
+
+SQL>  create table project (ProjNo char(10) primary key,ProjName varchar2(30),DeptNo char(5),ResEmp char(10),StDate Date,EndDate Date,foreign key(DepNo) references Department(DepNo), foreign key(ResEmp) references Employee(EmpNo));
+ create table project (ProjNo char(10) primary key,ProjName varchar2(30),DeptNo char(5),ResEmp char(10),StDate Date,EndDate Date,foreign key(DepNo) references Department(DepNo), foreign key(ResEmp) references Employee(EmpNo))
+
+                     *
+ERROR at line 1:
+ORA-00904: "DEPNO": invalid identifier
+
+
+SQL>  create table project (ProjNo char(10) primary key,ProjName varchar2(30),DepNo char(5),ResEmp char(10),StDate Date,EndDate Date,foreign key(DepNo) references Department(DepNo), foreign key(ResEmp) references Employee(EmpNo));
+
+Table created.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL CHAR(10)
+ EMPNAME                                            VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ MOBILE                                             CHAR(12)
+ HIRE_DATE                                          DATE
+ JOB                                                VARCHAR2(15)
+ EDLEVEL                                            NUMBER(38)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+ SALARY                                             NUMBER(10,2)
+ BONUS                                              NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+
+SQL> desc project;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJNO                                    NOT NULL CHAR(10)
+ PROJNAME                                           VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ RESEMP                                             CHAR(10)
+ STDATE                                             DATE
+ ENDDATE                                            DATE
+
+SQL> drop table student;
+
+Table dropped.
+
+SQL> drop table department;
+drop table department
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+SQL> drop table departments;
+
+Table dropped.
+
+SQL> create table student(sid varchar(5), sname varchar(20), gender varchar(2), marks float);
+
+Table created.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              FLOAT(126)
+
+SQL> create table course(cid varchar(5), cname varchar2(20),dur varchar2(10));
+create table course(cid varchar(5), cname varchar2(20),dur varchar2(10))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop table course;
+drop table course
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+SQL> drop table students;
+
+Table dropped.
+
+SQL> drop table course;
+
+Table dropped.
+
+SQL> create table course(cid varchar(5), cname varchar2(20),dur varchar2(10));
+
+Table created.
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                VARCHAR2(5)
+ CNAME                                              VARCHAR2(20)
+ DUR                                                VARCHAR2(10)
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              FLOAT(126)
+
+SQL> ALTER TABLE COURSE ADD PRIMARY KEY(CID);
+
+Table altered.
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(5)
+ CNAME                                              VARCHAR2(20)
+ DUR                                                VARCHAR2(10)
+
+SQL> ALTER TABLE ADD COLUMN FEES NUMBER(10,2);
+ALTER TABLE ADD COLUMN FEES NUMBER(10,2)
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> ALTER TABLE COURSE ADD COLUMN FEES NUMBER(10,2);
+ALTER TABLE COURSE ADD COLUMN FEES NUMBER(10,2)
+                       *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> ALTER TABLE COURSE ADD FEES NUMBER(10,2);
+
+Table altered.
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(5)
+ CNAME                                              VARCHAR2(20)
+ DUR                                                VARCHAR2(10)
+ FEES                                               NUMBER(10,2)
+
+SQL> ALTER TABLE COURSE DROP COLUMN FEES;
+
+Table altered.
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(5)
+ CNAME                                              VARCHAR2(20)
+ DUR                                                VARCHAR2(10)
+
+SQL> ALTER TABLE COURSE RENAME COLUMN DUR TO DURATION;
+
+Table altered.
+
+SQL> desc course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(5)
+ CNAME                                              VARCHAR2(20)
+ DURATION                                           VARCHAR2(10)
+
+SQL> ALTER TABLE COURSE MODIFY DURATION VARCHAR2(15);
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT MODIFY MARK NUMBER(10,2);
+ALTER TABLE STUDENT MODIFY MARK NUMBER(10,2)
+                           *
+ERROR at line 1:
+ORA-00904: "MARK": invalid identifier
+
+
+SQL> ALTER TABLE STUDENT MODIFY MARKS NUMBER(10,2);
+
+Table altered.
+
+SQL> DESC STUDENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              NUMBER(10,2)
+
+SQL> MODIFY TABLE COURSE MODIFY CID VARCHAR2(10);
+SP2-0734: unknown command beginning "MODIFY TAB..." - rest of line ignored.
+SQL> ALTER TABLE COURSE MODIFY CID VARCHAR2(10);
+
+Table altered.
+
+SQL> ALTER TABLE COURSE RENAME CNAME TO COURSE_NAME;
+ALTER TABLE COURSE RENAME CNAME TO COURSE_NAME
+                          *
+ERROR at line 1:
+ORA-14155: missing PARTITION or SUBPARTITION keyword
+
+
+SQL> ALTER TABLE COURSE RENAME COLUMN CNAME TO COURSE_NAME;
+
+Table altered.
+
+SQL> DESC COURSE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(10)
+ COURSE_NAME                                        VARCHAR2(20)
+ DURATION                                           VARCHAR2(15)
+
+SQL> ALTER TABLE COURSE DROP PRIMARY KEY;
+
+Table altered.
+
+SQL> DESC COURSE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                VARCHAR2(10)
+ COURSE_NAME                                        VARCHAR2(20)
+ DURATION                                           VARCHAR2(15)
+
+SQL> ALTER TABLE COURSE ADD PRIMARY KEY(CID);
+
+Table altered.
+
+SQL> DESC COURSE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(10)
+ COURSE_NAME                                        VARCHAR2(20)
+ DURATION                                           VARCHAR2(15)
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='COURSE';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+SYS_C0013131                   P
+
+SQL> ALTER TABLE COURSE ADD FEES NUMBER(10,2)
+  2  ;
+
+Table altered.
+
+SQL> ALTER TABLE COURSE ADD CONSTRAINT CHKFESS CHECK(FEES>1000);
+
+Table altered.
+
+SQL> DESC COURSE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(10)
+ COURSE_NAME                                        VARCHAR2(20)
+ DURATION                                           VARCHAR2(15)
+ FEES                                               NUMBER(10,2)
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='COURSE';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+SYS_C0013131                   P
+CHKFESS                        C
+
+SQL> ALTER TABLE COURSE DROP PEIMARY KEY;
+ALTER TABLE COURSE DROP PEIMARY KEY
+                        *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> ALTER TABLE COURSE DROP PRIMARY KEY;
+
+Table altered.
+
+SQL> ALTER TABLE COURSE ADD CONSTRAINT PKY PRIMARY KEY(CID);
+
+Table altered.
+
+SQL> DESC COURSE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(10)
+ COURSE_NAME                                        VARCHAR2(20)
+ DURATION                                           VARCHAR2(15)
+ FEES                                               NUMBER(10,2)
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='COURSE';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+PKY                            P
+CHKFESS                        C
+
+SQL> ALTER TABLE COURSE DROP CONSTRAINT PKT;
+ALTER TABLE COURSE DROP CONSTRAINT PKT
+                                   *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> ALTER TABLE COURSE DROP CONSTRAINT PKY;
+
+Table altered.
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='COURSE';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+CHKFESS                        C
+
+SQL> DESC COURSE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                VARCHAR2(10)
+ COURSE_NAME                                        VARCHAR2(20)
+ DURATION                                           VARCHAR2(15)
+ FEES                                               NUMBER(10,2)
+
+SQL> ALTER TABLE COURSE DROP CONSTARINT CHKFEES;
+ALTER TABLE COURSE DROP CONSTARINT CHKFEES
+                        *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> ALTER TABLE COURSE DROP CONSTRAINT CHKFEES;
+ALTER TABLE COURSE DROP CONSTRAINT CHKFEES
+                                   *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> ALTER TABLE COURSE DROP CONSTRAINT CHKFESS;
+
+Table altered.
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='COURSE';
+
+no rows selected
+
+SQL> DESC COURSE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                VARCHAR2(10)
+ COURSE_NAME                                        VARCHAR2(20)
+ DURATION                                           VARCHAR2(15)
+ FEES                                               NUMBER(10,2)
+
+SQL> DESC STUDENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              NUMBER(10,2)
+
+SQL> ALTER TABLE STUDENT ADD CONSTRAINT PKY PRIMARY KEY(SID);
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT ADD CID VARCHAR2(10);
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT ADD CONSTRAINT CHKMRK CHECK(MARK>60);
+ALTER TABLE STUDENT ADD CONSTRAINT CHKMRK CHECK(MARK>60)
+                                                *
+ERROR at line 1:
+ORA-00904: "MARK": invalid identifier
+
+
+SQL> ALTER TABLE STUDENT ADD CONSTRAINT CHKMRK CHECK(MARKS>60);
+
+Table altered.
+
+SQL> DESC STUDENT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              NUMBER(10,2)
+ CID                                                VARCHAR2(10)
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='STUDENT';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+PKY                            P
+CHKMRK                         C
+
+SQL> ALTER TABLE STUDENT ADD CONSTRAINT FRGKY FOREIGN KEY(CID) REFERENCES COURSE(CID);
+ALTER TABLE STUDENT ADD CONSTRAINT FRGKY FOREIGN KEY(CID) REFERENCES COURSE(CID)
+                                                                            *
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list
+
+
+SQL> ALTER TABLE COURSE ADD CONSTRAINT CPKY PRIMARY KEY(CID);
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT ADD CONSTRAINT FRGKY FOREIGN KEY(CID) REFERENCES COURSE(CID);
+
+Table altered.
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='STUDENT';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+PKY                            P
+CHKMRK                         C
+FRGKY                          R
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='COURSE';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+CPKY                           P
+
+SQL>
+SQL>
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPNO                                     NOT NULL CHAR(5)
+ DEPTNAME                                           VARCHAR2(35)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL CHAR(10)
+ EMPNAME                                            VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ MOBILE                                             CHAR(12)
+ HIRE_DATE                                          DATE
+ JOB                                                VARCHAR2(15)
+ EDLEVEL                                            NUMBER(38)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+ SALARY                                             NUMBER(10,2)
+ BONUS                                              NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+
+SQL> desc project;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJNO                                    NOT NULL CHAR(10)
+ PROJNAME                                           VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ RESEMP                                             CHAR(10)
+ STDATE                                             DATE
+ ENDDATE                                            DATE
+
+SQL> SQL> create table emp_proj(ProjNo char(10),EmpNo char(10),EmpTime char(10),constraint PEPK primary key(PROJNO,EMPNO));
+SP2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+SQL>  create table project (ProjNo char(10) primary key,ProjName varchar2(30),DeptNo char(5),ResEmp char(10),StDate Date,EndDate Date,foreign key(DeptNo) references Department(DeptNo), foreign key(ResEmp) references Employee(EmpNo));
+ create table project (ProjNo char(10) primary key,ProjName varchar2(30),DeptNo char(5),ResEmp char(10),StDate Date,EndDate Date,foreign key(DeptNo) references Department(DeptNo), foreign key(ResEmp) references Employee(EmpNo))
+              *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> SQL> create table emp_proj(ProjNo char(10),EmpNo char(10),EmpTime char(10),constraint PEPK primary key(PROJNO,EMPNO));
+SP2-0734: unknown command beginning "SQL> creat..." - rest of line ignored.
+SQL> create table emp_proj(ProjNo char(10),EmpNo char(10),EmpTime char(10),constraint PEPK primary key(PROJNO,EMPNO));
+
+Table created.
+
+SQL> desc emp_proj;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJNO                                    NOT NULL CHAR(10)
+ EMPNO                                     NOT NULL CHAR(10)
+ EMPTIME                                            CHAR(10)
+
+SQL> alter table employee add adress varchar(50);
+
+Table altered.
+
+SQL> alter table employee drop column adress;
+
+Table altered.
+
+SQL> alter table employee modify phoneno varchar(10);
+alter table employee modify phoneno varchar(10)
+                            *
+ERROR at line 1:
+ORA-00904: "PHONENO": invalid identifier
+
+
+SQL> alter table employee modify mobile varchar(10);
+
+Table altered.
+
+SQL> alter table employee rename column resemp to respemp;
+alter table employee rename column resemp to respemp
+                                   *
+ERROR at line 1:
+ORA-00904: "RESEMP": invalid identifier
+
+
+SQL> alter table employee rename column RESEMP to RESPEMP;
+alter table employee rename column RESEMP to RESPEMP
+                                   *
+ERROR at line 1:
+ORA-00904: "RESEMP": invalid identifier
+
+
+SQL> alter table project rename column RESEMP to RESPEMP;
+
+Table altered.
+
+SQL> drop table emp_proj;
+
+Table dropped.
+
+SQL> create table emp_proj(proj_no char(10),emp_no(10),emp_time cahr(10));
+create table emp_proj(proj_no char(10),emp_no(10),emp_time cahr(10))
+                                             *
+ERROR at line 1:
+ORA-00902: invalid datatype
+
+
+SQL> create table emp_proj(proj_no char(10),emp_no char(10),emp_time cahr(10));
+create table emp_proj(proj_no char(10),emp_no char(10),emp_time cahr(10))
+                                                                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table emp_proj(proj_no char(10),emp_no char(10),emp_time char(10));
+
+Table created.
+
+SQL> desc emp_proj;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJ_NO                                            CHAR(10)
+ EMP_NO                                             CHAR(10)
+ EMP_TIME                                           CHAR(10)
+
+SQL> alter table emp_proj add constarint pky Primary key(projno,empno);
+alter table emp_proj add constarint pky Primary key(projno,empno)
+                                                    *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table emp_proj add constarint pky Primary key(projno);
+alter table emp_proj add constarint pky Primary key(projno)
+                                                    *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table emp_proj add constraint pky Primary key(projno,empno);
+alter table emp_proj add constraint pky Primary key(projno,empno)
+                                                    *
+ERROR at line 1:
+ORA-00904: "PROJNO": invalid identifier
+
+
+SQL> alter table emp_proj add constraint pky Primary key(proj_no,emp_no);
+alter table emp_proj add constraint pky Primary key(proj_no,emp_no)
+                                    *
+ERROR at line 1:
+ORA-02264: name already used by an existing constraint
+
+
+SQL> alter table emp_proj add constraint pjcky Primary key(proj_no,emp_no);
+
+Table altered.
+
+SQL> desc emp_proj;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJ_NO                                   NOT NULL CHAR(10)
+ EMP_NO                                    NOT NULL CHAR(10)
+ EMP_TIME                                           CHAR(10)
+
+SQL> desc project;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJNO                                    NOT NULL CHAR(10)
+ PROJNAME                                           VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ RESPEMP                                            CHAR(10)
+ STDATE                                             DATE
+ ENDDATE                                            DATE
+
+SQL> alter table project add constraint pjchk check(stddate>enddate);
+alter table project add constraint pjchk check(stddate>enddate)
+                                               *
+ERROR at line 1:
+ORA-00904: "STDDATE": invalid identifier
+
+
+SQL> alter table project add constraint pjchk check(stdate>enddate);
+
+Table altered.
+
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPNO                                     NOT NULL CHAR(5)
+ DEPTNAME                                           VARCHAR2(35)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL CHAR(10)
+ EMPNAME                                            VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ MOBILE                                             VARCHAR2(10)
+ HIRE_DATE                                          DATE
+ JOB                                                VARCHAR2(15)
+ EDLEVEL                                            NUMBER(38)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+ SALARY                                             NUMBER(10,2)
+ BONUS                                              NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+
+SQL> alter table employee add constarint chkdt check(hire_date>dob);
+alter table employee add constarint chkdt check(hire_date>dob)
+                                                             *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns
+
+
+SQL> alter table employee add constraint chkdt check(hire_date>dob);
+
+Table altered.
+
+SQL>

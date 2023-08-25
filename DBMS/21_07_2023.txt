@@ -1,0 +1,585 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Fri Jul 21 11:14:20 2023
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: mca
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> create table employee(empno varchar2(5) constraint pkconst,empname varchar2(20),salary number(10,2)constarint chksal check(salary>1000));
+create table employee(empno varchar2(5) constraint pkconst,empname varchar2(20),salary number(10,2)constarint chksal check(salary>1000))
+                                        *
+ERROR at line 1:
+ORA-02253: constraint specification not allowed here
+
+
+SQL> create table employee(empno varchar2(5) constraint pkconst primary key,empname varchar2(20),salary number(10,2)constarint chksal check(salary>1000));
+create table employee(empno varchar2(5) constraint pkconst primary key,empname varchar2(20),salary number(10,2)constarint chksal check(salary>1000))
+                                                                                                               *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table employee(empno varchar2(5) constraint pkconst primary key,empname varchar2(20),salary number(10,2) constarint chksal check(salary>1000));
+create table employee(empno varchar2(5) constraint pkconst primary key,empname varchar2(20),salary number(10,2) constarint chksal check(salary>1000))
+                                                                                                                *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table employee(empno varchar2(5) constraint pkconst primary key,empname varchar2(20),salary number(10,2) constraint chksal check(salary>1000));
+create table employee(empno varchar2(5) constraint pkconst primary key,empname varchar2(20),salary number(10,2) constraint chksal check(salary>1000))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table employee1(empno varchar2(5) constraint pkconst primary key,empname varchar2(20),salary number(10,2) constraint chksal check(salary>1000));
+
+Table created.
+
+SQL> desc employee1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL VARCHAR2(5)
+ EMPNAME                                            VARCHAR2(20)
+ SALARY                                             NUMBER(10,2)
+
+SQL> Select * from user_constarints where table_name='EMPLOYEE1'
+  2  ;
+Select * from user_constarints where table_name='EMPLOYEE1'
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> Select * from user_constarints where table_name='EMPLOYEE';
+Select * from user_constarints where table_name='EMPLOYEE'
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> Select * from user_constraints where table_name='EMPLOYEE1';
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+MCA                            CHKSAL                         C
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+EMPLOYEE1
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+salary>1000
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+                                                                        ENABLED
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+NOT DEFERRABLE IMMEDIATE VALIDATED     USER NAME               21-JUL-23
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+MCA                            PKCONST                        P
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+EMPLOYEE1
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+                                                                        ENABLED
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+NOT DEFERRABLE IMMEDIATE VALIDATED     USER NAME               21-JUL-23
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+MCA                            PKCONST
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+
+
+OWNER                          CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+TABLE_NAME
+------------------------------
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS
+------------------------------ ------------------------------ --------- --------
+DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN
+-------------- --------- ------------- -------------- --- ---- ---------
+INDEX_OWNER                    INDEX_NAME                     INVALID
+------------------------------ ------------------------------ -------
+VIEW_RELATED
+--------------
+
+
+SQL> select constraint_name constraint_type from user_constraints where table name='EMPLOYEE1';
+select constraint_name constraint_type from user_constraints where table name='EMPLOYEE1'
+                                                                   *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select constraint_name constraint_type from user_constraints where table_name='EMPLOYEE1';
+
+CONSTRAINT_TYPE
+------------------------------
+CHKSAL
+PKCONST
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BIN$6EJXNFs/SbmE8SZoOkUyvw==$0 TABLE
+BIN$DwP0CWHMTgS3H7H2oTbqeA==$0 TABLE
+BIN$FwMDY+n6RRyitDKH8GXuYA==$0 TABLE
+BIN$WYZPZgieSAOErPp9LO0/8A==$0 TABLE
+BIN$YGaf0RzcQFiGbcY/sHchGA==$0 TABLE
+BIN$ctShpVqxTEOMfJV66Z0ZyQ==$0 TABLE
+BIN$mI+rmfWnTwKbIQX9cdxTpw==$0 TABLE
+BIN$mppOUFBYQCSZeMwwAAkxvQ==$0 TABLE
+BIN$nqTIoo7ESK6kUDOt0C4Yhw==$0 TABLE
+COURSE                         TABLE
+DEPARTMENT                     TABLE
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEPARTMENTS                    TABLE
+EMPLOYEE                       TABLE
+EMPLOYEE1                      TABLE
+STUDENTS                       TABLE
+
+15 rows selected.
+
+SQL> select constraint_name,constraint_type from user_constraints where table_name='EMPLOYEE1';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+CHKSAL                         C
+PKCONST                        P
+
+SQL> create table course(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid));
+create table course(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop course;
+drop course
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop table course;
+drop table course
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+SQL> create table courses(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid));
+
+Table created.
+
+SQL> desc courses;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(5)
+ CNAME                                              VARCHAR2(20)
+ DUR                                                VARCHAR2(10)
+
+SQL> drop table courses;
+
+Table dropped.
+
+SQL> create table courses(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid) constraint chkid check(cid like"C%"));
+create table courses(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid) constraint chkid check(cid like"C%"))
+                                                                                          *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table courses(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid),constraint chkid check(cid like"C%"));
+create table courses(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid),constraint chkid check(cid like"C%"))
+                                                                                                                         *
+ERROR at line 1:
+ORA-00904: "C%": invalid identifier
+
+
+SQL> create table courses(cid varchar(5),cname varchar2(20),dur varchar2(10), primary key(cid),constraint chkid check(cid like'C%'));
+
+Table created.
+
+SQL> desc students;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                   NOT NULL NUMBER(3)
+ CID                                                VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              NUMBER(4,2)
+
+SQL> desc student;
+ERROR:
+ORA-04043: object student does not exist
+
+
+SQL> create table student(sid varchar2(5), sname varchar2(20),cid varchar2(5),gender varchar2(2), marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid) references course(cid));
+create table student(sid varchar2(5), sname varchar2(20),cid varchar2(5),gender varchar2(2), marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid) references course(cid))
+
+   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table student(sid varchar2(5), sname varchar2(20),cid varchar2(5),gender varchar2(2), marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid)references course(cid));
+create table student(sid varchar2(5), sname varchar2(20),cid varchar2(5),gender varchar2(2), marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid)references course(cid))
+
+   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table student(sid varchar2(5), sname varchar2(20),cid varchar2(5),gender varchar2(2),marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid)references course(cid));
+create table student(sid varchar2(5), sname varchar2(20),cid varchar2(5),gender varchar2(2),marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid)references course(cid))
+
+  *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table student(sid varchar2(5),sname varchar2(20),cid varchar2(5),gender varchar2(2),marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid)references course(cid));
+create table student(sid varchar2(5),sname varchar2(20),cid varchar2(5),gender varchar2(2),marks number(10,2),constraint pks primary key(sid),constrint frgn foreign key(cid)references course(cid))
+
+ *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table student(sid varchar2(5),sname varchar2(20),cid varchar2(5),gender varchar2(2),marks number(10,2),constraint pks primary key(sid),constraint frgn foreign key(cid)references course(cid));
+
+Table created.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL VARCHAR2(5)
+ SNAME                                              VARCHAR2(20)
+ CID                                                VARCHAR2(5)
+ GENDER                                             VARCHAR2(2)
+ MARKS                                              NUMBER(10,2)
+
+SQL>
+     desc department
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEP_ID                                    NOT NULL VARCHAR2(10)
+ DEP_NAME                                  NOT NULL VARCHAR2(20)
+ HOD                                                VARCHAR2(20)
+
+SQL> drop department;
+drop department
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop table department;'
+  2
+SQL> drop table department;
+
+Table dropped.
+
+SQL> creste table department(DepNo char(5) Primary Key,DeptName Varchar2(35),Location Varchar2(15));
+SP2-0734: unknown command beginning "creste tab..." - rest of line ignored.
+SQL> create table department(DepNo char(5) Primary Key,DeptName Varchar2(35),Location Varchar2(15));
+
+Table created.
+
+SQL> desc department;;
+SP2-0565: Illegal identifier.
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPNO                                     NOT NULL CHAR(5)
+ DEPTNAME                                           VARCHAR2(35)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> desc Department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPNO                                     NOT NULL CHAR(5)
+ DEPTNAME                                           VARCHAR2(35)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Departmentcreate table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check gender)
+
+SQL>
+                                     desc student;
+SQL>
+SQL>       ),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check gender)
+SQL>
+SQL>
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Departmentcreate table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2);Hire_Date Date,Job smallint,Gender
+create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Departmentcreate table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2)
+                                                                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2);
+     create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2);
+create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2)
+                                                                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2);
+create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2)
+                                                                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2));
+create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check(salary>0),Bonus number(10,2),comm Number(10,2))
+                                                                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check (salary>0),Bonus number(10,2),comm Number(10,2));
+create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check (salary>0),Bonus number(10,2),comm Number(10,2))
+                                                                                       *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),EmpNAme varchar(20),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check (salary>0),Bonus number(10,2),comm Number(10,2));
+create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),EmpNAme varchar(20),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check (salary>0),Bonus number(10,2),comm Number(10,2))
+                                                                                                           *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),EmpName varchar(20),DeptNo char(5) Foreign Key references Department(DepNO),mobile ccreate table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),EmpName varchar(20),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job varchar2(10),Edlevel smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check (salary>0),Bonus number(10,2),comm Number(10,2));
+create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),EmpName varchar(20),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job varchar2(10),Edlevel smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check (salary>0),Bonus number(10,2),comm Number(10,2))
+                                                                                                           *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Employee(EmpNo char(10) Primary Key check(EmpNo like 'E%'),EmpName varchar(20),DeptNo char(5) Foreign Key references Department(DepNO),mobile char(10),Hire_Date Date,Job varchar2(10),Edlevel smallint,Gender char(1) check(gender in ('M','F')),DOB date,salary Number(10,2) check (salary>0),Bonus number(10,2),comm Number(10,2));

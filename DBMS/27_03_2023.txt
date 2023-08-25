@@ -1,0 +1,657 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Thu Jul 27 11:13:45 2023
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: mca
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select * from department;
+
+DEPNO DEPTNAME                            LOCATION
+----- ----------------------------------- ---------------
+A00   COMPUTER SERVICE DIVISION           KOCHI
+B01   PLANNING                            BANGALORE
+C01   INFORMATION CENTER                  KOCHI
+D01   DEVELOPMENT CENTER                  KOCHI
+D11   MANUFACTURING SYSTEMS               CHENNAI
+D21   ADMINISTRATION SYSTEMS              BANGALORE
+E01   SUPPORT SERVICES                    CHENNAI
+E11   OPERATIONS                          BANGALORE
+E21   SOFTWARE SUPPORT                    KOCHI
+
+9 rows selected.
+
+SQL> select * from employee;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08
+MANAGER                 16 F 12-MAY-87      32250       4600       2580
+
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09
+MANAGER                 16 F 30-MAR-80      36170       3700       2893
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11
+MANAGER                 16 F 19-MAR-78      29750       5600       2380
+
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13
+MANAGER                 14 M 22-OCT-93      26150       5500       2092
+
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99
+ANALYST                 16 F 20-JUL-82      23800       1500       1904
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03
+ANALYST                 18 M 23-NOV-82      28420       2600       2274
+
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07
+DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11
+DESIGNER                17 F 14-FEB-82      22250       2400       1780
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16
+CLERK                   14 M 22-AUG-97      29250       1600       2340
+
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15
+DESIGNER                16 M 10-NOV-87      24680       2500       1974
+
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09
+DESIGNER                17 F 26-DEC-85      21340       2500       1707
+
+
+15 rows selected.
+
+SQL> select * from project;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+
+9 rows selected.
+
+SQL> INSERT INTO PROJECT VALUES('MA2111','W L PROGRAM DESIGN','D11','E0020','24-JUN-2019','22-OCT-2019');
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('MA2112','W L ROBOT DESIGN','D11','E0150','05-FEB-2019','22-NOV-2019');
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('OP1000','OPERATION SUPPORT','E01','E0050','24-JUN-2017','24-MAR-2018');
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('OP1010','OPERATION','E11','E0090','24-JUN-2017','22-AUG-2020');
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('OP2000','GEN SYSTEM SERVICES','E01','E0050','24-JUN-2017','25-JUL-2018');
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('OP2010','SYSTEMS SUPPORT','E21','E0100','24-JUN-2017','25-JUL-2018');
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('OP2011','SCP SYSTEM SUPPORT','E21','E0320','25-JUL-2018','22-AUG-2019');
+INSERT INTO PROJECT VALUES('OP2011','SCP SYSTEM SUPPORT','E21','E0320','25-JUL-2018','22-AUG-2019')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013129) violated - parent key not
+found
+
+
+SQL> INSERT INTO PROJECT VALUES('OP2012','APPLICATIONS SUPPORT','E21','E0330','24-JUN-2017','25-JUL-2021');
+INSERT INTO PROJECT VALUES('OP2012','APPLICATIONS SUPPORT','E21','E0330','24-JUN-2017','25-JUL-2021')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013129) violated - parent key not
+found
+
+
+SQL> INSERT INTO PROJECT VALUES('OP2011','SCP SYSTEM SUPPORT','E21','E0120','25-JUL-2018','22-AUG-2019');
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('OP2012','APPLICATIONS SUPPORT','E21','E0070','24-JUN-2017','25-JUL-2021');
+
+1 row created.
+
+SQL> select * from project;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+
+SQL> INSERT INTO EMP_PROJ VALUES('AD3100','E0010',0.5);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('AD3110','E0070',0.5);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('AD3111','E0200',0.25);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('AD3112','E0120',0.5);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('AD3113','E0120',0.5);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('IF1000','E0030',0.5);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('IF2000','E0030',1);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('MA2100','E0010',1);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('MA2110','E0060',0.25);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('MA2111','E0020',0.5);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('MA2112','E0050',1);
+
+1 row created.
+
+SQL>  INSERT INTO EMP_PROJ VALUES('OP1000','E0050',1);
+
+1 row created.
+
+SQL>
+SQL>
+SQL>  INSERT INTO EMP_PROJ VALUES('OP1010','E0050',0.5);
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL>  INSERT INTO EMP_PROJ VALUES('OP2000','E0100',0.75);
+
+1 row created.
+
+SQL>  INSERT INTO EMP_PROJ VALUES('OP2012','E020',0.25);
+
+1 row created.
+
+SQL> INSERT INTO EMP_PROJ VALUES('PL2100','E0040',1);
+
+1 row created.
+
+SQL> select * from emp_project;
+select * from emp_project
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from emp_proj;
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+AD3100     E0010      .5
+AD3110     E0070      .5
+AD3111     E0200      .25
+AD3112     E0120      .5
+AD3113     E0120      .5
+IF1000     E0030      .5
+IF2000     E0030      1
+MA2100     E0010      1
+MA2110     E0060      .25
+MA2111     E0020      .5
+MA2112     E0050      1
+
+PROJ_NO    EMP_NO     EMP_TIME
+---------- ---------- ----------
+OP1000     E0050      1
+OP1010     E0050      .5
+OP2000     E0100      .75
+OP2012     E020       .25
+PL2100     E0040      1
+
+16 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table testemp(empno char(10) primary key,lastname char(30),workdept char(20) foreign key references department(deptno),hiredate date,salary number(10,2),bonus number(10,2))
+  2  ;
+create table testemp(empno char(10) primary key,lastname char(30),workdept char(20) foreign key references department(deptno),hiredate date,salary number(10,2),bonus number(10,2))
+                                                                                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table testemp(empno char(10) primary key,lastname char(30),workdept char(20) foreign key references department('deptno'),hiredate date,salary number(10,2),bonus number(10,2));
+create table testemp(empno char(10) primary key,lastname char(30),workdept char(20) foreign key references department('deptno'),hiredate date,salary number(10,2),bonus number(10,2))
+                                                                                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table testemp(empno char(10) primary key,lastname char(30),workdept char(20) foreign key references department(deptno),**,**hiredate date,salary number(10,2),bonus number(10,2));
+create table testemp(empno char(10) primary key,lastname char(30),workdept char(20) foreign key references department(deptno),**,**hiredate date,salary number(10,2),bonus number(10,2))
+
+        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table testemp(empno char(10) primary key,lastname char(30),workdept char(20),foreign key references department(deptno),hiredate date,salary number(10,2),bonus number(10,2));
+create table testemp(empno char(10) primary key,lastname char(30),workdept char(20),foreign key references department(deptno),hiredate date,salary number(10,2),bonus number(10,2))
+
+                    *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL> create table testemp(empno char(10) primary key,lastname char(30),workdept char(20),foreign key(workdept) references department(deptno),hiredate date,salary number(10,2),bonus number(10,2));
+create table testemp(empno char(10) primary key,lastname char(30),workdept char(20),foreign key(workdept) references department(deptno),hiredate date,salary number(10,2),bonus number(10,2))
+
+                                                    *
+ERROR at line 1:
+ORA-00904: "DEPTNO": invalid identifier
+
+
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPNO                                     NOT NULL CHAR(5)
+ DEPTNAME                                           VARCHAR2(35)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> create table testemp(empno char(10) primary key,lastname char(30),workdept char(20),foreign key(workdept) references department(depno),hiredate date,salary number(10,2),bonus number(10,2));
+
+Table created.
+
+SQL> insert into testemp('E011','SMITH','C01','6-JUN-2015',25000,0);
+insert into testemp('E011','SMITH','C01','6-JUN-2015',25000,0)
+                    *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into testemp VALUES('E011','SMITH','C01','6-JUN-2015',25000,0);
+insert into testemp VALUES('E011','SMITH','C01','6-JUN-2015',25000,0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013169) violated - parent key notfound
+
+
+SQL> insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0);
+insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013169) violated - parent key notfound
+
+
+SQL> SELECT *FROM DEPARTMENT;
+
+DEPNO DEPTNAME                            LOCATION
+----- ----------------------------------- ---------------
+A00   COMPUTER SERVICE DIVISION           KOCHI
+B01   PLANNING                            BANGALORE
+C01   INFORMATION CENTER                  KOCHI
+D01   DEVELOPMENT CENTER                  KOCHI
+D11   MANUFACTURING SYSTEMS               CHENNAI
+D21   ADMINISTRATION SYSTEMS              BANGALORE
+E01   SUPPORT SERVICES                    CHENNAI
+E11   OPERATIONS                          BANGALORE
+E21   SOFTWARE SUPPORT                    KOCHI
+
+9 rows selected.
+
+SQL> insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0);
+insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013169) violated - parent key notfound
+
+
+SQL> ALTER TABLE TESTEMP DROP CONSTARINT MCA.SYS_C0013169;
+ALTER TABLE TESTEMP DROP CONSTARINT MCA.SYS_C0013169
+                         *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> ALTER TABLE TESTEMP DROP CONSTRAINT MCA.SYS_C0013169;
+ALTER TABLE TESTEMP DROP CONSTRAINT MCA.SYS_C0013169
+                                       *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE TESTEMP DROP CONSTRAINT;
+ALTER TABLE TESTEMP DROP CONSTRAINT
+                                  *
+ERROR at line 1:
+ORA-02250: missing or invalid constraint name
+
+
+SQL> ALTER TABLE TESTEMP DROP CONSTRAINT C0013169;
+ALTER TABLE TESTEMP DROP CONSTRAINT C0013169
+                                    *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> ALTER TABLE TESTEMP DROP CONSTRAINT SYS_C0013169;
+
+Table altered.
+
+SQL> insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0);
+
+1 row created.
+
+SQL> insert into testemp VALUES('E0222','BAKER','A02','6-JUN-2015',25000,0);
+
+1 row created.
+
+SQL> DROP TABLE TESTEMP;
+
+Table dropped.
+
+SQL> create table testemp(empno char(10) primary key,lastname char(30),workdept char(20),foreign key(workdept) references department(depno),hiredate date,salary number(10,2),bonus number(10,2));
+
+Table created.
+
+SQL> insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0);insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013171) violated - parent key notfound
+
+
+SQL> DROP TABLE TESTEMP;
+Table dropped.
+
+SQL> create table testemp(empno char(10) primary key,lastname varchar(30),workdept char(5),foreign key(workdept) references department(depno),hiredate date,salary number(10,2),bonus number(10,2));
+
+Table created.
+
+SQL> insert into testemp VALUES('E0111','SMITH','C01','6-JUN-2015',25000,0);
+1 row created.
+
+SQL> insert into testemp VALUES('E0222','BAKER','A02','6-JUN-2015',25000,0);insert into testemp VALUES('E0222','BAKER','A02','6-JUN-2015',25000,0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013173) violated - parent key notfound
+
+
+SQL> insert into testemp VALUES('E0222','BAKER','A02','6-JUN-2015',25000,0);
+insert into testemp VALUES('E0222','BAKER','A02','6-JUN-2015',25000,0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013173) violated - parent key notfound
+
+
+SQL> insert into testemp VALUES('E0222','BAKER','A00','6-JUN-2015',28000,null);
+
+1 row created.
+
+SQL> insert into testemp VALUES('E0333','thomas','d11','6-JUN-2015',33000,0);
+insert into testemp VALUES('E0333','thomas','d11','6-JUN-2015',33000,0)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA.SYS_C0013173) violated - parent key notfound
+
+
+SQL> insert into testemp VALUES('E0333','thomas','D11','6-JUN-2015',33000,0);
+
+1 row created.
+
+SQL> select * from testemp;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0111      SMITH                          C01   06-JUN-15      25000          0
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+
+SQL> commit;
+
+Commit complete.
+
+SQL> INSERT INTO TESTEMP(EMPNO)
+  2  LASTNAME WORKDEPT HIREDATE SALARY BONUS
+  3  LASTNAME WORKDEPT HIREDATE SALARY BONUS
+  4  ;
+LASTNAME WORKDEPT HIREDATE SALARY BONUS
+*
+ERROR at line 2:
+ORA-00926: missing VALUES keyword
+
+
+SQL> INSERT INTO TESTEMP(EMPNO,LASTNAME,WORKDEPT,HIREDATE,SALARY,BONUS) SELECT EMPNO,EMPNAME,DEPNO,HIRE_DATE,SALARY,BONUS FROM EMPLOYEE WHERE SALARY<=25000;
+
+4 rows created.
+
+SQL> SELECT * FROM TESTEMP;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0111      SMITH                          C01   06-JUN-15      25000          0
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+E0130      CHRISTEENA THOMAS              C01   02-DEC-99      23800       1500
+E0160      MELLOW REEBA THOMAS            D11   28-MAR-11      22250       2400
+E0170      JOHN VARGHESE                  D11   04-JAN-15      24680       2500
+E0180      ASHREENA HASSAN                D11   15-OCT-09      21340       2500
+
+7 rows selected.
+
+SQL> ALTER TABLE TESTEMP SET SALARY=SALARY+500 WHERE EMPNO='E0111';
+ALTER TABLE TESTEMP SET SALARY=SALARY+500 WHERE EMPNO='E0111'
+                        *
+ERROR at line 1:
+ORA-02000: missing UNUSED keyword
+
+
+SQL> UPDATE TESTEMP SET BONUS=BONUS+500 WHERE EMPNO='E0111';
+
+1 row updated.
+
+SQL> SELECT * FROM TESTEMP;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0111      SMITH                          C01   06-JUN-15      25000        500
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+E0130      CHRISTEENA THOMAS              C01   02-DEC-99      23800       1500
+E0160      MELLOW REEBA THOMAS            D11   28-MAR-11      22250       2400
+E0170      JOHN VARGHESE                  D11   04-JAN-15      24680       2500
+E0180      ASHREENA HASSAN                D11   15-OCT-09      21340       2500
+
+7 rows selected.
+
+SQL> UPDATE TESTEMP SET SALARY=SALARY+1000 WHERE WORKDEPT='C01';
+
+2 rows updated.
+
+SQL> SELECT * FROM TESTEMP;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0111      SMITH                          C01   06-JUN-15      26000        500
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+E0130      CHRISTEENA THOMAS              C01   02-DEC-99      24800       1500
+E0160      MELLOW REEBA THOMAS            D11   28-MAR-11      22250       2400
+E0170      JOHN VARGHESE                  D11   04-JAN-15      24680       2500
+E0180      ASHREENA HASSAN                D11   15-OCT-09      21340       2500
+
+7 rows selected.
+
+SQL> DELETE FROM TESTEMP WHERE E
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00920: invalid relational operator
+
+
+SQL> DELETE FROM TESTEMP WHERE LASTNAME='SMITH';
+
+1 row deleted.
+
+SQL> SELECT * FROM TESTEMP;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+E0130      CHRISTEENA THOMAS              C01   02-DEC-99      24800       1500
+E0160      MELLOW REEBA THOMAS            D11   28-MAR-11      22250       2400
+E0170      JOHN VARGHESE                  D11   04-JAN-15      24680       2500
+E0180      ASHREENA HASSAN                D11   15-OCT-09      21340       2500
+
+6 rows selected.
+
+SQL> UPDATE TABLE EMPTEST SET WORKDEPT='E01' WHERE LASTNAME='ASHREENA HASSAN';
+UPDATE TABLE EMPTEST SET WORKDEPT='E01' WHERE LASTNAME='ASHREENA HASSAN'
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> UPDATE TABLE TESTEMP SET WORKDEPT='E01' WHERE LASTNAME='ASHREENA HASSAN';
+UPDATE TABLE TESTEMP SET WORKDEPT='E01' WHERE LASTNAME='ASHREENA HASSAN'
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> UPDATE TESTEMP SET WORKDEPT='E01' WHERE LASTNAME='ASHREENA HASSAN';
+
+1 row updated.
+
+SQL> SELECT * FROM TESTEMP;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+E0130      CHRISTEENA THOMAS              C01   02-DEC-99      24800       1500
+E0160      MELLOW REEBA THOMAS            D11   28-MAR-11      22250       2400
+E0170      JOHN VARGHESE                  D11   04-JAN-15      24680       2500
+E0180      ASHREENA HASSAN                E01   15-OCT-09      21340       2500
+
+6 rows selected.
+
+SQL> INSERT INO TESTEMP VALUES('E0360','BROWN','D01',SYSDATE,'45000',NULL);
+INSERT INO TESTEMP VALUES('E0360','BROWN','D01',SYSDATE,'45000',NULL)
+       *
+ERROR at line 1:
+ORA-00925: missing INTO keyword
+
+
+SQL> INSERT INTO TESTEMP VALUES('E0360','BROWN','D01',SYSDATE,'45000');
+INSERT INTO TESTEMP VALUES('E0360','BROWN','D01',SYSDATE,'45000')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> INSERT INTO TESTEMP VALUES('E0360','BROWN','D01',SYSDATE,'45000',NULL);
+
+1 row created.
+
+SQL> SELECT * FROM TESTEMP;
+
+EMPNO      LASTNAME                       WORKD HIREDATE      SALARY      BONUS
+---------- ------------------------------ ----- --------- ---------- ----------
+E0222      BAKER                          A00   06-JUN-15      28000
+E0333      thomas                         D11   06-JUN-15      33000          0
+E0130      CHRISTEENA THOMAS              C01   02-DEC-99      24800       1500
+E0160      MELLOW REEBA THOMAS            D11   28-MAR-11      22250       2400
+E0170      JOHN VARGHESE                  D11   04-JAN-15      24680       2500
+E0180      ASHREENA HASSAN                E01   15-OCT-09      21340       2500
+E0360      BROWN                          D01   27-JUL-23      45000
+
+7 rows selected.
+
+SQL> D

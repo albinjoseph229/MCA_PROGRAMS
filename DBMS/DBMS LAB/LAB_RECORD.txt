@@ -1,0 +1,24 @@
+create table Directors(Id int primary key,Name varchar2(40) not null);
+
+create table Stars(Id int primary key, Name varchar2(40) unique,About Varchar2(100));
+
+create table Movies(Id int primary key,Title Varchar2(40) not null,R_date Date,Image_url varchar2(100),Certificate Varchar2(20),Runtime Number(3,2),ImbdRating Number(3,1) default 0,Description Varchar2(100) default null,Metascore Number(3,1) default 0,Votes Int default 0,Gross Number(10,2),check (Gross>10000));
+
+CREATE TABLE MoviesDirectors (MoviesId INT,DirectorsId INT,FOREIGN KEY (MoviesId) REFERENCES Movies(Id),FOREIGN KEY (DirectorsId) REFERENCES Directors(Id));
+
+CREATE TABLE MoviesStars (MoviesId INT, StarsId INT,FOREIGN KEY (MoviesId) REFERENCES Movies(Id),FOREIGN KEY (StarsId) REFERENCES Stars(Id));
+
+ALTER TABLE Stars ADD DOB DATE;
+
+TABLE STARSResult Set 1
+Column	Null?	Type
+ID	NOT NULL	NUMBER
+NAME	 - 	VARCHAR2(40)
+ABOUT	 - 	VARCHAR2(100)
+DOB	 - 	DATE
+--CREATE TABLE MoviesDirectors (MoviesId INT,DirectorsId INT,FOREIGN KEY (MoviesId) REFERENCES Movies(Id),FOREIGN KEY (DirectorsId) REFERENCES Directors(Id));
+--CREATE TABLE MoviesStars (MoviesId INT, StarsId INT,FOREIGN KEY (MoviesId) REFERENCES Movies(Id),FOREIGN KEY (StarsId) REFERENCES Stars(Id));
+--ALTER TABLE Stars ADD DOB DATE;
+--ALTER TABLE Movies DROP COLUMN GROSS;
+--DESC MOVIES;
+--ALTER TABLE Movies ADD Language VARCHAR(40);

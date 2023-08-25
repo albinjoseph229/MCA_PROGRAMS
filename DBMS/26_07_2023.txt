@@ -1,0 +1,694 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Wed Jul 26 09:44:39 2023
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: MCA
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Enter user-name: mca
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select * from deapartment;
+select * from deapartment
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from department;
+
+no rows selected
+
+SQL> insert into DEPARTMENT values(
+  2  A00,'COMPUTER SERVICE DIVISION','KOCHI');
+A00,'COMPUTER SERVICE DIVISION','KOCHI')
+*
+ERROR at line 2:
+ORA-00984: column not allowed here
+
+
+SQL> insert into department values('A00','COMPUTER SERVICE DIVISION','KOCHI');
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('B01','PLANNING','BANGALORE');
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('C01','INFORMATION CENTER','KOCHI');
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('D01','DEVELOPMENT CENTER','KOCHI');
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('D11','MANUFACTURING SYSTEMS','CHENNAI');
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('D21','ADMINISTRATION SYSTEMS','BANGALORE'
+  2  );
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('E01','SUPPORT SERVICES','CHENNAI');
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('E11','OPERATIONS','BANGALORE');
+
+1 row created.
+
+SQL> insert into DEPARTMENT values('E21','SOFTWARE SUPPORT','KOCHI');
+
+1 row created.
+
+SQL> select * from department;
+
+DEPNO DEPTNAME                            LOCATION
+----- ----------------------------------- ---------------
+A00   COMPUTER SERVICE DIVISION           KOCHI
+B01   PLANNING                            BANGALORE
+C01   INFORMATION CENTER                  KOCHI
+D01   DEVELOPMENT CENTER                  KOCHI
+D11   MANUFACTURING SYSTEMS               CHENNAI
+D21   ADMINISTRATION SYSTEMS              BANGALORE
+E01   SUPPORT SERVICES                    CHENNAI
+E11   OPERATIONS                          BANGALORE
+E21   SOFTWARE SUPPORT                    KOCHI
+
+9 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL CHAR(10)
+ EMPNAME                                            VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ MOBILE                                             VARCHAR2(10)
+ HIRE_DATE                                          DATE
+ JOB                                                VARCHAR2(15)
+ EDLEVEL                                            NUMBER(38)
+ GENDER                                             CHAR(1)
+ DOB                                                DATE
+ SALARY                                             NUMBER(10,2)
+ BONUS                                              NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0010','ARNOLD LEONARD AMON','A00','9445876534','01-DEC-2000','PRESIDENT','18','M','19-MAY-1967','152750','10000','14220);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0010','ARNOLD LEONARD AMON','A00','9445876534','01-DEC-2000','PRESIDENT','18','M','19-MAY-1967','152750','10000','14220');
+INSERT INTO EMPLOYEE VALUES('E0010','ARNOLD LEONARD AMON','A00','9445876534','01-DEC-2000','PRESIDENT','18','M','19-MAY-1967','152750','10000','14220')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA.GCHCK) violated
+
+
+SQL> ALTER TABLE EMPLYEE DROP CONSTRAINT GCHCK;
+ALTER TABLE EMPLYEE DROP CONSTRAINT GCHCK
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> ALTER TABLE EMPLOYEE DROP CONSTRAINT GCHCK;
+
+Table altered.
+
+SQL> ALTER TABLE EMPLOYEE ADD CONSTRAINT GCHK CHECK(GENDER IN 'M','F');
+ALTER TABLE EMPLOYEE ADD CONSTRAINT GCHK CHECK(GENDER IN 'M','F')
+                                                            *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> ALTER TABLE EMPLOYEE ADD CONSTRAINT GCHK CHECK(GENDER IN ('M','F'));
+
+Table altered.
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0010','ARNOLD LEONARD AMON','A00','9445876534','01-DEC-2000','PRESIDENT','18','M','19-MAY-1967','152750','10000','14220');
+
+1 row created.
+
+SQL>
+SQL>    INSERT INTO EMPLOYEE VALUES('E0020','PHILIP VINCENT','B01','9445976535','10-SEP-2002','MANAGER','18','M','07-DEC-1976','41250','4800','3300');
+
+1 row created.
+
+SQL>    INSERT INTO EMPLOYEE VALUES('E0030','SHILVY K K','C01','9445976538','19-JUN-2004','MANAGER','20','F','15-MAR-1978','38250','4800','3060');
+
+1 row created.
+
+SQL>    INSERT INTO EMPLOYEE VALUES('E0050','ALFRIN LUIZ','E01','9445976541','29-MAR-2006','MANAGER','16','F','20-07-1982','40175','5800','3214');
+        INSERT INTO EMPLOYEE VALUES('E0050','ALFRIN LUIZ','E01','9445976541','29-MAR-2006','MANAGER','16','F','20-07-1982','40175','5800','3214')
+                                                                                                              *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL>    INSERT INTO EMPLOYEE VALUES('E0050','ALFRIN LUIZ','E01','9445976541','29-MAR-2006','MANAGER','16','F','20-AUG-1982','40175','5800','3214');
+
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0060','OSHINA ANTONY','D11','9445976544','06-JAN-2008','MANAGER','16','F','12-MAY-1987','32250','4600','2580');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0070','BINCY PAUL','D21','9445976547','15-OCT-2009','MANAGER','16','F','30-MAR-1980','36170','3700','2893');
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO EMPLOYEE VALUES('E0090','ANAMIKA PAUL','E11','9445976550','25-JUL-2011','MANAGER','16','F','19-MAR-1978','29750','5600','2380');
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO EMPLOYEE VALUES('E0100','ANEESH DENNY','E21','9445976553','03-05-2013  ','MANAGER','14','M','22-OCT-1993','26150','5500','2092);
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0100','ANEESH DENNY','E21','9445976553','03-05-2013  ','MANAGER','14','M','22-OCT-1993','26150','5500','2092');
+INSERT INTO EMPLOYEE VALUES('E0100','ANEESH DENNY','E21','9445976553','03-05-2013       ','MANAGER','14','M','22-OCT-1993','26150','5500','2092')
+                                                                      *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0100','ANEESH DENNY','E21','9445976553','03-MAY-2013 ','MANAGER','14','M','22-OCT-1993','26150','5500','2092');
+
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08
+MANAGER                 16 F 12-MAY-87      32250       4600       2580
+
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09
+MANAGER                 16 F 30-MAR-80      36170       3700       2893
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11
+MANAGER                 16 F 19-MAR-78      29750       5600       2380
+
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13
+MANAGER                 14 M 22-OCT-93      26150       5500       2092
+
+
+8 rows selected.
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0120','JUNAID K V','A00','9445976559','19-11-2016','CLERK','14','M','22-08-1997','29250','1600','2340');
+INSERT INTO EMPLOYEE VALUES('E0120','JUNAID K V','A00','9445976559','19-11-2016','CLERK','14','M','22-08-1997','29250','1600','2340')
+                                                                    *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO EMPLOYEE VALUES('E0130','CHRISTEENA THOMAS','C01','9445976562','02-DEC-1999','ANALYST','16','F','20-JUL-1982','23800','1500','1904');
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO EMPLOYEE VALUES('E0140','JEFFIN DOMINIC','C01','9445976565','10-SEP-2003','ANALYST','18','M','23-NOV-1982','28420','2600','2274');
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO EMPLOYEE VALUES('E0150','JEWEL BIJOY','D11','9445976568','19-JUN-2007','DESIGNER','16','M','21-MAR-1984','25280','2500','2022');
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO EMPLOYEE VALUES('E0160','MELLOW REEBA THOMAS','D11','9466976556','28-MAR-2011','DESIGNER','17','F','14-FEB-1982','22250','2400','1780');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0120','JUNAID K V','A00','9445976559','19-NOV-2016','CLERK','14','M','22-AUG-1997','29250','1600','2340');
+
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08
+MANAGER                 16 F 12-MAY-87      32250       4600       2580
+
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09
+MANAGER                 16 F 30-MAR-80      36170       3700       2893
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11
+MANAGER                 16 F 19-MAR-78      29750       5600       2380
+
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13
+MANAGER                 14 M 22-OCT-93      26150       5500       2092
+
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99
+ANALYST                 16 F 20-JUL-82      23800       1500       1904
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03
+ANALYST                 18 M 23-NOV-82      28420       2600       2274
+
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07
+DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11
+DESIGNER                17 F 14-FEB-82      22250       2400       1780
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16
+CLERK                   14 M 22-AUG-97      29250       1600       2340
+
+
+13 rows selected.
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0170','JOHN VARGHESE','D11','9466976557','04-JAN-2015','DESIGNER','16','M','10-NOV-1987','24680','2500','1974');
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO EMPLOYEE VALUES('E0180','ASHREENA HASSAN','D11','9466976558','15-10-2009','DESIGNER','17','F','26-DEC-1985','21340','2500','1707');
+INSERT INTO EMPLOYEE VALUES('E0180','ASHREENA HASSAN','D11','9466976558','15-10-2009','DESIGNER','17','F','26-DEC-1985','21340','2500','1707')
+                                                                         *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> INSERT INTO EMPLOYEE VALUES('E0180','ASHREENA HASSAN','D11','9466976558','15-OCT-2009','DESIGNER','17','F','26-DEC-1985','21340','2500','1707');
+
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08
+MANAGER                 16 F 12-MAY-87      32250       4600       2580
+
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09
+MANAGER                 16 F 30-MAR-80      36170       3700       2893
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11
+MANAGER                 16 F 19-MAR-78      29750       5600       2380
+
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13
+MANAGER                 14 M 22-OCT-93      26150       5500       2092
+
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99
+ANALYST                 16 F 20-JUL-82      23800       1500       1904
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03
+ANALYST                 18 M 23-NOV-82      28420       2600       2274
+
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07
+DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11
+DESIGNER                17 F 14-FEB-82      22250       2400       1780
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16
+CLERK                   14 M 22-AUG-97      29250       1600       2340
+
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15
+DESIGNER                16 M 10-NOV-87      24680       2500       1974
+
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09
+DESIGNER                17 F 26-DEC-85      21340       2500       1707
+
+
+15 rows selected.
+
+SQL> DESC PROJECT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJNO                                    NOT NULL CHAR(10)
+ PROJNAME                                           VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ RESPEMP                                            CHAR(10)
+ STDATE                                             DATE
+ ENDDATE                                            DATE
+
+SQL> INSERT INTO PROJECT VALUES('AD3100','ADMIN SERVICES','D01','E0010','24-JUN-2017,'25-JUL-2018');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> INSERT INTO PROJECT VALUES('AD3100','ADMIN SERVICES','D01','E0010','24-JUN-2017','25-JUL-2018');
+INSERT INTO PROJECT VALUES('AD3100','ADMIN SERVICES','D01','E0010','24-JUN-2017','25-JUL-2018')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA.PJCHK) violated
+
+
+SQL> SELECT 'CONSTARINT_NAME','CONSTRAINT_TYPE' FROM 'CONSTRAINT_TABLE' WHERE TABLE NAME='PROJECT');
+SELECT 'CONSTARINT_NAME','CONSTRAINT_TYPE' FROM 'CONSTRAINT_TABLE' WHERE TABLE NAME='PROJECT')
+                                                *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> SELECT 'CONSTARINT_NAME','CONSTRAINT_TYPE' FROM 'CONSTRAINTS_TABLE' WHERE TABLE NAME='PROJECT');
+SELECT 'CONSTARINT_NAME','CONSTRAINT_TYPE' FROM 'CONSTRAINTS_TABLE' WHERE TABLE NAME='PROJECT')
+                                                *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> SELECT 'CONSTARINT_NAME','CONSTRAINT_TYPE' FROM 'USER_CONSTRAINTS' WHERE TABLE NAME='PROJECT');
+SELECT 'CONSTARINT_NAME','CONSTRAINT_TYPE' FROM 'USER_CONSTRAINTS' WHERE TABLE NAME='PROJECT')
+                                                *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> SELECT CONSTARINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE NAME='PROJECT');
+SELECT CONSTARINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE NAME='PROJECT')
+                                                                   *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> SELECT CONSTARINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='PROJECT');
+SELECT CONSTARINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='PROJECT')
+                                                                                       *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT CONSTARINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='PROJECT';
+SELECT CONSTARINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='PROJECT'
+       *
+ERROR at line 1:
+ORA-00904: "CONSTARINT_NAME": invalid identifier
+
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME='PROJECT';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+SYS_C0013127                   P
+SYS_C0013128                   R
+SYS_C0013129                   R
+PJCHK                          C
+
+SQL> INSERT INTO PROJECT VALUES('AD3100','ADMIN SERVICES','D01','E0010','24-JUN-2017','25-JUL-2018');
+INSERT INTO PROJECT VALUES('AD3100','ADMIN SERVICES','D01','E0010','24-JUN-2017','25-JUL-2018')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA.PJCHK) violated
+
+
+SQL> DESC PROJECT;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROJNO                                    NOT NULL CHAR(10)
+ PROJNAME                                           VARCHAR2(30)
+ DEPNO                                              CHAR(5)
+ RESPEMP                                            CHAR(10)
+ STDATE                                             DATE
+ ENDDATE                                            DATE
+
+SQL> ALTER TABLE PROJECT DROP CONSTARINT PJCHK;
+ALTER TABLE PROJECT DROP CONSTARINT PJCHK
+                         *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> ALTER TABLE PROJECT DROP CONSTRAINT PJCHK;
+
+Table altered.
+
+SQL> alter table project add constraint pjchk check(stdate<enddate);
+
+Table altered.
+
+SQL> INSERT INTO PROJECT VALUES('AD3100','ADMIN SERVICES','D01','E0010','24-JUN-2017','25-JUL-2018');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO PROJECT VALUES('AD3110','GENERAL AD SYSTEMS','D21','E0070','23-JUN-2016','22-NOV-2017');
+
+
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO PROJECT VALUES('AD3111','PAYROLL PROGRAMMING','D21','E0120','24-JUN-2017','22-NOV-2017');
+
+
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO PROJECT VALUES('AD3112','PERSONNEL PROGRAMMING','D21','E0130','24-JUN-2017','25-JUL-2018');
+
+
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO PROJECT VALUES('AD3113','ACCOUNT PROGRAMMING','D21','E0140','22-NOV-2017','22-JUN-2019');
+
+
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO PROJECT VALUES('IF1000','QUERY SERVICES','C01','E0030','22-SEP-2017','25-JUL-2018);
+
+
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO PROJECT VALUES('IF2000','USER EDUCATION','C01','E0030','24-MAY-2018','24-MAY-2019');
+
+
+
+1 row created.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO PROJECT VALUES('MA2100','WELD LINE AUTOMATION','D01','E0010','24-APR-2018');   24-APR-2019
+
+
+  2
+SQL>
+SQL>
+SQL>
+SQL> INSERT INTO PROJECT VALUES('MA2110','W L PROGRAMMING','D11','E0060','24-JUN-2017','25-JUL-2018');
+
+
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES('IF1000','QUERY SERVICES','C01','E0030','22-SEP-2017,'25-JUL-2018');                    
+
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> INSERT INTO PROJECT VALUES('IF1000','QUERY SERVICES','C01','E0030','22-SEP-2017','25-JUL-2018');                   
+
+
+1 row created.
+
+SQL> SELECT * FROM PROJECT;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+
+8 rows selected.
+
+SQL> INSERT INTO COMMIT;                                                                                                
+Commit complete.
+
+SQL> INSERT INTO PROJECT VALUES('MA2100','WELD LINE AUTOMATION','D01','E0010','24-APR-2018','24-APR-2019');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL>

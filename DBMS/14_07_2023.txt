@@ -1,0 +1,521 @@
+
+Enter user-name: mca
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> create table employee(emp_id varchar2(10), emp_name varchar2(20), emp_salary number(10,2), gender varchar(2));
+
+Table created.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             VARCHAR2(10)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SALARY                                         NUMBER(10,2)
+ GENDER                                             VARCHAR2(2)
+
+SQL> insert into employee values('E01','ALBIN',20000,'M0');
+
+1 row created.
+
+SQL> DELETE FROM TABLE EMPLOYEE WHERE EMP_ID='E01';
+DELETE FROM TABLE EMPLOYEE WHERE EMP_ID='E01'
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> DELETE FROM TABLE employee WHERE EMP_ID='E01';
+DELETE FROM TABLE employee WHERE EMP_ID='E01'
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> DELETE FROM  employee WHERE EMP_ID='E01';
+
+1 row deleted.
+
+SQL> insert into employee values('E01','ALBIN',20000,'M');
+
+1 row created.
+
+SQL> insert into employee values('E02','rock',21000,'M');
+
+1 row created.
+
+SQL> insert into employee(emp_id,emp_name,gender) values('E03','rockey','M');
+
+1 row created.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E01        ALBIN                     20000 M
+E02        rock                      21000 M
+E03        rockey                          M
+
+SQL> insert into employee values('E04','rama',18000,'F');
+
+1 row created.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E01        ALBIN                     20000 M
+E02        rock                      21000 M
+E03        rockey                          M
+E04        rama                      18000 F
+
+SQL> update  employee set emp_name='albin' where emp_id=1;
+update  employee set emp_name='albin' where emp_id=1
+                                            *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> update  employee set emp_name='albin' where emp_id='e01';
+
+0 rows updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E01        ALBIN                     20000 M
+E02        rock                      21000 M
+E03        rockey                          M
+E04        rama                      18000 F
+
+SQL> update  employee set emp_name='albin' where emp_id='E01';
+
+1 row updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E01        albin                     20000 M
+E02        rock                      21000 M
+E03        rockey                          M
+E04        rama                      18000 F
+
+SQL> insert into employee values(&emp_id,&emp_name,&salary,&gender);
+Enter value for emp_id: 'E05'
+Enter value for emp_name: 'alfia'
+Enter value for salary: '25000'
+Enter value for gender: 'F'
+old   1: insert into employee values(&emp_id,&emp_name,&salary,&gender)
+new   1: insert into employee values('E05','alfia','25000','F')
+
+1 row created.
+
+SQL> update  employee set salary=25000 where emp_id='E05';
+update  employee set salary=25000 where emp_id='E05'
+                     *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier
+
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E01        albin                     20000 M
+E02        rock                      21000 M
+E03        rockey                          M
+E04        rama                      18000 F
+E05        alfia                     25000 F
+
+SQL> create table department(did varchar(20));
+
+Table created.
+
+SQL> drop table department;
+
+Table dropped.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E01        albin                     20000 M
+E02        rock                      21000 M
+E03        rockey                          M
+E04        rama                      18000 F
+E05        alfia                     25000 F
+
+SQL> delete from employee where emp_id='E02';
+
+1 row deleted.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E01        albin                     20000 M
+E03        rockey                          M
+E04        rama                      18000 F
+E05        alfia                     25000 F
+
+SQL> insert into employee values(&emp_id,&emp_name,&salary,&gender);
+Enter value for emp_id: 'E02'
+Enter value for emp_name: 'rocky'
+Enter value for salary: 15000
+Enter value for gender: 'M'
+old   1: insert into employee values(&emp_id,&emp_name,&salary,&gender)
+new   1: insert into employee values('E02','rocky',15000,'M')
+
+1 row created.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E02        rocky                     15000 M
+E01        albin                     20000 M
+E03        rockey                          M
+E04        rama                      18000 F
+E05        alfia                     25000 F
+
+SQL> select * from depatment;
+select * from depatment
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from department;
+select * from department
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table department(did varchar(20));
+
+Table created.
+
+SQL> truncate table department;
+
+Table truncated.
+
+SQL> select * from department;
+
+no rows selected
+
+SQL> dec department;
+SP2-0734: unknown command beginning "dec depart..." - rest of line ignored.
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DID                                                VARCHAR2(20)
+
+SQL> drop department;
+drop department
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> drop table department;
+
+Table dropped.
+
+SQL> desc department;
+ERROR:
+ORA-04043: object department does not exist
+
+
+SQL> update employee set emp_salary=30000 where emp_id='E01','E02';
+update employee set emp_salary=30000 where emp_id='E01','E02'
+                                                       *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update employee set emp_salary=30000 where emp_id=('E01','E02');
+update employee set emp_salary=30000 where emp_id=('E01','E02')
+                                                 *
+ERROR at line 1:
+ORA-01797: this operator must be followed by ANY or ALL
+
+
+SQL> update employee set emp_salary=30000 where emp_id=ALL;
+update employee set emp_salary=30000 where emp_id=ALL
+                                                    *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> update employee set emp_salary=30000 where emp_id='E01';
+
+1 row updated.
+
+SQL> update employee set emp_salary=+100 where all;
+update employee set emp_salary=+100 where all
+                                          *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> update employee set emp_salary=emp_salary+emp_salary*0.2;
+
+5 rows updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E02        rocky                     18000 M
+E01        albin                     36000 M
+E03        rockey                          M
+E04        rama                      21600 F
+E05        alfia                     30000 F
+
+SQL> update employee set emp_salary=emp_salary+emp_salary*0.2 where gender='F';
+
+2 rows updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E02        rocky                     18000 M
+E01        albin                     36000 M
+E03        rockey                          M
+E04        rama                      25920 F
+E05        alfia                     36000 F
+
+SQL> update employee set emp_nam='Alfia AH'where emp_name='alfia';
+update employee set emp_nam='Alfia AH'where emp_name='alfia'
+                    *
+ERROR at line 1:
+ORA-00904: "EMP_NAM": invalid identifier
+
+
+SQL> update employee set emp_name='Alfia AH'where emp_name='alfia';
+
+1 row updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E02        rocky                     18000 M
+E01        albin                     36000 M
+E03        rockey                          M
+E04        rama                      25920 F
+E05        Alfia AH                  36000 F
+
+SQL>
+SQL> drop table department;
+
+Table dropped.
+
+SQL> desc department;
+ERROR:
+ORA-04043: object department does not exist
+
+
+SQL> update employee set emp_salary=30000 where emp_id='E01','E02';
+update employee set emp_salary=30000 where emp_id='E01','E02'
+                                                       *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update employee set emp_salary=30000 where emp_id=('E01','E02');
+update employee set emp_salary=30000 where emp_id=('E01','E02')
+                                                 *
+ERROR at line 1:
+ORA-01797: this operator must be followed by ANY or ALL
+
+
+SQL> update employee set emp_salary=30000 where emp_id=ALL;
+update employee set emp_salary=30000 where emp_id=ALL
+                                                    *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> update employee set emp_salary=30000 where emp_id='E01';
+
+1 row updated.
+
+SQL> update employee set emp_salary=+100 where all;
+update employee set emp_salary=+100 where all
+                                          *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> update employee set emp_salary=emp_salary+emp_salary*0.2;
+
+5 rows updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E02        rocky                     18000 M
+E01        albin                     36000 M
+E03        rockey                          M
+E04        rama                      21600 F
+E05        alfia                     30000 F
+
+SQL> update employee set emp_salary=emp_salary+emp_salary*0.2 where gender='F';
+
+2 rows updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E02        rocky                     18000 M
+E01        albin                     36000 M
+E03        rockey                          M
+E04        rama                      25920 F
+E05        alfia                     36000 F
+
+SQL> update employee set emp_nam='Alfia AH'where emp_name='alfia';
+update employee set emp_nam='Alfia AH'where emp_name='alfia'
+                    *
+ERROR at line 1:
+ORA-00904: "EMP_NAM": invalid identifier
+
+
+SQL> update employee set emp_name='Alfia AH'where emp_name='alfia';
+
+1 row updated.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             EMP_SALARY GE
+---------- -------------------- ---------- --
+E02        rocky                     18000 M
+E01        albin                     36000 M
+E03        rockey                          M
+E04        rama                      25920 F
+E05        Alfia AH                  36000 F
+
+SQL> drop table employee;
+
+Table dropped.
+
+SQL> create table employee(emp_id varchar2(10) primary key, emp_name varchar(20), gender varchar(2), salary number(10,2));
+
+Table created.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL VARCHAR2(10)
+ EMP_NAME                                           VARCHAR2(20)
+ GENDER                                             VARCHAR2(2)
+ SALARY                                             NUMBER(10,2)
+
+SQL> insert into employee values('E01','rama','F',18000);
+
+1 row created.
+
+SQL> insert into employee values('E02','vimala','F',20000);
+
+1 row created.
+
+SQL> insert into employee values('E03','albin','M',28000);
+
+1 row created.
+
+SQL> insert into employee values('E04','alfia','F',30000);
+
+1 row created.
+
+SQL> select * from employee;
+
+EMP_ID     EMP_NAME             GE     SALARY
+---------- -------------------- -- ----------
+E01        rama                 F       18000
+E02        vimala               F       20000
+E03        albin                M       28000
+E04        alfia                F       30000
+
+SQL> create table dapartment(dep_id varchar2(10) primary key, dep_name varchar(20) not null, hod varchar(20) );
+
+Table created.
+
+SQL> desc department
+ERROR:
+ORA-04043: object department does not exist
+
+
+SQL> desc department;
+ERROR:
+ORA-04043: object department does not exist
+
+
+SQL> select * from department;
+select * from department
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> drop table dapartment;
+
+Table dropped.
+
+SQL> create table department(dep_id varchar2(10) primary key, dep_name varchar(20) not null, hod varchar(20) );
+
+Table created.
+
+SQL> select * from department;
+
+no rows selected
+
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEP_ID                                    NOT NULL VARCHAR2(10)
+ DEP_NAME                                  NOT NULL VARCHAR2(20)
+ HOD                                                VARCHAR2(20)
+
+SQL> insert int department values('D01','CS','Bindhya');
+insert int department values('D01','CS','Bindhya')
+       *
+ERROR at line 1:
+ORA-00925: missing INTO keyword
+
+
+SQL> insert into department values('D01','CS','Bindhya');
+
+1 row created.
+
+SQL> insert into department values('D02','maths','Chacko');
+
+1 row created.
+
+SQL> insert into department values('D03','physics','Newton');
+
+1 row created.
+
+SQL> insert into department values('D04','chemistry','mary');
+
+1 row created.
+
+SQL> select * from department;
+
+DEP_ID     DEP_NAME             HOD
+---------- -------------------- --------------------
+D01        CS                   Bindhya
+D02        maths                Chacko
+D03        physics              Newton
+D04        chemistry            mary
+
+SQL>

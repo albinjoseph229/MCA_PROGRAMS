@@ -1,0 +1,634 @@
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select * from employee;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08
+MANAGER                 16 F 12-MAY-87      32250       4600       2580
+
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09
+MANAGER                 16 F 30-MAR-80      36170       3700       2893
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11
+MANAGER                 16 F 19-MAR-78      29750       5600       2380
+
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13
+MANAGER                 14 M 22-OCT-93      26150       5500       2092
+
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99
+ANALYST                 16 F 20-JUL-82      23800       1500       1904
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03
+ANALYST                 18 M 23-NOV-82      28420       2600       2274
+
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07
+DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11
+DESIGNER                17 F 14-FEB-82      22250       2400       1780
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16
+CLERK                   14 M 22-AUG-97      29250       1600       2340
+
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15
+DESIGNER                16 M 10-NOV-87      24680       2500       1974
+
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09
+DESIGNER                17 F 26-DEC-85      21340       2500       1707
+
+
+15 rows selected.
+
+SQL> select* from department;
+
+DEPNO DEPTNAME                            LOCATION
+----- ----------------------------------- ---------------
+A00   COMPUTER SERVICE DIVISION           KOCHI
+B01   PLANNING                            BANGALORE
+C01   INFORMATION CENTER                  KOCHI
+D01   DEVELOPMENT CENTER                  KOCHI
+D11   MANUFACTURING SYSTEMS               CHENNAI
+D21   ADMINISTRATION SYSTEMS              BANGALORE
+E01   SUPPORT SERVICES                    CHENNAI
+E11   OPERATIONS                          BANGALORE
+E21   SOFTWARE SUPPORT                    KOCHI
+
+9 rows selected.
+
+SQL> select * from project;
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+AD3100     ADMIN SERVICES                 D01   E0010      24-JUN-17 25-JUL-18
+AD3110     GENERAL AD SYSTEMS             D21   E0070      23-JUN-16 22-NOV-17
+AD3111     PAYROLL PROGRAMMING            D21   E0120      24-JUN-17 22-NOV-17
+AD3112     PERSONNEL PROGRAMMING          D21   E0130      24-JUN-17 25-JUL-18
+AD3113     ACCOUNT PROGRAMMING            D21   E0140      22-NOV-17 22-JUN-19
+IF2000     USER EDUCATION                 C01   E0030      24-MAY-18 24-MAY-19
+MA2110     W L PROGRAMMING                D11   E0060      24-JUN-17 25-JUL-18
+IF1000     QUERY SERVICES                 C01   E0030      22-SEP-17 25-JUL-18
+MA2100     WELD LINE AUTOMATION           D01   E0010      24-APR-18 24-APR-19
+MA2111     W L PROGRAM DESIGN             D11   E0020      24-JUN-19 22-OCT-19
+MA2112     W L ROBOT DESIGN               D11   E0150      05-FEB-19 22-NOV-19
+
+PROJNO     PROJNAME                       DEPNO RESPEMP    STDATE    ENDDATE
+---------- ------------------------------ ----- ---------- --------- ---------
+OP1000     OPERATION SUPPORT              E01   E0050      24-JUN-17 24-MAR-18
+OP1010     OPERATION                      E11   E0090      24-JUN-17 22-AUG-20
+OP2000     GEN SYSTEM SERVICES            E01   E0050      24-JUN-17 25-JUL-18
+OP2010     SYSTEMS SUPPORT                E21   E0100      24-JUN-17 25-JUL-18
+OP2011     SCP SYSTEM SUPPORT             E21   E0120      25-JUL-18 22-AUG-19
+OP2012     APPLICATIONS SUPPORT           E21   E0070      24-JUN-17 25-JUL-21
+
+17 rows selected.
+
+SQL> select * from emp_project;
+select * from emp_project
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from proj_emp;
+select * from proj_emp
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> emp_proj;
+SP2-0042: unknown command "emp_proj" - rest of line ignored.
+SQL> selct lower(empname) from employee;
+SP2-0734: unknown command beginning "selct lowe..." - rest of line ignored.
+SQL> select length(empname) from employee;
+
+LENGTH(EMPNAME)
+---------------
+             19
+             14
+             10
+             11
+             13
+             10
+             12
+             12
+             17
+             14
+             11
+
+LENGTH(EMPNAME)
+---------------
+             19
+             10
+             13
+             15
+
+15 rows selected.
+
+SQL> select lower(empname) from employee;
+
+LOWER(EMPNAME)
+------------------------------
+arnold leonard amon
+philip vincent
+shilvy k k
+alfrin luiz
+oshina antony
+bincy paul
+anamika paul
+aneesh denny
+christeena thomas
+jeffin dominic
+jewel bijoy
+
+LOWER(EMPNAME)
+------------------------------
+mellow reeba thomas
+junaid k v
+john varghese
+ashreena hassan
+
+15 rows selected.
+
+SQL> select upper(empname) from employee;
+
+UPPER(EMPNAME)
+------------------------------
+ARNOLD LEONARD AMON
+PHILIP VINCENT
+SHILVY K K
+ALFRIN LUIZ
+OSHINA ANTONY
+BINCY PAUL
+ANAMIKA PAUL
+ANEESH DENNY
+CHRISTEENA THOMAS
+JEFFIN DOMINIC
+JEWEL BIJOY
+
+UPPER(EMPNAME)
+------------------------------
+MELLOW REEBA THOMAS
+JUNAID K V
+JOHN VARGHESE
+ASHREENA HASSAN
+
+15 rows selected.
+
+SQL> select substr(empname,1,3) from employee;
+
+SUB
+---
+ARN
+PHI
+SHI
+ALF
+OSH
+BIN
+ANA
+ANE
+CHR
+JEF
+JEW
+
+SUB
+---
+MEL
+JUN
+JOH
+ASH
+
+15 rows selected.
+
+SQL> select ascii(s);
+select ascii(s)
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select ascii(s) from employee;
+select ascii(s) from employee
+             *
+ERROR at line 1:
+ORA-00904: "S": invalid identifier
+
+
+SQL> select ascii(empname) from employee;
+
+ASCII(EMPNAME)
+--------------
+            65
+            80
+            83
+            65
+            79
+            66
+            65
+            65
+            67
+            74
+            74
+
+ASCII(EMPNAME)
+--------------
+            77
+            74
+            74
+            65
+
+15 rows selected.
+
+SQL> selct ltrin(empname,5) from employee;
+SP2-0734: unknown command beginning "selct ltri..." - rest of line ignored.
+SQL> selct ltrin('empname','5') from employee;
+SP2-0734: unknown command beginning "selct ltri..." - rest of line ignored.
+SQL> select ltrim('albin','in') from dual;
+
+LTRIM
+-----
+albin
+
+SQL> select ltrim('albin','al') from dual;
+
+LTR
+---
+bin
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select rtrim('albin','in') from dual;
+
+RTR
+---
+alb
+
+SQL> select trim(' albin ') "trim both side" from dual;
+
+trim
+-----
+albin
+
+SQL> select trim(' albin ') "remove prefixes" from dual;
+
+remov
+-----
+albin
+
+SQL> select trim(both 'x' from 'sssalbinss') from dual;
+
+TRIM(BOTH'
+----------
+sssalbinss
+
+SQL> select trim(both 's' from 'sssalbinss') from dual;
+
+TRIM(
+-----
+albin
+
+SQL> select trim(leading 's' from 'sssalbinss')"remove prefixes" from dual;
+
+remove
+-------
+albinss
+
+SQL> select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5;
+
+EMPNAME                        EMPNO          SALARY
+------------------------------ ---------- ----------
+ARNOLD LEONARD AMON            E0010          152750
+PHILIP VINCENT                 E0020           41250
+ALFRIN LUIZ                    E0050           40175
+SHILVY K K                     E0030           38250
+
+SQL> select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5 and job='manager' or 'president';
+select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5 and job='manager' or 'president'
+
+                                                                  *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5 and job not in('manager','president');
+select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5 and job not in('manager','president')
+
+                                       *
+ERROR at line 1:
+ORA-00904: "JOB": invalid identifier
+
+
+SQL> select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5 and JOB not in('manager','president');
+select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5 and JOB not in('manager','president')
+
+                                       *
+ERROR at line 1:
+ORA-00904: "JOB": invalid identifier
+
+
+SQL> select empname,empno,salary from(select empname,empno,salary from employee order by salary desc) where rownum<5 and JOB not in('manager','president');
+select empname,empno,salary from(select empname,empno,salary from employee order by salary desc) where rownum<5 and JOB not in('manager','president')
+
+                                        *
+ERROR at line 1:
+ORA-00904: "JOB": invalid identifier
+
+
+SQL> select * from employee;
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0010      ARNOLD LEONARD AMON            A00   9445876534 01-DEC-00
+PRESIDENT               18 M 19-MAY-67     152750      10000      14220
+
+E0020      PHILIP VINCENT                 B01   9445976535 10-SEP-02
+MANAGER                 18 M 07-DEC-76      41250       4800       3300
+
+E0030      SHILVY K K                     C01   9445976538 19-JUN-04
+MANAGER                 20 F 15-MAR-78      38250       4800       3060
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0050      ALFRIN LUIZ                    E01   9445976541 29-MAR-06
+MANAGER                 16 F 20-AUG-82      40175       5800       3214
+
+E0060      OSHINA ANTONY                  D11   9445976544 06-JAN-08
+MANAGER                 16 F 12-MAY-87      32250       4600       2580
+
+E0070      BINCY PAUL                     D21   9445976547 15-OCT-09
+MANAGER                 16 F 30-MAR-80      36170       3700       2893
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0090      ANAMIKA PAUL                   E11   9445976550 25-JUL-11
+MANAGER                 16 F 19-MAR-78      29750       5600       2380
+
+E0100      ANEESH DENNY                   E21   9445976553 03-MAY-13
+MANAGER                 14 M 22-OCT-93      26150       5500       2092
+
+E0130      CHRISTEENA THOMAS              C01   9445976562 02-DEC-99
+ANALYST                 16 F 20-JUL-82      23800       1500       1904
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0140      JEFFIN DOMINIC                 C01   9445976565 10-SEP-03
+ANALYST                 18 M 23-NOV-82      28420       2600       2274
+
+E0150      JEWEL BIJOY                    D11   9445976568 19-JUN-07
+DESIGNER                16 M 21-MAR-84      25280       2500       2022
+
+E0160      MELLOW REEBA THOMAS            D11   9466976556 28-MAR-11
+DESIGNER                17 F 14-FEB-82      22250       2400       1780
+
+
+EMPNO      EMPNAME                        DEPNO MOBILE     HIRE_DATE
+---------- ------------------------------ ----- ---------- ---------
+JOB                EDLEVEL G DOB           SALARY      BONUS       COMM
+--------------- ---------- - --------- ---------- ---------- ----------
+E0120      JUNAID K V                     A00   9445976559 19-NOV-16
+CLERK                   14 M 22-AUG-97      29250       1600       2340
+
+E0170      JOHN VARGHESE                  D11   9466976557 04-JAN-15
+DESIGNER                16 M 10-NOV-87      24680       2500       1974
+
+E0180      ASHREENA HASSAN                D11   9466976558 15-OCT-09
+DESIGNER                17 F 26-DEC-85      21340       2500       1707
+
+
+15 rows selected.
+
+SQL> select empname,empno,salary from(select empname,empno,salary from employee order by salary desc) where JOB not in('manager','president');
+select empname,empno,salary from(select empname,empno,salary from employee order by salary desc) where JOB not in('manager','president')
+
+                           *
+ERROR at line 1:
+ORA-00904: "JOB": invalid identifier
+
+
+SQL> select empname,empno,salary from(select empname,empno,salary from employee order by salary desc)where rownum<5 and 'JOB' not in('manager','president');
+
+EMPNAME                        EMPNO          SALARY
+------------------------------ ---------- ----------
+ARNOLD LEONARD AMON            E0010          152750
+PHILIP VINCENT                 E0020           41250
+ALFRIN LUIZ                    E0050           40175
+SHILVY K K                     E0030           38250
+
+SQL> select empname,empno,salary,job from(select empname,empno,salary,job from employee order by salary desc)where rownum<5 and 'JOB' not in('manager','president');
+
+EMPNAME                        EMPNO          SALARY JOB
+------------------------------ ---------- ---------- ---------------
+ARNOLD LEONARD AMON            E0010          152750 PRESIDENT
+PHILIP VINCENT                 E0020           41250 MANAGER
+ALFRIN LUIZ                    E0050           40175 MANAGER
+SHILVY K K                     E0030           38250 MANAGER
+
+SQL> select lpad('albin',10,'*')"lpad" from dual;
+
+lpad
+----------
+*****albin
+
+SQL> select rpad('albin',10,'*')"lpad" from dual;
+
+lpad
+----------
+albin*****
+
+SQL> select vsize("iam here")"size" from dual;
+select vsize("iam here")"size" from dual
+             *
+ERROR at line 1:
+ORA-00904: "iam here": invalid identifier
+
+
+SQL> select vsize('iam here')"size" from dual;
+
+      size
+----------
+         8
+
+SQL> select instr('hello world','o') from dual;
+
+INSTR('HELLOWORLD','O')
+-----------------------
+                      5
+
+SQL> select instr('hello world','o',1,2) from dual;
+
+INSTR('HELLOWORLD','O',1,2)
+---------------------------
+                          8
+
+SQL> select instr('heollo world','o'),instr('hello world','o',1,2) from dual;
+
+INSTR('HEOLLOWORLD','O') INSTR('HELLOWORLD','O',1,2)
+------------------------ ---------------------------
+                       3                           8
+
+SQL> select ABS(-15) "absolute" from dual;
+
+  absolute
+----------
+        15
+
+SQL> select power(3,2)"raised" from dual;
+
+    raised
+----------
+         9
+
+SQL> select round(15.19,1) from dual;
+
+ROUND(15.19,1)
+--------------
+          15.2
+
+SQL> select sqrt(25) from dual;
+
+  SQRT(25)
+----------
+         5
+
+SQL> select round(17.139,2) from dual;
+
+ROUND(17.139,2)
+---------------
+          17.14
+
+SQL> select round(17.139,1) from dual;
+
+ROUND(17.139,1)
+---------------
+           17.1
+
+SQL> select sqrt(16) from dual;
+
+  SQRT(16)
+----------
+         4
+
+SQL> select exp(5) from dual;
+
+    EXP(5)
+----------
+148.413159
+
+SQL> extract(year from date'2004-07-02')"year",extract(moth from sysdate)"month" from dual;
+SP2-0734: unknown command beginning "extract(ye..." - rest of line ignored.
+SQL> select extract(year from date'2004-07-02'),extract(moth from sysdate)from dual;
+select extract(year from date'2004-07-02'),extract(moth from sysdate)from dual
+                                                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select extract(year from date'2004-07-02'),extract(month from sysdate)from dual;
+
+EXTRACT(YEARFROMDATE'2004-07-02') EXTRACT(MONTHFROMSYSDATE)
+--------------------------------- -------------------------
+                             2004                         8
+
+SQL> select greatest('4','5','3') from dual;
+
+G
+-
+5
+
+SQL> select least('4','5','3') from dual;
+
+L
+-
+3
+
+SQL> select mod(15,7),mod(15.7,7) from dual;
+
+ MOD(15,7) MOD(15.7,7)
+---------- -----------
+         1         1.7
+
+SQL> select trunc(125.815,1),trunc(125.815,-2) from dual;
+
+TRUNC(125.815,1) TRUNC(125.815,-2)
+---------------- -----------------
+           125.8               100
+
+SQL> select floor(24.8) from dual;
+
+FLOOR(24.8)
+-----------
+         24
+
+SQL> select ceil(24.8),ceil(13.5) from dual;
+
+CEIL(24.8) CEIL(13.5)
+---------- ----------
+        25         14
+
+SQL> SELECT SYSDATE, TO_DATE(’06/07/2009’,’DD/MM/YY’) FROM DUAL;
+
+SYSDATE   TO_DATE('
+--------- ---------
+04-AUG-23 06-JUL-09
+
+SQL> Select nvl(null,101) from dual;
+
+NVL(NULL,101)
+-------------
+          101
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
