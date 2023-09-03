@@ -13,6 +13,14 @@ struct Expense {
 
 struct Expense *head = NULL; // Head of the linked list
 
+struct SpendingNote {
+    char title[100];
+    char content[500];
+    struct SpendingNote *next;
+};
+
+struct SpendingNote *noteHead = NULL; // Head of the linked list for notes
+
 const char *spendingTips[] = {
     "Cook meals at home instead of eating out.",
     "Use public transportation or carpool to save on fuel costs.",
@@ -21,6 +29,7 @@ const char *spendingTips[] = {
     "Plan your shopping trips with a list to avoid impulsive purchases.",
     // Add more tips here
 };
+
 
 void addExpense(float *totalExpenses) {
     struct Expense *newExpense = (struct Expense *)malloc(sizeof(struct Expense));
@@ -128,10 +137,44 @@ void displayRandomSpendingTip() {
     printf("\nTip to Reduce Spending:\n%s\n\n", spendingTips[randomIndex]);
 }
 
+void addSpendingNote() {
+    struct SpendingNote *newNote = (struct SpendingNote *)malloc(sizeof(struct SpendingNote));
+    if (newNote == NULL) {
+        printf("Memory allocation error.\n");
+        return;
+    }
+
+    printf("Enter note title: ");
+    scanf(" %[^\n]", newNote->title);
+
+    printf("Enter note content: ");
+    scanf(" %[^\n]", newNote->content);
+
+    newNote->next = noteHead;
+    noteHead = newNote;
+
+    printf("Spending note added successfully.\n");
+}
+
+void viewSpendingNotes() {
+    if (noteHead == NULL) {
+        printf("No spending notes to display.\n");
+        return;
+    }
+
+    printf("Spending Notes:\n");
+    printf("---------------------------------------------------\n");
+    struct SpendingNote *current = noteHead;
+    while (current != NULL) {
+        printf("Title: %s\n", current->title);
+        printf("Content: %s\n", current->content);
+        printf("---------------------------------------------------\n");
+        current = current->next;
+    }
+}
 int main() {
     float totalExpenses = 0.0; // Total of all expenses
     float expenseGoal = 0.0; // User-defined expense goal
-
     int loaded = loadExpensesFromFile(&totalExpenses);
 
     srand(time(NULL)); // Initialize random number generator
@@ -142,11 +185,12 @@ int main() {
         printf("1. Add Expense\n");
         printf("2. View Expenses\n");
         printf("3. Set Expense Goal\n");
-        printf("4. View Expense Goal\n");
-        printf("5. Check Expense Goal\n");
-        printf("6. Save Expenses to File\n");
-        printf("7. Display Spending Tip\n");
-        printf("8. Exit\n");
+        printf("4. Check Expense Goal\n");
+        printf("5. Display Spending Tip\n");
+        printf("6. Add Spending Note\n");
+        printf("7. View Spending Notes\n");
+        printf("8. Save Expenses to File\n"); // Added option to save expenses to a file
+        printf("9. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -163,28 +207,31 @@ int main() {
                 printf("Expense goal set to %.2f\n", expenseGoal);
                 break;
             case 4:
-                printf("Your expense goal is: %.2f\n", expenseGoal);
-                break;
-            case 5:
                 if (totalExpenses >= expenseGoal) {
                     printf("Congratulations! You have met or exceeded your expense goal.\n");
                 } else {
                     printf("You are %.2f away from reaching your expense goal.\n", expenseGoal - totalExpenses);
                 }
                 break;
-            case 6:
-                saveExpensesToFile(totalExpenses);
-                break;
-            case 7:
+            case 5:
                 displayRandomSpendingTip();
                 break;
+            case 6:
+                addSpendingNote();
+                break;
+            case 7:
+                viewSpendingNotes();
+                break;
             case 8:
+                saveExpensesToFile(totalExpenses); // Call the function to save expenses to a file
+                break;
+            case 9:
                 printf("Exiting...\n");
                 break;
             default:
                 printf("Invalid choice. Please try again.\n");
         }
-    } while (choice != 8);
+    } while (choice != 9);
 
     // Free allocated memory before exiting
     struct Expense *current = head;
