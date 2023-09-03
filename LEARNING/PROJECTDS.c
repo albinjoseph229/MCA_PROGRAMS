@@ -27,6 +27,7 @@ const char *spendingTips[] = {
     "Cancel unnecessary subscription services.",
     "Buy items in bulk to save money in the long run.",
     "Plan your shopping trips with a list to avoid impulsive purchases.",
+    "avoid unnecessary travels.",
     // Add more tips here
 };
 
@@ -189,7 +190,7 @@ int main() {
         printf("5. Display Spending Tip\n");
         printf("6. Add Spending Note\n");
         printf("7. View Spending Notes\n");
-        printf("8. Save Expenses to File\n"); // Added option to save expenses to a file
+        printf("8. Save Expenses to File\n"); 
         printf("9. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -208,7 +209,7 @@ int main() {
                 break;
             case 4:
                 if (totalExpenses >= expenseGoal) {
-                    printf("Congratulations! You have met or exceeded your expense goal.\n");
+                    printf("Congratulations! You have not met or exceeded your expense goal.\n");
                 } else {
                     printf("You are %.2f away from reaching your expense goal.\n", expenseGoal - totalExpenses);
                 }
