@@ -1,0 +1,77 @@
+#include<stdio.h>
+int i;
+struct poly
+{
+    int coeff1,coeff2,coeff3;
+};
+struct poly p[10];
+void read(int degree1,int degree2);
+{
+    printf("Enter the elements of 1st polynomial: \n");
+    for(i=degree1;i>=0;i--)
+    {
+        if(i==0)
+        {
+            printf("enter the constant term",i);
+            scanf("%d",&p[i].coeff1);
+        }
+        else{
+            printf("enter the coefficient of x^%d: ",i);
+            scanf("%d",&p[i].coeff1);
+        }
+    }
+    printf("enter the elements of the second")
+    for(i=degree2;i>=0;i--)
+    {
+        if(i==0)
+        {
+            printf("enter the constant term");
+            scanf("%d",&p[i].coeff2);
+        }
+        else
+        {
+            printf("enter the coefficient of x^%d",i);
+            scanf("%d",&p[i].coeff2);
+        }
+    }
+    
+}
+void disp(int degree,int degree2)
+{
+    printf("the 1st polynomial is: \n");
+    for(i=degree1;i>=0;i--)
+    {
+        if(i==0)
+        {
+            printf("%d",&p[i].coeff1);
+        }
+        else
+        {
+            printf("%dx^%d+",&p[i].coeff1,i);
+        }
+    }
+    printf("the 2nd polynomial is: \n");
+    for(i=degree2;i>=0;i--)
+    {
+        if(i==0)
+        {
+            printf("%d",p[i].coeff2);
+        }
+        else
+        {
+            printf("%dx^%d+",p[i].coeff2,i);
+        }
+    }
+}
+void add(int degree, int degree2)
+{
+    printf("addition of 1st and 2nd polynomial is:\n");
+    for(i=degree;i>=0;i--)
+    {
+        p[i].coeff3=p[i].coeff1+p[i].coeff2;
+    }
+    for(i=degree;i>=0;i--)
+    {
+
+    }
+}
