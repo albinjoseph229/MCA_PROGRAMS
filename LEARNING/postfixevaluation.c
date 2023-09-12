@@ -1,26 +1,31 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h> // Include the math library for pow
 #define MAX 100
 
-char stack[MAX];
+int stack[MAX];
 char infix[MAX], postfix[MAX];
 int top = -1;
 
-void push(char);
-char pop();
+void push(int); // Change the argument type to int
+int pop(); // Change the return type to int
 int isEmpty();
 void inToPost();
 int isOperator(char);
 int precedence(char);
+int post_eval(); // Change the return type to int
 void print();
 
 int main()
 {
+    int result;
     printf("Enter the infix expression: ");
-    gets(infix);
+    fgets(infix, sizeof(infix), stdin); // Use fgets instead of gets
     inToPost();
     print();
+    result = post_eval();
+    printf("The result after postfix evaluation is: %d\n", result);
     return 0;
 }
 
@@ -90,7 +95,7 @@ void print()
     printf("\n");
 }
 
-void push(char c)
+void push(int c) // Change the argument type to int
 {
     if (top == MAX - 1)
     {
@@ -101,9 +106,9 @@ void push(char c)
     stack[top] = c;
 }
 
-char pop()
+int pop() // Change the return type to int
 {
-    char c;
+    int c;
     if (top == -1)
     {
         printf("Stack underflow\n");
@@ -120,4 +125,38 @@ int isEmpty()
         return 1;
     else
         return 0;
+}
+
+int post_eval()
+{
+    int i, a, b;
+    for (i = 0; i < strlen(postfix); i++)
+    {
+        if (postfix[i] >= '0' && postfix[i] <= '9')
+            push(postfix[i] - '0');
+        else
+        {
+            a = pop();
+            b = pop();
+            switch (postfix[i])
+            {
+            case '+':
+                push(b + a);
+                break;
+            case '-':
+                push(b - a); 
+                break;
+            case '*':
+                push(b * a);
+                break;
+            case '/':
+                push(b / a);
+                break;
+            case '^':
+                push(pow(b, a));
+                break;
+            }
+        }
+    }
+    return pop(); // Return the final result
 }
