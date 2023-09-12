@@ -38,7 +38,7 @@ void display()
 {
     int i;
     printf("\nqueue elements are: ");
-    for(i=front;i<rear;i++)
+    for(i=front;i<=rear;i++)
     {
         printf("%d\t",queue[i]);
     }
@@ -46,14 +46,21 @@ void display()
 }
 int main()
 {
-    enqueue(10);
-    enqueue(20);
-    enqueue(30);
-    enqueue(40);
-    enqueue(40);
-    enqueue(50);
-    enqueue(50);
-    dequeue();
+    // enqueue(10);
+    // enqueue(20);
+    // enqueue(30);
+    // enqueue(40);
+    // enqueue(50);
+    // enqueue(40);
+    // enqueue(50);
+    // dequeue();
+    // dequeue();
+    enqueue(5);
+    enqueue(8);
+    enqueue(33);
+    enqueue(11);
+    enqueue(3);
+    display();
     dequeue();
     display();
 }
