@@ -33,15 +33,43 @@ void disp(){
     else{
         t=head;
         while(t!=NULL){
-            printf("%d\t",t->data);
+            printf("\n%d\t",t->data);
             t=t->next;
         }
     }
+}
+void delete(int e)
+{
+    struct node *t;
+    if(head==NULL)
+    {
+        printf("linked list is empty");
+    }
+    else if(head->data==e)
+    {
+        head=head->next;
+    }
+    else{
+        t=head;
+        while(t->next!=NULL && t->next->data!=e){
+            t=t->next;
+        }
+        if(t->next==NULL){
+            printf("\n element not found");
+        }
+        else{
+            t->next=t->next->next;
+            printf("\nelement removed");
+        }
+    }
+
 }
 int main()
 {
     insert(10);
     insert(20);
     insert(30);
+    disp();
+    delete(30);
     disp();
 }
