@@ -1,53 +1,50 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-struct node {
+#include<stdio.h>
+#include<malloc.h>
+struct node{
     int data;
-    struct node *next;
+    struct node* next;
 };
-
-void countofnodes(struct node *head);
-
-int main() {
-    struct node *head = NULL;
-    head = (struct node*)malloc(sizeof(struct node));
-    head->data = 45;
-    head->next = NULL;
-
-    struct node *t = (struct node*)malloc(sizeof(struct node));
-    t->data = 98;
-    t->next = NULL;
-    head->next = t;
-
-    t = (struct node*)malloc(sizeof(struct node));
-    t->data = 3;
-    t->next = NULL;
-    head->next->next = t;
-
-    countofnodes(head);
-
-    // Free allocated memory
-    struct node *current = head;
-    while (current != NULL) {
-        struct node *temp = current;
-        current = current->next;
-        free(temp);
+struct node* head=NULL;
+void insert(int e)
+{
+    struct node* t;
+    if(head==NULL)
+    {
+        head=(struct node*)malloc(sizeof(struct node*));
+        head->data=e;
+        head->next=NULL;
     }
-
-    return 0;
-}
-
-void countofnodes(struct node *head) {
-    int count = 0;
-    struct node *ptr = head;
-
-    if (head == NULL) {
-        printf("Linked list is empty\n");
-    } else {
-        while (ptr != NULL) {
-            count++;
-            ptr = ptr->next;
+    else{
+        t=head;
+        while(t->next!=NULL)
+        {
+            t=t->next;
         }
-        printf("Number of nodes in the linked list: %d\n", count);
+        t->next=(struct node*)malloc(sizeof(struct node*));
+        t->next->data=e;
+        t->next->next=NULL;
     }
+}
+void display()
+{
+    struct node* t;
+    if(head==NULL)
+    {
+        printf("linked list is empty\n");
+    }
+    else{
+        t=head;
+        while(t!=NULL){
+            printf("%d\n",t->data);
+            t=t->next;
+        }
+    }
+}
+int main()
+{
+    insert(20);
+    insert(30);
+    insert(40);
+    display();
+
 }
