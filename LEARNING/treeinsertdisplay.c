@@ -36,7 +36,7 @@ void insert(int e)
                 x->right = (tree *)malloc(sizeof(tree));
                 x->right->data = e;
                 x->right->left = NULL;
-                x->right->left = NULL; // This line should be x->right->right=NULL;
+                x->right->left = NULL; 
             }
             else
             {
