@@ -50,10 +50,9 @@ void delete(int e)
         head=head->next;
     }
     else{
-        t=head;
-        while(t->next!=NULL && t->next->data!=e){
-            t=t->next;
-        }
+        
+        for(t=head;t->next!=NULL && t->next->data!=e; t=t->next)
+        
         if(t->next==NULL){
             printf("\n element not found");
         }

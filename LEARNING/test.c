@@ -40,6 +40,20 @@ void display()
         }
     }
 }
+void delete(int e)
+{
+    if(head==NULL)
+    {
+        printf("linked list is empty");
+    }
+    else if(head->data==e)
+    {
+        head=head->next;
+    }
+    else{
+        
+    }
+}
 int main()
 {
     insert(20);
