@@ -42,6 +42,7 @@ void display()
 }
 void delete(int e)
 {
+    struct node *t;
     if(head==NULL)
     {
         printf("linked list is empty");
@@ -51,6 +52,17 @@ void delete(int e)
         head=head->next;
     }
     else{
+        for(t=head;t->next!=NULL && t->next->data!=e; t=t->next)
+        {
+
+        }
+        if(t->next==NULL){
+            printf("\n element not found");
+        }
+        else{
+            t->next=t->next->next;
+            printf("\n element removed");
+        }
         
     }
 }

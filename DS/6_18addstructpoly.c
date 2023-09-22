@@ -31,7 +31,7 @@ int main() {
     for (i = 0; i < n1; i++) {
         printf("%dx^%d", p1[i].coeff, p1[i].exp);
         if (i < n1 - 1) {
-            printf(" - ");
+            printf(" + ");
         }
     }
 
@@ -39,14 +39,14 @@ int main() {
     for (i = 0; i < n2; i++) {
         printf("%dx^%d", p2[i].coeff, p2[i].exp);
         if (i < n2 - 1) {
-            printf(" - ");
+            printf(" + ");
         }
     }
 
     i = j = k = 0;
     while (i < n1 && j < n2) {
         if (p1[i].exp == p2[j].exp) {
-            p3[k].coeff = p1[i].coeff - p2[j].coeff;
+            p3[k].coeff = p1[i].coeff + p2[j].coeff;
             p3[k].exp = p1[i].exp;
             i++;
             j++;
@@ -82,7 +82,7 @@ int main() {
     for (i = 0; i < k; i++) {
         printf("%dx^%d", p3[i].coeff, p3[i].exp);
         if (i < k - 1) {
-            printf(" - ");
+            printf(" + ");
         }
     }
     
