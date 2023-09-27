@@ -17,7 +17,6 @@ int main()
 	{
 		printf("Enter the %d Element: ",(i+1));
 		scanf("%d",arr+i);
-		sum=sum+*(arr+i);
 	}
 	
 	int maxValue=0;
