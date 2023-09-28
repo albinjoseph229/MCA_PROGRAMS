@@ -19,7 +19,7 @@ int main()
 		scanf("%d",arr+i);
 	}
 	
-	int maxValue=0;
+	int modeValue=0;
 	int maxCount = 0;
 
     for (i = 0; i < n; i++) {
@@ -32,12 +32,12 @@ int main()
       
        if (count >maxCount) {
 	   		maxCount = count;
-        	maxValue = arr[i];		
+        	modeValue = arr[i];		
        }
        
     }
 
-	printf("Mode is: %d",maxValue);
+	printf("Mode is: %d",modeValue);
 
 	
 	return 0;
