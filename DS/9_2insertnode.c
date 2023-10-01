@@ -44,6 +44,28 @@ void atbegin(int e)
     head = newnode;
 }
 
+
+void afterelement(int e,int n)
+{
+    struct node *t,*a;
+    t=head;
+    while((t->next!=NULL) &&(t->data!=n))
+    {
+
+        t=t->next;
+    }
+    if((t->next==NULL)&&(t->data!=n))
+    {
+        printf("element not found");
+
+    }
+    else{
+        a=(struct node*)malloc(sizeof(struct node));
+        a->data=e;
+        a->next=t->next;
+        t->next=a;
+    }
+}
 void disp()
 {
     struct node *t = head;
@@ -61,42 +83,50 @@ void disp()
         printf("\n");
     }
 }
-void afterelement(int e,int n)
+int menu()
 {
-    struct node *t,*a;
-    t=head;
-    while((t->next!=NULL)&&(t->data!=n))
-    {
-        t=t->next;
-    }
-    if((t->next==NULL)&&(t->data!=n))
-    {
-        printf("element not found");
-
-    }
-    else{
-        a=(struct node*)malloc(sizeof(struct node));
-        a->data=e;
-        a->next=t->next;
-        t->next=a;
-    }
+    int ch;
+    printf("enter your choice \n 1-At Begining \n 2-At End \n 3-After Element \n 4-Display \n 5-Exit \n");
+    scanf("%d",&ch);
+    return ch;
+}
+int elemnt()
+{
+    int n;
+    printf("enter the element");
+    scanf("%d",&n);
+    return n;
 }
 
 int main()
 {
-    atend(10);
-    atend(30);
-    atbegin(20);
-    afterelem(40,30);
-    disp();
-
-    // Free memory
-    struct node* temp;
-    while (head != NULL)
+    int ch;
+    int n,m;
+    for(ch=menu();ch!=5;ch=menu())
     {
-        temp = head;
-        head = head->next;
-        free(temp);
+        switch(ch)
+        {
+            case 1:
+                n=elemnt();
+                atbegin(n);
+            break;
+            case 2:
+                n=elemnt();
+                atend(n);
+            break;
+            case 3:
+                n=elemnt();
+                printf("\nenter the elemnt after which you want to enter new element: ");
+                scanf("%d",&m);
+                afterelement(n,m);
+            break;
+            case 4:
+                disp();
+            break;
+            default:
+                printf("invalid choice");
+            break;
+        }
     }
 
     return 0;

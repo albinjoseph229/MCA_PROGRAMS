@@ -104,18 +104,47 @@ void specified(int e)
         }
     }
 }
-
+int menu()
+{
+    int ch;
+    printf("\nEnter your choice \n1-Insert Element \n2-Delete From Begining \n3-Delete From End \n4-Delete A Specified Element \n5-Display \n-Exit \n");
+    scanf("%d",&ch);
+    return ch;
+}
 int main()
 {
-    insert(10);
-    insert(300);
-    insert(20);
-    insert(100);
-    insert(200);
-    insert(300);
-    display();
-    atfront();
-    atend();
-    specified(20);
-    display();
+   int ch,e;
+   for(ch=menu();ch!=6;ch=menu())
+   {
+        switch(ch)
+        {
+            case 1:
+                printf("Enter the element to be inserted\n");
+                scanf("%d",&e);
+                insert(e);
+                break;
+            case 2:
+                atfront();
+                break;
+            case 3:
+                atend();
+                break;
+            case 4:
+                printf("Enter the element to be deleted\n");
+                scanf("%d", &e);
+                specified(e);
+                break;
+            case 5:
+                display();
+                break;
+            case 6:
+                exit(0);
+                break;
+            default:
+                printf("Invalid Choice\n");
+            break;
+
+        }
+   }
+  
 }

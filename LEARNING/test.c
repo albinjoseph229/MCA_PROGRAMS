@@ -1,15 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
-
+#include <malloc.h>
 struct node
 {
     int data;
     struct node *next;
+    struct node *prev;
 };
-
 struct node *head = NULL;
-
-void atend(int e)
+void insert(int e)
 {
     struct node *t;
     if (head == NULL)
@@ -17,7 +15,9 @@ void atend(int e)
         head = (struct node *)malloc(sizeof(struct node));
         head->data = e;
         head->next = NULL;
+        head->prev = NULL;
     }
+
     else
     {
         t = head;
@@ -28,55 +28,15 @@ void atend(int e)
         t->next = (struct node *)malloc(sizeof(struct node));
         t->next->data = e;
         t->next->next = NULL;
+        t->next->prev = t;
     }
 }
-
-void atinter(int e, int el)
-{
-    struct node *t;
-    if (head == NULL)
-    {
-        head = (struct node *)malloc(sizeof(struct node));
-        head->data = e;
-        head->next = NULL;
-    }
-    else
-    {
-        t = head;
-        while (t->next != NULL && t->data != el)
-        {
-            t = t->next;
-        }
-        if (t->next == NULL && t->data != el)
-        {
-            printf("Element not found\n");
-        }
-        else
-        {
-            struct node *newnode;
-            newnode = (struct node *)malloc(sizeof(struct node));
-            newnode->data = e;
-            newnode->next = t->next;
-            t->next = newnode;
-        }
-    }
-}
-
-void atbeginning(int e)
-{
-    struct node *newnode;
-    newnode = (struct node *)malloc(sizeof(struct node));
-    newnode->data = e;
-    newnode->next = head;
-    head = newnode;
-}
-
 void disp()
 {
     struct node *t;
     if (head == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("linked list is empty");
     }
     else
     {
@@ -86,62 +46,56 @@ void disp()
             printf("%d\t", t->data);
             t = t->next;
         }
-        printf("\n");
     }
 }
-
-void delete(int e)
+void deleteNode(int key)
 {
-    struct node *t = head; // Initialize t to head
+    struct node *t;
+    struct node *p;
+
     if (head == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("List is empty");
     }
-    else if (head->data == e)
+    else if (head->data == key)
     {
         head = head->next;
-        free(t); // Free the memory of the deleted node
-        printf("Element removed\n");
+        if (head != NULL)
+        {
+            head->prev = NULL;
+        }
     }
     else
     {
-        while (t->next != NULL && t->next->data != e)
+        t = head;
+        while (t != NULL && t->data != key)
         {
+            p = t;
             t = t->next;
         }
-        if (t->next == NULL)
+        if (t == NULL)
         {
-            printf("Element not found\n");
+            printf("Element not found");
         }
         else
         {
-            struct node *temp = t->next;
-            t->next = t->next->next;
-            free(temp); // Free the memory of the deleted node
-            printf("Element removed\n");
+            p->next = t->next;
+            if (t->next != NULL)
+            {
+                t->next->prev = t->prev;
+            }
+            free(t);
         }
     }
 }
 
 int main()
 {
-    atend(10);
-    atend(30);
-    atend(20);
-    atinter(50, 30);
-    atbeginning(40);
+    insert(10);
+    insert(20);
+    insert(30);
     disp();
-    delete (30);
+    deleteNode(10);
     disp();
-
-    // Free memory
-    struct node *temp;
-    while (head != NULL)
-    {
-        temp = head;
-        head = head->next;
-        free(temp);
-    }
-
     return 0;
 }
