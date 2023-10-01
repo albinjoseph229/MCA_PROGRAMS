@@ -3,7 +3,7 @@
 struct node{
     int data;
     struct node *next;
-}*top=NULL,*head=NULL;
+}*top=NULL;
 
 void push(int e)
 {
@@ -17,10 +17,6 @@ void push(int e)
     new->next=top;
     top=new;
     printf("%d is pushed onto the stack\n",e);
-    if(head==NULL)
-    {
-        head=new;
-    }
 }
 void pop()
 {
@@ -33,10 +29,6 @@ void pop()
         struct node *t = top;
         printf("%d is popped out",top->data);
         top=top->next;
-    }
-    if(top==NULL)
-    {
-        head==NULL;
     }
 }
 void peek()
