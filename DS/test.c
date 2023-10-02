@@ -1,101 +1,70 @@
 #include <stdio.h>
-#include <malloc.h>
-struct node
-{
-    int data;
-    struct node *next;
-    struct node *prev;
-};
-struct node *head = NULL;
-void insert(int e)
-{
-    struct node *t;
-    if (head == NULL)
-    {
-        head = (struct node *)malloc(sizeof(struct node));
-        head->data = e;
-        head->next = NULL;
-        head->prev = NULL;
-    }
+#include <stdlib.h>
 
-    else
-    {
-        t = head;
-        while (t->next != NULL)
-        {
-            t = t->next;
-        }
-        t->next = (struct node *)malloc(sizeof(struct node));
-        t->next->data = e;
-        t->next->next = NULL;
-        t->next->prev = t;
-    }
-}
-void disp()
-{
-    struct node *t;
-    if (head == NULL)
-    {
-        printf("linked list is empty");
-    }
-    else
-    {
-        t = head;
-        while (t != NULL)
-        {
-            printf("%d\t", t->data);
-            t = t->next;
-        }
-    }
-}
-void deleteNode(int key)
-{
-    struct node *t;
-    struct node *p;
+struct Node{
+  int data;
+  struct Node *next;
+}*front = NULL, *rear = NULL;
 
-    if (head == NULL)
-    {
-        printf("List is empty");
-    }
-    else if (head->data == key)
-    {
-        head = head->next;
-        if (head != NULL)
-        {
-            head->prev = NULL;
-        }
-    }
-    else
-    {
-        t = head;
-        while (t != NULL && t->data != key)
-        {
-            p = t;
-            t = t->next;
-        }
-        if (t == NULL)
-        {
-            printf("Element not found");
-        }
-        else
-        {
-            p->next = t->next;
-            if (t->next != NULL)
-            {
-                t->next->prev = t->prev;
-            }
-            free(t);
-        }
-    }
+void enqueue(int x){
+  struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+  temp->data = x; 
+  temp->next = NULL;
+  
+  if(front == NULL){
+    front = rear = temp;
+  }
+  else{
+    rear->next = temp;
+    rear = temp;
+  }
 }
 
-int main()
-{
-    insert(10);
-    insert(20);
-    insert(30);
-    disp();
-    deleteNode(10);
-    disp();
-    return 0;
+void dequeue(){
+  if(front == NULL){
+    printf("Queue is empty");
+    return;
+  }
+  
+  struct Node *temp = front;
+  front = front->next;
+  
+  if(front == NULL)
+    rear = NULL;
+  
+  printf("Removed element is: %d\n", temp->data);
+  free(temp); 
+}
+
+void display(){
+  struct Node *ptr;
+  if(front == NULL){
+    printf("Queue is empty\n");
+    return;
+  }
+  
+  ptr = front;
+  printf("Queue elements: \n");
+  
+  while(ptr != NULL){
+    printf("%d ", ptr->data);
+    ptr = ptr->next;
+  }
+  printf("\n");
+}
+
+int main(){
+
+  enqueue(10);
+  enqueue(20);
+  enqueue(30);
+  
+  display();
+  
+  dequeue();
+  dequeue();
+  
+  display();
+  
+  return 0;
 }
