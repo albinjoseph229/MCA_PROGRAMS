@@ -107,7 +107,7 @@ void specified(int e)
 int menu()
 {
     int ch;
-    printf("\nEnter your choice \n1-Insert Element \n2-Delete From Begining \n3-Delete From End \n4-Delete A Specified Element \n5-Display \n-Exit \n");
+    printf("\nEnter your choice \n1-Insert Element \n2-Delete From Begining \n3-Delete From End \n4-Delete A Specified Element \n5-Display \n6-Exit \n");
     scanf("%d",&ch);
     return ch;
 }
