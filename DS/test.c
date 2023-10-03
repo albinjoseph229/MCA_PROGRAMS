@@ -1,70 +1,80 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-struct Node{
+#include <malloc.h>
+struct node
+{
   int data;
-  struct Node *next;
-}*front = NULL, *rear = NULL;
-
-void enqueue(int x){
-  struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
-  temp->data = x; 
-  temp->next = NULL;
-  
-  if(front == NULL){
-    front = rear = temp;
+  struct node *next;
+};
+struct node *head = NULL;
+void insert(int e)
+{
+  struct node *t;
+  if (head == NULL)
+  {
+    head = (struct node *)malloc(sizeof(struct node));
+    head->data = e;
+    head->next = NULL;
   }
-  else{
-    rear->next = temp;
-    rear = temp;
+
+  else
+  {
+    t = head;
+    while (t->next != NULL)
+    {
+      t = t->next;
+    }
+    t->next = (struct node *)malloc(sizeof(struct node));
+    t->next->data = e;
+    t->next->next = NULL;
   }
 }
-
-void dequeue(){
-  if(front == NULL){
-    printf("Queue is empty");
-    return;
+void replace(int el, int e)
+{
+  struct node *t = head;
+  if (head->data == el)
+  {
+    head->data = e;
   }
-  
-  struct Node *temp = front;
-  front = front->next;
-  
-  if(front == NULL)
-    rear = NULL;
-  
-  printf("Removed element is: %d\n", temp->data);
-  free(temp); 
+  else
+  {
+    while (t->next != NULL && t->data != el)
+    {
+      t = t->next;
+    }
+    if (t->next == NULL && t->data != el)
+    {
+      printf("Element not found");
+    }
+    else
+      t->data = e;
+  }
 }
-
-void display(){
-  struct Node *ptr;
-  if(front == NULL){
-    printf("Queue is empty\n");
-    return;
+void display()
+{
+  if (head == NULL)
+  {
+    printf("Linked List Is Empty");
   }
-  
-  ptr = front;
-  printf("Queue elements: \n");
-  
-  while(ptr != NULL){
-    printf("%d ", ptr->data);
-    ptr = ptr->next;
+  else
+  {
+    struct node *t;
+    t = head;
+    while (t != NULL)
+    {
+      printf("%d\t", t->data);
+      t = t->next;
+    }
+    printf("\n");
   }
-  printf("\n");
 }
-
-int main(){
-
-  enqueue(10);
-  enqueue(20);
-  enqueue(30);
-  
+int main()
+{
+  insert(10);
+  insert(20);
+  insert(30);
+  insert(40);
   display();
-  
-  dequeue();
-  dequeue();
-  
+  replace(30, 33);
+  replace(40, 43);
   display();
-  
-  return 0;
 }
