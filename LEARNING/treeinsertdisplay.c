@@ -1,13 +1,17 @@
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
+
 struct node
 {
     int data;
     struct node *left;
     struct node *right;
 };
+
 typedef struct node tree;
+
 tree *root = NULL;
+
 void insert(int e)
 {
     tree *p, *x;
@@ -29,25 +33,47 @@ void insert(int e)
             else
                 p = p->right;
         }
-        if (x->data < e)
+
+        if (x->data > e)
         {
-            if (x->data < e)
-            {
-                x->right = (tree *)malloc(sizeof(tree));
-                x->right->data = e;
-                x->right->left = NULL;
-                x->right->left = NULL; 
-            }
-            else
-            {
-                x->left = (tree *)malloc(sizeof(tree));
-                x->left->data = e;
-                x->left->left = NULL;
-                x->left->right = NULL;
-            }
+            x->left = (tree *)malloc(sizeof(tree));
+            x->left->data = e;
+            x->left->left = NULL;
+            x->left->right = NULL;
+        }
+        else
+        {
+            x->right = (tree *)malloc(sizeof(tree));
+            x->right->data = e;
+            x->right->left = NULL;
+            x->right->right = NULL; 
         }
     }
 }
+
+
+void preorder(tree *r)
+{
+    if (r != NULL)
+    {
+        printf("%d\t", r->data);
+        preorder(r->left);
+        preorder(r->right);
+    }
+
+}
+
+void postorder(tree *r)
+{
+    if (r != NULL)
+    {
+        postorder(r->left);
+        postorder(r->right);
+        printf("%d\t", r->data);
+    }
+
+}
+
 void inorder(tree *r)
 {
     if (r != NULL)
@@ -56,7 +82,9 @@ void inorder(tree *r)
         printf("%d\t", r->data);
         inorder(r->right);
     }
+   
 }
+
 int main()
 {
     insert(100);
@@ -66,5 +94,10 @@ int main()
     insert(10);
     insert(60);
     inorder(root);
+    printf("\n");
+    preorder(root);
+    printf("\n");
+    postorder(root);
+    printf("\n");
     return 0;
 }
