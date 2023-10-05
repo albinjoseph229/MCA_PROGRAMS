@@ -96,6 +96,7 @@ void sort()
             }
         }
     }
+    printf("Sorted sucessfully");
 }
 void display()
 {
