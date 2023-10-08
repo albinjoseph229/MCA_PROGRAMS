@@ -83,8 +83,6 @@ void postorder(tree *r)
     printf("%d\t",r->data);
 }
 
-
-
 void delete(int e) {
     if (root == NULL) {
         return;
