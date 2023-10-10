@@ -129,8 +129,6 @@ void delete(int e) {
     }
 }
 
-
-
 int main()
 {
     insert(100);
