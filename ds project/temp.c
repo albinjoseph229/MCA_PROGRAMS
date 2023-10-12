@@ -26,6 +26,7 @@ void add_expense(float amount, char *description, char *date) {
             current = current->next;
         }
         current->next = new_expense;
+        printf("Expense added.\n");
     }
 }
 
@@ -52,6 +53,7 @@ void remove_expense(int index) {
     struct Expense *temp = current->next;
     current->next = temp->next;
     free(temp);
+    printf("Expense removed.\n");
 }
 
 void display_expenses() {
@@ -127,6 +129,37 @@ void load_expenses(char *filename) {
     }
     fclose(file);
 }
+void display_spending_tips() {
+    printf("Spending Tips:\n");
+    printf("- Reduce expenses on non-essential items.\n");
+    printf("- Use coupons to save money.\n");
+    printf("- Buy in bulk to save money.\n");
+    printf("- Use Public Transport.\n");
+}
+float expense_goal = 0;
+
+void set_expense_goal() {
+    printf("Enter expense goal: ");
+    scanf("%f", &expense_goal);
+    printf("Expense goal set to %.2f\n", expense_goal);
+}
+
+void view_expense_goal_and_total() {
+    float total = 0;
+    struct Expense *current = head;
+    while (current != NULL) {
+        total += current->amount;
+        current = current->next;
+    }
+
+    printf("Total expenses: %.2f\n", total);
+    printf("Expense goal: %.2f\n", expense_goal);
+    if (total <= expense_goal) {
+        printf("Congratulations! You have met your expense goal.\n");
+    } else {
+        printf("You have exceeded your expense goal.\n");
+    }
+}
 
 int main() {
     int choice;
@@ -141,7 +174,8 @@ int main() {
         printf("6. Display expenses with keyword\n");
         printf("7. Save expenses to file\n");
         printf("8. Load expenses from file\n");
-        printf("9. Exit\n");
+        printf("9. Display spending tips\n");
+        printf("10. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         switch (choice) {
@@ -170,7 +204,7 @@ int main() {
                 break;
             }
             case 4: {
-                display_total();
+                view_expense_goal_and_total();
                 break;
             }
             case 5: {
@@ -203,8 +237,13 @@ int main() {
                 break;
             }
             case 9: {
+            display_spending_tips();
+            break;
+            }
+            case 10: {
                 exit(0);
             }
+
             default: {
                 printf("Invalid choice.\n");
                 break;
