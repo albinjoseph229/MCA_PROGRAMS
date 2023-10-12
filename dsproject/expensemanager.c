@@ -179,25 +179,6 @@ void savetofile()
         current = current->next;
     }
     fclose(fp);
-    
-}
-void readfromfile()
-{
-    FILE *fp;
-    fp = fopen("expense.txt", "r");
-    if (fp == NULL)
-    {
-        printf("Error: File not found.\n");
-        return;
-    }
-    float amount;
-    char description[100];
-    char date[20];
-    while (fscanf(fp, "%f %s %s\n", &amount, description, date) != EOF)
-    {
-        add_expense(amount, description, date);
-    }
-    fclose(fp);
 }
 int main()
 {
@@ -215,7 +196,6 @@ int main()
         printf("7. Display spending tips\n");
         printf("8. Exit\n");
         printf("9. Save to file\n");
-        printf("10. Read from file\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         switch (choice)
@@ -274,11 +254,6 @@ int main()
         case 9:
         {
             savetofile();
-            break;
-        }
-        case 10:
-        {
-            readfromfile();
             break;
         }
         default:
