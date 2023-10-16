@@ -1,166 +1,70 @@
 #include <stdio.h>
 #include <malloc.h>
-
-
-typedef struct node{
-    int data;
-    struct node *left;
-    struct node *right;
-}tree;
-
-tree *root=NULL;
-
-void insert(int e)
+typedef struct node
 {
-    tree *p,*x;
-    if(root==NULL)
+    int data;
+    struct node *next;
+} node;
+
+node *front = NULL;
+node *rear = NULL;
+void enqueue(int e)
+{
+    node *newnode = (node *)malloc(sizeof(node));
+    newnode->data = e;
+    newnode->next = NULL;
+    if (front == NULL)
     {
-        root=(tree*)malloc(sizeof(tree));
-        root->data=e;
-        root->left=NULL;
-        root->right=NULL;
+        front = rear = newnode;
     }
     else
     {
-        p=root;
-        x=root;
-        while(p!=NULL)
+        node *t = front;
+        while (t->next != NULL)
         {
-            x=p;
-            if(e>p->data)
-            {
-                p=p->right;
-            }
-            else
-            {
-                p=p->left;
-            }
+            t = t->next;
         }
-        if(e>x->data)
+        t->next=newnode;
+        rear=newnode;
+    }
+}
+void display()
+{
+    if (front == NULL)
+    {
+        printf("Queue underflow");
+    }
+    else
+    {
+        node *t = front;
+        while (t != NULL)
         {
-            x->right=(tree*)malloc(sizeof(tree));
-            x->right->data=e;
-            x->right->left=NULL;
-            x->right->right=NULL;
+            printf("%d\t", t->data);
+            t=t->next;
         }
-        else
-        {
-            x->left=(tree*)malloc(sizeof(tree));
-            x->left->data=e;
-            x->left->left=NULL;
-            x->left->right=NULL;
-        }
+        printf("\n");
     }
 }
-void inorder(tree *r)
-{
-    if(r==NULL)
-    {
-        return ;
+void dequeue(){
+    if(front==NULL){
+        printf("Queue underflow");
     }
-    inorder(r->left);
-    printf("%d\t",r->data);
-    inorder(r->right);
-}
-void preorder(tree *r)
-{
-    if(r==NULL)
-    {
-        return ;
-    }
-    printf("%d\t",r->data);
-    preorder(r->left);
-    preorder(r->right);
-}
-void postorder(tree *r)
-{
-    if(r==NULL)
-    {
-        return ;
-    }
-    postorder(r->left);
-    postorder(r->right);
-    printf("%d\t",r->data);
-}
-
-
-
-void delete(int e) {
-    if (root == NULL) {
-        return;
-    }
-
-    tree* x = NULL;
-    tree* p = root;
-
-    // Find the node to be deleted.
-    while (p != NULL && p->data != e) {
-        x = p;
-        if (e < p->data) {
-            p = p->left;
-        } else {
-            p = p->right;
+    else{
+        node *temp=front;
+        front=front->next;
+        free(temp);
+        if(front==NULL){
+            rear=NULL;
         }
     }
-
-    // If the node to be deleted is not found.
-    if (p == NULL) {
-        return;
-    }
-
-    // If the node to be deleted has no child or one child.
-    if (p->left == NULL || p->right == NULL) {
-        tree* child = (p->left != NULL) ? p->left : p->right;
-
-        if (x == NULL) {
-            root = child;
-        } else if (x->left == p) {
-            x->left = child;
-        } else {
-            x->right = child;
-        }
-    }
-
-    // If the node to be deleted has two children.
-    else {
-        tree *t=p->right;
-				while(t->left!=NULL)
-					t=t->left;
-				delete(t->data);
-				p->data = t->data;
-    }
 }
-
-
-
-int main()
-{
-    insert(100);
-    insert(50);
-    insert(200);
-    insert(10);
-    insert(60);
-    insert(150);
-    insert(250);
-    printf("INODER\n");
-    inorder(root);
-    printf("\nPREORDER\n");
-    preorder(root);
-    printf("\nPOSTORDER\n");
-    postorder(root);
-    delete(100);
-    printf("\nINODER\n");
-    inorder(root);
-    delete(50);
-    printf("\n");
-    inorder(root);
-    delete(150);
-    printf("\n");
-    inorder(root);
+int main(){
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    enqueue(40);
+    display();
+    dequeue();
+    display();
     return 0;
 }
-
-
-
-
-

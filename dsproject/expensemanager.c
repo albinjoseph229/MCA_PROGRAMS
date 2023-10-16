@@ -41,8 +41,9 @@ void add_expense(float amount, char *description, char *date)
             current = current->next;
         }
         current->next = new_expense;
-        printf("Expense added.\n");
+        
     }
+    printf("Expense added.\n");
 }
 void remove_expense(int index)
 {
@@ -179,6 +180,7 @@ void savetofile()
         current = current->next;
     }
     fclose(fp);
+    printf("Saved to file\n");
 }
 int main()
 {
@@ -194,8 +196,8 @@ int main()
         printf("5. Add Notes\n");
         printf("6. Display Notes\n");
         printf("7. Display spending tips\n");
-        printf("8. Exit\n");
-        printf("9. Save to file\n");
+        printf("8. Save to file\n");
+        printf("9. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         switch (choice)
@@ -249,12 +251,12 @@ int main()
         }
         case 8:
         {
-            exit(0);
+            savetofile();
+            break;
         }
         case 9:
         {
-            savetofile();
-            break;
+            exit(0);
         }
         default:
         {
