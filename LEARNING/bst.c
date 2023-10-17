@@ -22,6 +22,7 @@ void insert(int e)
     }
     else
     {
+        
         p=root;
         x=root;
         while(p!=NULL)
