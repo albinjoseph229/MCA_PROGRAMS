@@ -81,7 +81,7 @@ void inorder(tree *r)
     }
 }
 
-void main()
+int main()
 {
     int ch,e;
     while (1)
@@ -106,7 +106,7 @@ void main()
                 postorder(root);
                 break;
             case 5:
-                return;
+                exit(0);
                 break;
             default:
                 printf("\nInvalid choice");
@@ -114,4 +114,5 @@ void main()
             }
         }
     }
+    return 0;
 }
