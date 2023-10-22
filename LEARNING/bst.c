@@ -89,46 +89,65 @@ void delete(int e) {
         return;
     }
 
-    tree* x = NULL;
-    tree* p = root;
+    tree* parent = NULL;
+    tree* current = root;
 
-    // Find the node to be deleted.
-    while (p != NULL && p->data != e) {
-        x = p;
-        if (e < p->data) {
-            p = p->left;
+    // Search for the node to be deleted.
+    while (current != NULL && current->data != e) {
+        parent = current;
+        if (e < current->data) {
+            current = current->left;
         } else {
-            p = p->right;
+            current = current->right;
         }
     }
 
     // If the node to be deleted is not found.
-    if (p == NULL) {
+    if (current == NULL) {
         return;
     }
 
     // If the node to be deleted has no child or one child.
-    if (p->left == NULL || p->right == NULL) {
-        tree* child = (p->left != NULL) ? p->left : p->right;
-
-        if (x == NULL) {
-            root = child;
-        } else if (x->left == p) {
-            x->left = child;
+    if (current->left == NULL) {
+        if (parent == NULL) {
+            root = current->right;
+        } else if (parent->left == current) {
+            parent->left = current->right;
         } else {
-            x->right = child;
+            parent->right = current->right;
         }
+        free(current);
+    } else if (current->right == NULL) {
+        if (parent == NULL) {
+            root = current->left;
+        } else if (parent->left == current) {
+            parent->left = current->left;
+        } else {
+            parent->right = current->left;
+        }
+        free(current);
     }
 
     // If the node to be deleted has two children.
     else {
-        tree *t=p->right;
-				while(t->left!=NULL)
-					t=t->left;
-				delete(t->data);
-				p->data = t->data;
+        tree* successor = current->right;
+        parent = current;
+        while (successor->left != NULL) {
+            parent = successor;
+            successor = successor->left;
+        }
+        current->data = successor->data;
+
+        if (parent->left == successor) {
+            parent->left = successor->right;
+        } else {
+            parent->right = successor->right;
+        }
+
+        free(successor);
     }
 }
+
 
 int main()
 {
