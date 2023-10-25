@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-int stack[10],top =-1;
+char stack[10],top =-1;
 char a[10];
 int i;
 void pop()

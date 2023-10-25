@@ -1,11 +1,29 @@
 #include<stdio.h>
-#include<malloc.h>
+#include<string.h>
+#define maxsize 100
 
-typedef struct node{
-    int data;
-    struct node *left;
-    struct node *right;
-}tree;
+int top=-1;
+char stack[maxsize];
+char a[maxsize];
+int i;
 
-tree * root=NULL;
-
+void push()
+{
+    for(i=0;i<strlen(a);i++){
+        top++;
+        stack[top]=a[i];
+    }
+}
+void pop()
+{
+    printf("Reversed string is:");
+    for(i=top;top>-1;top--){
+        printf("%c",stack[top]);
+    }
+}
+int main(){
+    printf("enter the string:");
+    gets(a);
+    push(a);
+    pop();
+}

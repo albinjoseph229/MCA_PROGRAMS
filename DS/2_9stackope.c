@@ -1,68 +1,49 @@
-#include<stdio.h>
-int s[5],top=-1;
-void push(int e)
-{
-	if(top==6)
-	{
-		printf("stack is full");
-		
-	}
-	else{
-		s[++top]=e;
-	}
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int top = -1;
+int stack[MAX_SIZE];
+
+void push(int element) {
+    if (top == MAX_SIZE - 1) {
+        printf("Stack overflow\n");
+        return;
+    }
+    top++;
+    stack[top] = element;
 }
-void pop()
-{
-	if(top==-1)
-	{
-		printf("stack is underflow:");
-		
-	}
-	else{
-		s[top--];
-	}
+
+void pop() {
+    if (top == -1) {
+        printf("Stack underflow\n");
+    }
+    else{
+            top--;
+    }
+
 }
 void peek()
 {
 	if(top==-1)
 	{
-		printf("stack is empty");
+		printf("stack underflow\n");
 	}
 	else
 	{
-		printf("\nElement at top is %d",s[top]);
+		printf("\nElement at top is %d\n",stack[top]);
 	}
 }
-int menu()
-{
-	int ch;
-	printf("\nEnter your choice\n 1-PUSH\n 2-POP\n 3-PEEK\n 4-EXIT\n");
-	scanf("%d",&ch);
-	return ch;
-}
-void process()
-{
-	int e,ch;
-	for(ch=menu();ch!=4;ch=menu()){
-		switch(ch){
-			case 1:
-				printf("enter the element");
-				scanf("%d",&e);
-				push(e);
-				break;
-			case 2:
-				pop();
-				break;
-			case 3:
-				peek();
-				break;
-			default:
-				printf("wrong choice");
-		}
-	}
-}
-int main()
-{
-	process();
-	return 0;
+
+int main() {
+    push(1);
+    push(2);
+    push(3);
+    peek();
+    pop();
+    pop();
+    pop();
+    pop();
+    peek();
+    return 0;
 }
