@@ -1,80 +1,63 @@
 #include <stdio.h>
-#include <malloc.h>
-struct node
-{
-  int data;
-  struct node *next;
-};
-struct node *head = NULL;
-void insert(int e)
-{
-  struct node *t;
-  if (head == NULL)
-  {
-    head = (struct node *)malloc(sizeof(struct node));
-    head->data = e;
-    head->next = NULL;
-  }
-
-  else
-  {
-    t = head;
-    while (t->next != NULL)
-    {
-      t = t->next;
-    }
-    t->next = (struct node *)malloc(sizeof(struct node));
-    t->next->data = e;
-    t->next->next = NULL;
-  }
-}
-void replace(int el, int e)
-{
-  struct node *t = head;
-  if (head->data == el)
-  {
-    head->data = e;
-  }
-  else
-  {
-    while (t->next != NULL && t->data != el)
-    {
-      t = t->next;
-    }
-    if (t->next == NULL && t->data != el)
-    {
-      printf("Element not found");
-    }
-    else
-      t->data = e;
-  }
-}
-void display()
-{
-  if (head == NULL)
-  {
-    printf("Linked List Is Empty");
-  }
-  else
-  {
-    struct node *t;
-    t = head;
-    while (t != NULL)
-    {
-      printf("%d\t", t->data);
-      t = t->next;
-    }
-    printf("\n");
-  }
-}
 int main()
 {
-  insert(10);
-  insert(20);
-  insert(30);
-  insert(40);
-  display();
-  replace(30, 33);
-  replace(40, 43);
-  display();
-}
+  int c1[10], c2[10], c3[20], e1[10], e2[10], e3[20];
+  int n1, n2, i, j,k = 0;
+  printf("enter the numberof terms for 1st polynomial\n");
+  scanf("%d", &n1);
+
+  printf("enter the terms of 1st polynomial\n");
+  for (i = 0; i < n1; i++)
+  {
+    printf("enter the coefficient: ");
+    scanf("%d", &c1[i]);
+    printf("enter the exponent: ");
+    scanf("%d", &e1[i]);
+  }
+
+  printf("enter th e number of terms in 2nd polynomail\n");
+  sacnf("%d", &n2);
+
+  for (i = 0; i < n1; i++)
+  {
+    printf("enter the coefficient: ");
+    scanf("%d", &c2[i]);
+    printf("enter the exponent: ");
+    scanf("%d", &e2[i]);
+  }
+
+  i = 0;
+  j = 0;
+  int k = 0;
+
+  while (i < n1 && j < n2)
+  {
+    if (e1[i] == e2[i])
+    {
+      c3[k] = c1[i] + c2[j];
+      e3[k] = e2[j];
+      i++;
+      j++;
+      k++;
+    }
+    else if (e1[i] > e2[j])
+    {
+      c3[k] = c1[i];
+      e3[k] = e1[i];
+      i++;
+      k++;
+    }
+    else
+    {
+      c3[k] = c2[j];
+      e3[k] = e2[j];
+      j++;
+      k++;
+    }
+  }
+  while(i<n1){
+    c3[k]=c1[i];
+    e3[k]=e1[i];
+    i++;
+    k++;
+  }
