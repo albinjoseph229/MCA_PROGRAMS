@@ -171,16 +171,26 @@ void display_notes()
 }
 void savetofile()
 {
-    FILE *fp;
-    fp = fopen("expense.txt", "w");
+    char filename[256]; // Assuming a reasonable maximum length for the filename.
+    printf("Enter the filename to save the expenses: ");
+    scanf("%255s", filename); // Limit the input to 255 characters to avoid buffer overflow.
+
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL)
+    {
+        printf("Error opening the file.\n");
+        return;
+    }
+
     struct Expense *current = head;
     while (current != NULL)
     {
         fprintf(fp, "%f %s %s\n", current->amount, current->description, current->date);
         current = current->next;
     }
+
     fclose(fp);
-    printf("Saved to file\n");
+    printf("Saved to file: %s\n", filename);
 }
 int main()
 {

@@ -37,23 +37,32 @@ int main()
         {
             c3[k] = c1[i] + c2[j];
             e3[k] = e1[i];
+            if (e3[k] != 0)
+            { // Skip terms with an exponent of zero
+                k++;
+            }
             i++;
             j++;
-            k++;
         }
         else if (e1[i] > e2[j])
         {
             c3[k] = c1[i];
             e3[k] = e1[i];
+            if (e3[k] != 0)
+            { // Skip terms with an exponent of zero
+                k++;
+            }
             i++;
-            k++;
         }
         else
         {
             c3[k] = c2[j];
             e3[k] = e2[j];
+            if (e3[k] != 0)
+            { // Skip terms with an exponent of zero
+                k++;
+            }
             j++;
-            k++;
         }
     }
 
@@ -61,24 +70,35 @@ int main()
     {
         c3[k] = c1[i];
         e3[k] = e1[i];
+        if (e3[k] != 0)
+        { // Skip terms with an exponent of zero
+            k++;
+        }
         i++;
-        k++;
     }
 
     while (j < n2)
     {
         c3[k] = c2[j];
         e3[k] = e2[j];
+        if (e3[k] != 0)
+        { // Skip terms with an exponent of zero
+            k++;
+        }
         j++;
-        k++;
     }
 
     printf("Resultant polynomial after addition:\n");
     for (i = 0; i < k; i++)
     {
-        printf("%dx^%d", c3[i], e3[i]);
-        if (i < k - 1)
-            printf(" + ");
+        if (c3[i] != 0)
+        {
+            if (c3[i] > 0 && i != 0)
+            {
+                printf(" + ");
+            }
+            printf("%dx^%d", c3[i], e3[i]);
+        }
     }
 
     return 0;

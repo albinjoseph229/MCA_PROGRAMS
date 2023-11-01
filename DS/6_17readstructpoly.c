@@ -1,25 +1,31 @@
-#include<stdio.h>
-struct poly{
+#include <stdio.h>
+struct poly
+{
     int coeff;
     int exp;
 };
+
 int main()
 {
-    int i,num;
+    int i, num;
     struct poly p[10];
-    printf("enter the no of terms \n");
-    scanf("%d",&num);
-    for(i=0;i<num;i++)
+    printf("Enter the number of terms: ");
+    scanf("%d", &num);
+    for (i = 0; i < num; i++)
     {
-        printf("enter the coeff\n");
-        scanf("%d",&p[i].coeff);
-        printf("enter the degree\n");
-        scanf("%d",&p[i].exp);
+        printf("Enter the coefficient: ");
+        scanf("%d", &p[i].coeff);
+        printf("Enter the degree: ");
+        scanf("%d", &p[i].exp);
     }
-    printf("the entered polynomial is :");
-    for(i=0;i<num;i++)
+    printf("The entered polynomial is: ");
+    for (i = 0; i < num; i++)
     {
-        printf("%dx^%d+",p[i].coeff,p[i].exp);
+        printf("%dx^%d", p[i].coeff, p[i].exp);
+        if (i < num - 1)
+        {
+            printf(" + ");
+        }
     }
     return 0;
 }

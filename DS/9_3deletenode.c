@@ -107,7 +107,7 @@ void specified(int e)
 int menu()
 {
     int ch;
-    printf("\nEnter your choice \n1-Insert Element \n2-Delete From Begining \n3-Delete From End \n4-Delete A Specified Element \n5-Display \n6-Exit \n");
+    printf("\n1-Insert Element \n2-Delete From Begining \n3-Delete From End \n4-Delete A Specified Element \n5-Display \n6-Exit \nEnter your choice: ");
     scanf("%d",&ch);
     return ch;
 }
@@ -119,7 +119,7 @@ int main()
         switch(ch)
         {
             case 1:
-                printf("Enter the element to be inserted\n");
+                printf("Enter the element to be inserted: ");
                 scanf("%d",&e);
                 insert(e);
                 break;
@@ -130,7 +130,7 @@ int main()
                 atend();
                 break;
             case 4:
-                printf("Enter the element to be deleted\n");
+                printf("Enter the element to be deleted: ");
                 scanf("%d", &e);
                 specified(e);
                 break;

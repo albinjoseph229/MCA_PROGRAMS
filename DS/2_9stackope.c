@@ -12,6 +12,7 @@ void push(int element) {
     }
     top++;
     stack[top] = element;
+    printf("\n%d is pushed",element);
 }
 
 void pop() {
@@ -19,9 +20,10 @@ void pop() {
         printf("Stack underflow\n");
     }
     else{
+            printf("\n%d is popped",stack[top]);
             top--;
     }
-
+    
 }
 void peek()
 {

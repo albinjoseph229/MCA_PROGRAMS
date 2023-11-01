@@ -3,7 +3,7 @@
 int arr[MAX_SIZE],n,i;
 void read()
 {	
-	printf("enter array elements:");
+	printf(" Enter array elements:");
 	for(i=0;i<n;i++)
 	{
 	scanf("%d",&arr[i]);
@@ -11,7 +11,7 @@ void read()
 }
 void disp()
 {
-	printf("array elements are:");
+	printf(" Array elements are:");
 	for(i=0;i<n;i++)
 	{
 	printf(" %d",arr[i]);
@@ -30,6 +30,7 @@ void sort()
 			}
 		}
 	}
+	printf("Array sorted");
 }
 void del()
 {
@@ -38,14 +39,14 @@ void del()
         printf("ARRAY IS EMPTY");
     }
     else{
-        printf("Enter the position of the element to delete: ");
+        printf("Enter the index of the element to delete: ");
         int pos;
         scanf("%d", &pos);
         if(pos < 0 || pos >= n){
-            printf("Invalid position");
+            printf("Invalid index");
         }
         else{
-            printf("Deleted element is %d: ", arr[pos]);
+            printf("Deleted element is %d ", arr[pos]);
             for(i = pos; i < n - 1; i++){
                 arr[i] = arr[i + 1];
             }
@@ -57,7 +58,7 @@ void del()
 int menu()
 {
 	int ch;
-	printf("\nEnter your choice:\n INSERT-1\n DISPLAY-2\n SORT-3\n DELETE-4\n EXIT-5: ");
+	printf("\n INSERT-1\n DISPLAY-2\n SORT-3\n DELETE-4\n EXIT-5\n Enter your choice: ");
 	scanf("%d",&ch);
 	return ch;
 }
