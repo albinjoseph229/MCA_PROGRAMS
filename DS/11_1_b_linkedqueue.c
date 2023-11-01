@@ -47,7 +47,7 @@ void display()
         printf("Queue Elements Are: ");
         while(t!=NULL)
         {
-            printf("%d\t",t->data);
+            printf("%d ",t->data);
             t=t->next;
         }
         printf("\n");
@@ -56,7 +56,7 @@ void display()
 int menu()
 {
     int ch;
-    printf("\nEnter Your choice\n 1-Enqueue\n 2-Deque\n 3-Display\n 4-Exit\n");
+    printf("\n 1-Enqueue\n 2-Deque\n 3-Display\n 4-Exit\n Enter Your choice: ");
     scanf("%d",&ch);
     return ch;
 }
@@ -68,7 +68,7 @@ int main()
         switch (ch)
         {
         case 1:
-            printf("Enter The Element");
+            printf("Enter The Element: ");
             scanf("%d",&e);
             enqueue(e);
             break;

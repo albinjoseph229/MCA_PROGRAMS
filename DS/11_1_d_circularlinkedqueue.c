@@ -64,7 +64,7 @@ int main()
   printf("CIRCULAR LINKED QUEUE\n----------------------\n");
   do
   {
-    printf("\n1.Enqueue\n2.Display\n3.Deletion\n4.Exit\nChoose your option:");
+    printf("\n1.Enqueue\n2.Display\n3.Dequeue\n4.Exit\nEnter Your Choice: ");
     scanf("%d", &opt);
     switch (opt)
     {
