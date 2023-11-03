@@ -83,11 +83,11 @@ void inorder(tree *r)
 
 int main()
 {
-    int ch,e;
+    int ch, e;
     while (1)
     {
-        printf("\nEnter Your Choice \n1-Insert\n2-Inorder\n3-preorder\n4-postorder\n5-exit\n");
-            scanf("%d", &ch);
+        printf("\n1-Insert\n2-Inorder\n3-preorder\n4-postorder\n5-exit\nEnter Your Choice: ");
+        scanf("%d", &ch);
         {
             switch (ch)
             {
@@ -98,7 +98,7 @@ int main()
                 break;
             case 2:
                 inorder(root);
-            break;
+                break;
             case 3:
                 preorder(root);
                 break;

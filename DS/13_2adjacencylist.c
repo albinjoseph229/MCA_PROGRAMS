@@ -46,12 +46,17 @@ void printGraph(struct Graph *graph)
         printf("\n Vertex %d\n: ", v);
         while (temp)
         {
-            printf("%d ->",temp->vertex);
+            printf("%d", temp->vertex);
+            if (temp->next)
+            {
+                printf(" -> ");
+            }
             temp = temp->next;
         }
         printf("\n");
     }
 }
+
 int main()
 {
     struct Graph *graph = createAGraph(4);
