@@ -1,49 +1,104 @@
 #include <stdio.h>
-
-int queue[10];
-int front = -1;
-int rear = -1;
-int n;
-
-void enqueue() {
-    if ((rear + 1) % 10 == front) {
-        printf("Queue is full. Cannot enqueue.\n");
-    } else {
-        if (front == -1) {
-            front = 0;
+#include <malloc.h>
+typedef struct node
+{
+	int data;
+	struct node *next;
+	struct node *prev;
+} node;
+struct node *head = NULL;
+void insert(int e)
+{
+	node *newnode = (node *)malloc(sizeof(node));
+	newnode->data = e;
+	if (head == NULL)
+	{
+		head = newnode;
+		newnode->next = head;
+		newnode->prev = head;
+	}
+	else
+	{
+		node *t = head;
+		while (t->next != head)
+		{
+			t = t->next;
+		}
+		t->next = newnode;
+		newnode->next = head;
+		newnode->prev = t;
+	}
+}
+void delete(int e)
+{
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+    }
+    else
+    {
+        if (head->data == e)
+        {
+            if (head->next == head)
+            {
+                head = NULL;
+            }
+            else
+            {
+                node *p = head->prev;
+                head = head->next;
+                head->prev = p;
+                p->next = head;
+            }
         }
-        printf("Enter the element: ");
-        scanf("%d", &queue[rear = (rear + 1) % 10]);
-        printf("%d enqueued.\n", queue[rear]);
+		else
+        {
+            node *t = head;
+            node *p = NULL;
+            while (t->next != head && t->data != e)
+            {
+                p = t;
+                t = t->next;
+            }
+            if (t->data == e)
+            {
+                p->next = t->next;
+                t->next->prev = p;
+            }
+            else
+            {
+                printf("Element not found\n");
+            }
+        }
     }
 }
 
-void dequeue() {
-    if (front == -1) {
-        printf("Queue is empty. Cannot dequeue.\n");
+void display() {
+    if (head == NULL) {
+        printf("List is empty\n");
     } else {
-        printf("%d is removed.\n", queue[front]);
-        if (front == rear) {
-            front = rear = -1;
-        } else {
-            front = (front + 1) % 10;
+        node *t = head;
+        printf("%d\t", t->data);
+
+        t = t->next;
+        while (t != head) {
+            printf("%d\t", t->data);
+            t = t->next;
         }
+
+        printf("\n");
     }
 }
 
-int main() {
-    enqueue();
-    enqueue();
-    enqueue();
-    dequeue();
-    dequeue();
-    enqueue();
-    enqueue();
-    enqueue();
-    enqueue();
-    dequeue();
-    dequeue();
-    dequeue();
-    
-    return 0;
+int main()
+{
+    insert(10);
+    insert(20);
+    insert(30);
+    delete(10);
+    display();
+    getchar();
+	delete(100);
 }
+
+

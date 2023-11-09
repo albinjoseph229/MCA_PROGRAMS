@@ -97,5 +97,6 @@ int main()
     disp();
     deleteNode(10);
     disp();
+    deleteNode(100);
     return 0;
 }

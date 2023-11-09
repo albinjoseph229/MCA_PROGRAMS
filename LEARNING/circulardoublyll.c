@@ -5,7 +5,7 @@ typedef struct node
     int data;
     struct node *next;
     struct node *prev;
-}node;
+} node;
 struct node *head = NULL;
 void insert(int e)
 {
@@ -37,51 +37,56 @@ void delete(int e)
     }
     else
     {
-        if (head->data == e)
+        node *t = head;
+        node *p = NULL;
+        while (t->next != head && t->data != e)
         {
-            if (head->next == head)
+            p = t;
+            t = t->next;
+        }
+        if (t->data == e)
+        {
+            if (t == head)
             {
-                head = NULL;
+                if (head->next == head)
+                {
+                    head = NULL;
+                }
+                else
+                {
+                    node *p = head->prev;
+                    head = head->next;
+                    head->prev = p;
+                    p->next = head;
+                }
             }
             else
-            {
-                node *p = head->prev;
-                head = head->next;
-                head->prev = p;
-                p->next = head;
-            }
-        }
-        else
-        {
-            node *t = head;
-            node *p = NULL;
-            while (t->next != head && t->data != e)
-            {
-                p = t;
-                t = t->next;
-            }
-            if (t->data == e)
             {
                 p->next = t->next;
                 t->next->prev = p;
             }
-            else
-            {
-                printf("Element not found\n");
-            }
+        }
+        else if (t->next == head)
+        {
+            printf("Element not found\n");
         }
     }
 }
 
-void display() {
-    if (head == NULL) {
+void display()
+{
+    if (head == NULL)
+    {
         printf("List is empty\n");
-    } else {
+    }
+    else
+    {
         node *t = head;
         printf("%d\t", t->data);
 
         t = t->next;
-        while (t != head) {
+        while (t != head)
+        {
             printf("%d\t", t->data);
             t = t->next;
         }
@@ -95,7 +100,8 @@ int main()
     insert(10);
     insert(20);
     insert(30);
-    delete(10);
+    delete (10);
     display();
-    getchar();
+    insert(88);
+    delete (100);
 }
