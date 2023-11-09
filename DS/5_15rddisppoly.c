@@ -1,7 +1,7 @@
 #include<stdio.h>
 int coeff[10];
 int i;
-int read(degree)
+void read(degree)
 {
 	printf("ENTER THE ELEMENTS OF THE POLYNOMIAL\n");
 	for(i=degree;i>=0;i--)
@@ -16,7 +16,7 @@ int read(degree)
 		scanf("%d",&coeff[i]);	
 	}
 }
-int disp(degree)
+void disp(degree)
 {
 	printf("the entered polynomial is\n");
 	for(i=degree;i>=0;i--)

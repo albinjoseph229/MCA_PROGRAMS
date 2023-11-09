@@ -8,14 +8,23 @@ int coeff3[10];
 int exp3[10];
 int n1, n2, k, i, j;
 
-void read(int* coeff, int* exp, int* n) {
-    printf("Enter the number of terms: ");
-    scanf("%d", n);
-    for (i = 0; i < *n; i++) {
+void read() {
+    printf("Enter the number of terms for the 1st polynomial: ");
+    scanf("%d", &n1);
+    for (i = 0; i < n1; i++) {
         printf("Enter the coefficient for term %d: ", i + 1);
-        scanf("%d", &coeff[i]);
+        scanf("%d", &coeff1[i]);
         printf("Enter the degree for term %d: ", i + 1);
-        scanf("%d", &exp[i]);
+        scanf("%d", &exp1[i]);
+    }
+
+    printf("Enter the number of terms for the 2nd polynomial: ");
+    scanf("%d", &n2);
+    for (i = 0; i < n2; i++) {
+        printf("Enter the coefficient for term %d: ", i + 1);
+        scanf("%d", &coeff2[i]);
+        printf("Enter the degree for term %d: ", i + 1);
+        scanf("%d", &exp2[i]);
     }
 }
 
@@ -31,6 +40,7 @@ void mul() {
 }
 
 void display() {
+    printf("Result of polynomial multiplication: ");
     for (i = 0; i < k; i++) {
         if (i > 0) {
             printf(" + ");
@@ -41,10 +51,8 @@ void display() {
 }
 
 int main() {
-    read(coeff1, exp1, &n1);
-    read(coeff2, exp2, &n2);
+    read();
     mul();
-    printf("Result of polynomial multiplication: ");
     display();
     return 0;
 }
