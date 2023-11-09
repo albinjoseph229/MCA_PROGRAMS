@@ -1,50 +1,49 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-struct node {
-    int coeff;
-    int exp;
-    struct node* next;
-};
+int queue[10];
+int front = -1;
+int rear = -1;
+int n;
 
-int coeff, exp, n;
-struct node* head = NULL;
-
-void insertnode() {
-    for (int i = 0; i < n; i++) {
-        printf("Enter the coefficient and exponent for term %d: ", i + 1);
-        struct node* newnode = (struct node*)malloc(sizeof(struct node));
-        scanf("%d %d", &newnode->coeff, &newnode->exp);
-        newnode->next = NULL;
-        if (head == NULL) {
-            head = newnode;
-        } else {
-            struct node* temp = head;
-            while (temp->next != NULL) {
-                temp = temp->next;
-            }
-            temp->next = newnode;
+void enqueue() {
+    if ((rear + 1) % 10 == front) {
+        printf("Queue is full. Cannot enqueue.\n");
+    } else {
+        if (front == -1) {
+            front = 0;
         }
+        printf("Enter the element: ");
+        scanf("%d", &queue[rear = (rear + 1) % 10]);
+        printf("%d enqueued.\n", queue[rear]);
     }
 }
 
-void print() {
-    struct node* temp = head;
-    while (temp != NULL) {
-        printf("%dx^%d", temp->coeff, temp->exp);
-        temp = temp->next;
-        if (temp != NULL) {
-            printf(" + ");
+void dequeue() {
+    if (front == -1) {
+        printf("Queue is empty. Cannot dequeue.\n");
+    } else {
+        printf("%d is removed.\n", queue[front]);
+        if (front == rear) {
+            front = rear = -1;
+        } else {
+            front = (front + 1) % 10;
         }
     }
-    printf("\n");
 }
 
 int main() {
-    printf("Enter the number of terms: ");
-    scanf("%d", &n);
-    insertnode();
-    printf("Polynomial: ");
-    print();
+    enqueue();
+    enqueue();
+    enqueue();
+    dequeue();
+    dequeue();
+    enqueue();
+    enqueue();
+    enqueue();
+    enqueue();
+    dequeue();
+    dequeue();
+    dequeue();
+    
     return 0;
 }
