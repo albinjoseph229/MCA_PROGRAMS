@@ -1,19 +1,28 @@
 #include<stdio.h>
+#define maxsize 50
 
-int arr[5]={1,2,3,4,5};
-int i,count;
-int main(){
-    for(i=0;i<5;i++)
-    {
-        if(arr[i]==9)
-        {
-            count++;
-        }
+int reverse(arr[],int end)
+{
+    if(end<0){
+        return;
     }
-    if(count>0){
-        printf("%d ocuurance of the element",count);
-    }
-    else{
-        printf("\n element not found");
-    }
+    printf("%d",arr[end],end-1);
+
 }
+
+int main()
+{
+	int arr[maxsize],n,i;
+	int len,end;
+	printf("ENTER THE SIZE OF THE ARRAY:");
+	scanf("%d",&n);
+	printf("ENTER ARRAY ELEMENTS:");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&arr[i]);
+	}
+	printf("arary elements are: ");
+    reverse(arr,n-1);
+	return 0;
+}
+

@@ -48,7 +48,7 @@ void insert_by_priority(int data)
         printf("\nQueue overflow no more elements can be inserted");
         return;
     }
-    if ((front == -1) && (rear == -1))
+    else if ((front == -1) && (rear == -1))
     {
         front++;
         rear++;
