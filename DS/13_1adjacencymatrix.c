@@ -19,7 +19,7 @@ void printAdjMatrix(int arr[][V])
     int i, j;
     for (i = 0; i < V; i++)
     {
-        printf("%d: ", i);
+        printf("[%d]: ", i);
         for (j = 0; j < V; j++)
         {
             printf("%d ", arr[i][j]);

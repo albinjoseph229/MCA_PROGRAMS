@@ -1,51 +1,94 @@
 #include <stdio.h>
-int binary(int arr[], int size, int e)
+int n, i;
+int arr[50];
+
+int read()
 {
-    int low, mid, high,flag=0;
-    low = 0;
-    high = size - 1;
-    while (low <= high)
+    printf("enter the number of elements:");
+    scanf("%d", &n);
+    printf("enter the elements\n");
+    for (i = 0; i < n; i++)
     {
-        mid = (high + low) / 2;
-        if (arr[mid] == e)
+        scanf("%d", &arr[i]);
+    }
+}
+void sort()
+{
+    int j, t;
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = 0; j < (n - i) - 1; j++)
         {
-            printf("Element fount at%d", mid);
-            flag=1;
-        }
-        else if(arr[mid]<e)
-        {
-            low=mid+1;
-        }
-        else{
-            high=mid-1;
+            if (arr[j] > arr[j + 1])
+            {
+                t = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = t;
+            }
         }
     }
-    if(flag==0)
+}
+void display()
+{
+    for (i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+}
+void lsearch(int e)
+{
+    int count = 0;
+    for (i = 0; i < n; i++)
+    {
+        if (arr[i] == e)
+        {
+            printf("%d found at %dth position\n", e, i);
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        printf("\nelement not found!");
+    }
+}
+void bsearch(int e)
+{
+    int low = 0;
+    int high = n - 1;
+    int mid;
+    int count = 0;
+
+    while (low <= high)
+    {
+        mid = (low + high) / 2;
+        if (e == arr[mid])
+        {
+            printf("\nelement found");
+            count++;
+            break;
+        }
+        else if (e < mid)
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+    if (count == 0)
     {
         printf("Element not found\n");
     }
 }
-int linear(int arr[], int size, int e)
-{
-    int i = 0, flag = 0;
-    for (i = 0; i < size; i++)
-    {
-        if (arr[i] == e)
-        {
-            printf("element found at index:%d\n", i);
-            flag = 1;
-        }
-    }
-    if (flag == 0)
-    {
-        printf("element not found\n");
-    }
-}
 int main()
 {
-    int arr[] = {12, 14, 16, 18, 20, 22, 26};
-    int size = sizeof(arr) / sizeof(int);
-    int e = 111;
-    binary(arr,size,e);
-    linear(arr, size, e);
+    read();
+    sort();
+    display();
+    int e;
+    printf("\nenter the elemet to search for: ");
+    scanf("%d", &e);
+    lsearch(e);
+    bsearch(e);
 }

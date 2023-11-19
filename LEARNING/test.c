@@ -1,100 +1,94 @@
 #include <stdio.h>
-#include <malloc.h>
-struct node
+int n, i;
+int arr[50];
+
+int read()
 {
-    int data;
-    struct node *next;
-};
-struct node *head = NULL;
-void insert(int e)
-{
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
-    newnode->data = e;
-    newnode->next = NULL;
-    if (head == NULL)
+    printf("enter the number of elements:");
+    scanf("%d", &n);
+    printf("enter the elements\n");
+    for (i = 0; i < n; i++)
     {
-        head = newnode;
+        scanf("%d", &arr[i]);
     }
-    else
+}
+void sort()
+{
+    int j, t;
+    for (i = 0; i < n - 1; i++)
     {
-        struct node *t;
-        t = head;
-        while (t->next != NULL)
+        for (j = 0; j < (n - i) - 1; j++)
         {
-            t = t->next;
+            if (arr[j] > arr[j + 1])
+            {
+                t = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = t;
+            }
         }
-        t->next = newnode;
     }
-    printf("\n%d is inserted", newnode->data);
 }
-// Function to reverse a linked list recursively
-void reverse(struct node* t) {
-    if (t == NULL) {
-        return;
-    }
-    reverse(t->next);
-    printf("%d ", t->data);
-}
-
-void reverse()
-{
-    struct node *t=head;
-    struct node*prev=NULL, *next=NULL;
-    while(t!=NULL)
-    {
-        next=t->next;
-        t->next=prev;
-        prev=t;
-        t=next;
-    }
-    head=prev;
-}
-
 void display()
 {
-    if (head == NULL)
+    for (i = 0; i < n; i++)
     {
-        printf("\nLinked List Is Empty");
-    }
-    else
-    {
-        struct node *t = head;
-        while (t != NULL)
-        {
-            printf("%d\t", t->data);
-            t = t->next;
-        }
-        printf("\n");
+        printf("%d ", arr[i]);
     }
 }
-int menu()
+void lsearch(int e)
 {
-    int ch;
-    printf("\nEnter Your Choice \n1-Insert \n2-Display \n3-Reverse \n4-Exit\n");
-    scanf("%d", &ch);
-    return ch;
+    int count = 0;
+    for (i = 0; i < n; i++)
+    {
+        if (arr[i] == e)
+        {
+            printf("%d found at %dth position\n", e, i);
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        printf("\nelement not found!");
+    }
+}
+void bsearch(int e)
+{
+    int low = 0;
+    int high = n - 1;
+    int mid;
+    int count = 0;
+
+    while (low <= high)
+    {
+        mid = (low + high) / 2;
+        if (e == arr[mid])
+        {
+            printf("\nelement found");
+            count++;
+            break;
+        }
+        else if (e < mid)
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+    if (count == 0)
+    {
+        printf("Element not found\n");
+    }
 }
 int main()
 {
-    int ch, e;
-    for (ch = menu(); ch != 4; ch = menu())
-    {
-        switch (ch)
-        {
-        case 1:
-            printf("\nEnter The Element To Insert: ");
-            scanf("%d", &e);
-            insert(e);
-            break;
-        case 2:
-            display();
-            break;
-        case 3:
-            reverse(head);
-            break;
-        default:
-            printf("Invalid choice!");
-            break;
-        }
-    }
+    read();
+    sort();
+    display();
+    int e;
+    printf("\nenter the elemet to search for: ");
+    scanf("%d", &e);
+    lsearch(e);
+    bsearch(e);
 }
