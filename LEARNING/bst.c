@@ -136,24 +136,76 @@ void postorderTraversal(tree *root) {
     tree *stack[100];
     int top = -1;
     tree *prev = NULL;
+    tree *current = root;
+    
     do {
-        while (root != NULL) {
-            stack[++top] = root;
-            root = root->left;
+        while (current != NULL) {
+            stack[++top] = current;
+            current = current->left;
         }
-        while (root == NULL && top != -1) {
-            root = stack[top];
-            if (root->right == NULL || root->right == prev) {
-                printf("%d ", root->data);
+        while (current == NULL && top != -1) {
+            current = stack[top];
+            if (current->right == NULL || current->right == prev) {
+                printf("%d ", current->data);
                 top--;
-                prev = root;
-                root = NULL;
+                prev = current;
+                current = NULL;
             } else {
-                root = root->right;
+                current = current->right;
             }
         }
     } while (top != -1);
 }
+
+
+
+void preorderTraversal(tree *root) {
+    tree *stack[100];
+    int top = -1;
+    tree *current = root;
+
+    while (current != NULL || top != -1) {
+        // Print the current node's data
+        printf("%d ", current->data);
+
+        // Push the right subtree onto the stack
+        if (current->right != NULL) {
+            stack[++top] = current->right;
+        }
+
+        // Move to the left subtree
+        current = current->left;
+
+        // If the left subtree is NULL, pop a node from the stack
+        if (current == NULL && top != -1) {
+            current = stack[top--];
+        }
+    }
+}
+
+
+
+void inorderTraversal(tree *root) {
+    tree *stack[100];
+    int top = -1;
+    tree *current = root;
+
+    while (current != NULL || top != -1) {
+        // Traverse left subtree and push nodes onto the stack
+        while (current != NULL) {
+            stack[++top] = current;
+            current = current->left;
+        }
+
+        // Pop a node from the stack, print its data, and move to the right subtree
+        if (top != -1) {
+            current = stack[top--];
+            printf("%d ", current->data);
+            current = current->right;
+        }
+    }
+}
+
 
 int main() {
     insert(100);
