@@ -37,10 +37,12 @@ int main()
         }
     }
 }
+
 void create()
 {
     front = rear = -1;
 }
+
 void insert_by_priority(int data)
 {
     if (rear >= MAX - 1)
@@ -59,6 +61,7 @@ void insert_by_priority(int data)
         check(data);
     rear++;
 }
+
 void check(int data)
 {
     int i, j;
@@ -77,6 +80,7 @@ void check(int data)
     }
     pri_que[i] = data;
 }
+
 void delete_by_priority(int data)
 {
     int i;
@@ -102,6 +106,7 @@ void delete_by_priority(int data)
     }
     printf("\n%d not found in queue to delete", data);
 }
+
 void display_pqueue()
 {
     if ((front == -1) && (rear == -1))

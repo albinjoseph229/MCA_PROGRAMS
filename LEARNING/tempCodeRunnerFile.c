@@ -1,21 +1,15 @@
-else
+    while (current == NULL && top != -1)
         {
-            node *t = head;
-            node *p = NULL;
-            while (t->next != head && t->data != e)
+            current = stack[top];
+            if (current->right == NULL || current->right == prev)
             {
-                p = t;
-                t = t->next;
-            }
-            if (t->data == e)
-            {
-                p->next = t->next;
-                t->next->prev = p;
+                printf("%d ", current->data);
+                top--;
+                prev = current;
+                current = NULL;
             }
             else
             {
-                printf("Element not found\n");
+                current = current->right;
             }
         }
-    }
-}

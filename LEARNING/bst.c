@@ -18,7 +18,7 @@ void insert(int e) {
         root->right = NULL;
     } else {
         p = root;
-        x = root;
+        
         while (p != NULL) {
             x = p;
             if (e > p->data) {
