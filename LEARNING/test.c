@@ -1,94 +1,30 @@
 #include <stdio.h>
-int n, i;
-int arr[50];
+#include <stdlib.h>
+#include <string.h>
 
-int read()
-{
-    printf("enter the number of elements:");
-    scanf("%d", &n);
-    printf("enter the elements\n");
-    for (i = 0; i < n; i++)
-    {
-        scanf("%d", &arr[i]);
-    }
-}
-void sort()
-{
-    int j, t;
-    for (i = 0; i < n - 1; i++)
-    {
-        for (j = 0; j < (n - i) - 1; j++)
-        {
-            if (arr[j] > arr[j + 1])
-            {
-                t = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = t;
-            }
-        }
-    }
-}
-void display()
-{
-    for (i = 0; i < n; i++)
-    {
-        printf("%d ", arr[i]);
-    }
-}
-void lsearch(int e)
-{
-    int count = 0;
-    for (i = 0; i < n; i++)
-    {
-        if (arr[i] == e)
-        {
-            printf("%d found at %dth position\n", e, i);
-            count++;
-        }
-    }
-    if (count == 0)
-    {
-        printf("\nelement not found!");
-    }
-}
-void bsearch(int e)
-{
-    int low = 0;
-    int high = n - 1;
-    int mid;
-    int count = 0;
+typedef struct node {
+    char name[50];
+    struct node* next;
+} node;
 
-    while (low <= high)
-    {
-        mid = (low + high) / 2;
-        if (e == arr[mid])
-        {
-            printf("\nelement found");
-            count++;
-            break;
-        }
-        else if (e < mid)
-        {
-            high = mid - 1;
-        }
-        else
-        {
-            low = mid + 1;
-        }
-    }
-    if (count == 0)
-    {
-        printf("Element not found\n");
+node * head;
+
+void insert(char* name){
+    node* newnode=(node*)maaloc(sizeof(node));
+    strcpy(newnode->name,name);
+    newnode->next=head;
+    head=newnode;
+}
+void display() {
+    node* ptr = head;
+    while (ptr != NULL) {
+        printf("%s\n", ptr->name);
+        ptr = ptr->next;
     }
 }
-int main()
-{
-    read();
-    sort();
-    display();
-    int e;
-    printf("\nenter the elemet to search for: ");
-    scanf("%d", &e);
-    lsearch(e);
-    bsearch(e);
+void delete(char * name){
+    node * temp=head,*prev;
+    if(temp!=NULL && strcmp(temp->name,name)!=0){
+        
+    }
 }

@@ -94,7 +94,7 @@ void preorderTraversal(tree *root)
     while (current != NULL || top != -1)
     {
         // Print the current node's data
-        printf("%d ", current->data);
+        printf("%d ", current->data); 
 
         // Push the right subtree onto the stack
         if (current->right != NULL)
