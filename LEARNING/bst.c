@@ -182,9 +182,6 @@ void preorderTraversal(tree *root) {
         }
     }
 }
-
-
-
 void inorderTraversal(tree *root) {
     tree *stack[100];
     int top = -1;
