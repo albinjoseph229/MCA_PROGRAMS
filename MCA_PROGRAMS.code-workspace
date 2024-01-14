@@ -9,6 +9,7 @@
 			"stdio.h": "c",
 			"malloc.h": "c",
 			"stdlib.h": "c"
-		}
+		},
+		"java.debug.settings.onBuildFailureProceed": true
 	}
 }

@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Pgrm3",
+            "request": "launch",
+            "mainClass": "Pgrm3",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Pgrm1",
+            "request": "launch",
+            "mainClass": "Pgrm1",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "twofive",
             "request": "launch",
             "mainClass": "programlist.twofive",
