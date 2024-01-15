@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Pgrm8",
+            "request": "launch",
+            "mainClass": "Pgrm8",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Pgrm7",
+            "request": "launch",
+            "mainClass": "Pgrm7",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Pgrm6",
+            "request": "launch",
+            "mainClass": "Pgrm6",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Pgrm5",
+            "request": "launch",
+            "mainClass": "Pgrm5",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Pgrm4",
+            "request": "launch",
+            "mainClass": "Pgrm4",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "Pgrm3",
             "request": "launch",
             "mainClass": "Pgrm3",

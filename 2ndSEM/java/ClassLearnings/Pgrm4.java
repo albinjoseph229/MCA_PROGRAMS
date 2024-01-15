@@ -14,10 +14,10 @@ class Person{
     }
     public void disp()
     {
-        System.out.println("Name: "+name+"Age: "+age);
+        System.out.println("Name: "+name+" Age: "+age);
     }
 }
-class Pgrm2{
+class Pgrm4{
     public static void main(String[] args) {
         Person p,q;
         p=new Person();
