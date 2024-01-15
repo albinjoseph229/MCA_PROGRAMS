@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Pgrm12",
+            "request": "launch",
+            "mainClass": "Pgrm12",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Pgrm11",
+            "request": "launch",
+            "mainClass": "Pgrm11",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Pgrm10",
+            "request": "launch",
+            "mainClass": "Pgrm10",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "Pgrm9",
             "request": "launch",
             "mainClass": "Pgrm9",

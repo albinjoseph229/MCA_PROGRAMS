@@ -1,4 +1,4 @@
-//interface clled ishape having two prototypes draww and move
+//interface called ishape having two prototypes draw and move
 
 import java.io.*;
 interface IShape{

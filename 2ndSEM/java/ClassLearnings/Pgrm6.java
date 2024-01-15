@@ -1,3 +1,4 @@
+//function overriding
 import java.io.*;
 class Person{
     int age;
