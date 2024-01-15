@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Pgrm9",
+            "request": "launch",
+            "mainClass": "Pgrm9",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "Pgrm8",
             "request": "launch",
             "mainClass": "Pgrm8",
