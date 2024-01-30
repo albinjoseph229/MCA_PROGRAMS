@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "eight",
+            "request": "launch",
+            "mainClass": "eight",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "six",
+            "request": "launch",
+            "mainClass": "six",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "five",
+            "request": "launch",
+            "mainClass": "five",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "one",
             "request": "launch",
             "mainClass": "one",

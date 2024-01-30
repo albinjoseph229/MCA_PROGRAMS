@@ -1,3 +1,4 @@
+//user defined exception throws
 class InsufficientBalanceException extends Exception {
     public InsufficientBalanceException(String message) {
         super(message);

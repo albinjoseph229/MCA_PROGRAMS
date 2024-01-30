@@ -1,4 +1,4 @@
-//throw
+//user defined exception throw
 public class three {
     static void validateAge(int age) {
         if (age < 18) {
