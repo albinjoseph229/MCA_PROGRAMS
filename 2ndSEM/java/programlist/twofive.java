@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-class Main {
+class twofive {
     public static void main(String args[]) {
         System.out.println("Albin Joseph");
         int arr[][] = new int[10][10];
