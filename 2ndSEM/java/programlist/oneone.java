@@ -6,3 +6,4 @@ class oneone
         System.out.println("Albin Joseph");
         System.out.println("Welcome to java programming");
     }
+}
