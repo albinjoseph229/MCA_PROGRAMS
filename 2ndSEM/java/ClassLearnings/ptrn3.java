@@ -1,15 +1,14 @@
 import java.util.*;
-public class ptrn1 {
-    ;
+public class ptrn3 {
     public static void main(String args[]){
-        int count;
+        int n;
         Scanner sc=new Scanner(System.in);
         System.out.println("enter the count");{
-            count = Integer.parseInt(sc.nextLine());
+            n = Integer.parseInt(sc.nextLine());
         }
-        for(int i=0;i<count;i++){
-            for(int j=0;j<count;j++){
-                System.out.print("* ");
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=i;j++){
+                    System.out.print("*");
             }
             System.out.println();
         }
@@ -17,14 +16,18 @@ public class ptrn1 {
     }
     
 }
-
 /*
 output
+
 enter the count
-5
-* * * * *
-* * * * *
-* * * * *
-* * * * *
-* * * * *
+7
+
+*
+**
+***
+****
+*****
+******
+*******
+
 */
