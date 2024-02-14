@@ -1,6 +1,9 @@
+import java.util.*;
 public class Pgrm_1_1 {
     public static void main(String[] args) {
-        String str = "madam";
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter a string: ");
+        String str = sc.nextLine();
         if(isPalindrome(str)) {
             System.out.println(str + " is a palindrome");
         } else {
