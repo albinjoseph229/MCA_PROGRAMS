@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DBP",
+            "request": "launch",
+            "mainClass": "DBP",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "PasswordManager",
+            "request": "launch",
+            "mainClass": "PasswordManager",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "WeatherDownloader",
+            "request": "launch",
+            "mainClass": "WeatherDownloader",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "eight",
             "request": "launch",
             "mainClass": "eight",
