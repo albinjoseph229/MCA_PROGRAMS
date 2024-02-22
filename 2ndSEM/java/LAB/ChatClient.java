@@ -1,10 +1,13 @@
-import java.io.*;
 import java.net.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class ChatClient {
     public static void main(String[] args) {
         try {
-            String serverIP = "server_ip_address"; // Replace with the actual IP address of the server
+            String serverIP = "103.141.56.210"; // Replace with the actual IP address of the server
 
             Socket socket = new Socket(serverIP, 5000);
             System.out.println("Connected to server: " + socket.getInetAddress().getHostAddress());
@@ -39,8 +42,8 @@ public class ChatClient {
             consoleInput.close();
             socket.close();
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
+        }
+    }
 }
