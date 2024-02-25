@@ -1,6 +1,9 @@
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.Base64;
@@ -17,6 +20,11 @@ public class PasswordManager {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        if (isFirstTimeLogin()) {
+            System.out.println("First-time login detected. Please set up your username and password.");
+            setupUsernameAndPassword();
+        }
+
         if (login()) {
             createTableIfNotExists();
 
@@ -47,7 +55,6 @@ public class PasswordManager {
                         System.out.println("Exiting...");
                         System.exit(0);
                         break;
-
                     default:
                         System.out.println("Invalid choice. Please try again.");
                 }
@@ -57,14 +64,79 @@ public class PasswordManager {
         }
     }
 
+    private static boolean isFirstTimeLogin() {
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT COUNT(*) AS count FROM users";
+            try (Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(sql);
+                if (resultSet.next()) {
+                    int userCount = resultSet.getInt("count");
+                    return userCount == 0; // Return true if there are no users in the database
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static void setupUsernameAndPassword() {
+        System.out.print("Set up your username: ");
+        String username = scanner.nextLine();
+
+        String password;
+        String confirmPassword;
+        do {
+            System.out.print("Set up your password: ");
+            password = scanner.nextLine();
+            System.out.print("Confirm your password: ");
+            confirmPassword = scanner.nextLine();
+
+            if (!password.equals(confirmPassword)) {
+                System.out.println("Passwords do not match. Please try again.");
+            }
+        } while (!password.equals(confirmPassword));
+
+        // Store the username and password in the database
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD)) {
+            String sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, hashPassword(password));
+                preparedStatement.executeUpdate();
+                System.out.println("Username and password set successfully.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static boolean login() {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
         String enteredPassword = scanner.nextLine();
-
-        // Check if username and password are valid (for simplicity, hardcoded)
-        return username.equals("admin") && enteredPassword.equals("admin123");
+    
+        try (Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD)) {
+            String sql = "SELECT password_hash FROM users WHERE username = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, username);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    String passwordHashFromDB = resultSet.getString("password_hash");
+                    return validatePassword(enteredPassword, passwordHashFromDB);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    private static boolean validatePassword(String enteredPassword, String passwordHashFromDB) {
+        // Compare the hashed entered password with the hashed password retrieved from the database
+        String hashedEnteredPassword = hashPassword(enteredPassword);
+        return hashedEnteredPassword != null && hashedEnteredPassword.equals(passwordHashFromDB);
     }
 
     private static void createTableIfNotExists() {
@@ -162,6 +234,16 @@ public class PasswordManager {
                 | IllegalBlockSizeException | SQLException e) {
             System.out.println("Failed to edit password. Please try again.");
             e.printStackTrace();
+        }
+    }
+     private static String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes("UTF-8"));
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
