@@ -23,9 +23,7 @@ public class PasswordManager {
             while (true) {
                 System.out.println("1. Add a password");
                 System.out.println("2. Retrieve a password");
-                System.out.println("3. Edit a password");
-                System.out.println("4. Remove a password");
-                System.out.println("5. Exit");
+                System.out.println("3. Exit");
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // consume newline
@@ -38,16 +36,8 @@ public class PasswordManager {
                         retrievePassword();
                         break;
                     case 3:
-                        editPassword();
-                        break;
-                    case 4:
-                        removePassword();
-                        break;
-                    case 5:
                         System.out.println("Exiting...");
                         System.exit(0);
-                        break;
-
                     default:
                         System.out.println("Invalid choice. Please try again.");
                 }
@@ -102,65 +92,9 @@ public class PasswordManager {
                     System.out.println("Password added successfully.");
                 }
             }
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException
-                | IllegalBlockSizeException | SQLException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |
+                BadPaddingException | IllegalBlockSizeException | SQLException e) {
             System.out.println("Failed to add password. Please try again.");
-            e.printStackTrace();
-        }
-    }
-
-    private static void removePassword() {
-        System.out.print("Enter the website or application name to remove its password: ");
-        String name = scanner.nextLine();
-
-        try {
-            try (Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD)) {
-                String sql = "DELETE FROM passwords WHERE name = ?";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                    preparedStatement.setString(1, name);
-                    int rowsAffected = preparedStatement.executeUpdate();
-                    if (rowsAffected > 0) {
-                        System.out.println("Password for " + name + " removed successfully.");
-                    } else {
-                        System.out.println("No password found for " + name);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("Failed to remove password. Please try again.");
-            e.printStackTrace();
-        }
-    }
-
-    private static void editPassword() {
-        System.out.print("Enter the website or application name to edit its password: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter the new password: ");
-        String newPassword = scanner.nextLine();
-
-        try {
-            Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM);
-            SecretKeySpec secretKeySpec = new SecretKeySpec(ENCRYPTION_KEY.getBytes(), ENCRYPTION_ALGORITHM);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            byte[] encryptedPassword = cipher.doFinal(newPassword.getBytes());
-            String encryptedPasswordBase64 = Base64.getEncoder().encodeToString(encryptedPassword);
-
-            try (Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD)) {
-                String sql = "UPDATE passwords SET password = ? WHERE name = ?";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                    preparedStatement.setString(1, encryptedPasswordBase64);
-                    preparedStatement.setString(2, name);
-                    int rowsAffected = preparedStatement.executeUpdate();
-                    if (rowsAffected > 0) {
-                        System.out.println("Password for " + name + " updated successfully.");
-                    } else {
-                        System.out.println("No password found for " + name);
-                    }
-                }
-            }
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException
-                | IllegalBlockSizeException | SQLException e) {
-            System.out.println("Failed to edit password. Please try again.");
             e.printStackTrace();
         }
     }
@@ -191,8 +125,8 @@ public class PasswordManager {
                     }
                 }
             }
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException
-                | IllegalBlockSizeException | SQLException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |
+                BadPaddingException | IllegalBlockSizeException | SQLException e) {
             System.out.println("Failed to retrieve password. Please try again.");
             e.printStackTrace();
         }

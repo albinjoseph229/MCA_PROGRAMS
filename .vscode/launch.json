@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ResumeMaker",
+            "request": "launch",
+            "mainClass": "ResumeMaker",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "InternetFetcher",
+            "request": "launch",
+            "mainClass": "InternetFetcher",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "DBP",
             "request": "launch",
             "mainClass": "DBP",
