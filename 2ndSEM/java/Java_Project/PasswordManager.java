@@ -17,9 +17,9 @@ import java.util.Scanner;
 public class PasswordManager {
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/passwords_db";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = ""; // If password is empty
+    private static final String PASSWORD = ""; 
 
-    private static final String ENCRYPTION_KEY = "ThisIsASecretKey"; // Change this key
+    private static final String ENCRYPTION_KEY = "ThisIsASecretKey"; 
     private static final String ENCRYPTION_ALGORITHM = "AES";
 
     private static final Scanner scanner = new Scanner(System.in);
