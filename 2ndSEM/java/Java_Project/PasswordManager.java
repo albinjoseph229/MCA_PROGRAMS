@@ -9,6 +9,11 @@ import java.sql.*;
 import java.util.Base64;
 import java.util.Scanner;
 
+/**
+ * The PasswordManager class is responsible for managing passwords in a database.
+ * It provides functionality to set up a username and password, login, add, retrieve,
+ * edit, and remove passwords.
+ */
 public class PasswordManager {
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/passwords_db";
     private static final String USERNAME = "root";
