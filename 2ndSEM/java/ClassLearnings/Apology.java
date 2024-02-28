@@ -11,7 +11,6 @@ class Apology extends JFrame {
             } 
         }); 
     } 
- 
     public Apology() { 
         int strengthOfFeelings = 0; 
         boolean apologyAccepted = false; 
