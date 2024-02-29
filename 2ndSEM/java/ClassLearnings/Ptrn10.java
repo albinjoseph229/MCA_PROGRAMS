@@ -9,7 +9,6 @@ public class Ptrn10 {
         {
             n = Integer.parseInt(sc.nextLine());
         }
-
         for (int i = n; i > 0; i--) {
             for (j = 0; j <= n; j++) {
                 if (j < i) {
