@@ -21,7 +21,6 @@ public class Ptrn10 {
         }
         sc.close();
     }
-
 }
 /*
 enter the count
