@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MyClient",
+            "request": "launch",
+            "mainClass": "MyClient",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "MyServer",
+            "request": "launch",
+            "mainClass": "MyServer",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "ResumeMaker",
             "request": "launch",
             "mainClass": "ResumeMaker",
