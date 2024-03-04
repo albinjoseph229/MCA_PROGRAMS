@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DReceiver",
+            "request": "launch",
+            "mainClass": "DReceiver",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "DSender",
+            "request": "launch",
+            "mainClass": "DSender",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "UDPClient",
+            "request": "launch",
+            "mainClass": "UDPClient",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
+            "name": "UDPServer",
+            "request": "launch",
+            "mainClass": "UDPServer",
+            "projectName": "MCA_PROGRAMS_1be52bbc"
+        },
+        {
+            "type": "java",
             "name": "MyClient",
             "request": "launch",
             "mainClass": "MyClient",
