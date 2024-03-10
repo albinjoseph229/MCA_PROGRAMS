@@ -20,7 +20,6 @@ public class Client {
             System.out.println("Sending the File to the Server");
             // Call sendFile method to send file to the server
             sendFile(path);
-
             dataInputStream.close();
             dataOutputStream.close();
         } catch (IOException e) {
