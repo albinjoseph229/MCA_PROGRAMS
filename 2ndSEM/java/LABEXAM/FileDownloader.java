@@ -1,7 +1,5 @@
 import java.io.*;
-import java.net.URI;
-import java.net.http.*;
-import java.nio.file.*;
+import java.net.*;
 
 public class FileDownloader {
     public static void main(String[] args) {
@@ -9,22 +7,44 @@ public class FileDownloader {
         String saveDir = "downloads"; // Directory where you want to save the downloaded file
 
         try {
-            HttpClient httpClient = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(fileUrl))
-                    .build();
+            URL url = new URL(fileUrl);
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            int responseCode = httpConn.getResponseCode();
 
-            Path filePath = Paths.get(saveDir, "file.txt");
-            HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+            // Check if the response code indicates success
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Open input stream from the connection
+                InputStream inputStream = httpConn.getInputStream();
 
-            // Create directory if it doesn't exist
-            Files.createDirectories(Paths.get(saveDir));
+                // Create directory if it doesn't exist
+                File directory = new File(saveDir);
+                if (!directory.exists()) {
+                    directory.mkdir();
+                }
 
-            // Save the downloaded file
-            Files.copy(response.body(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                // Extract file name from URL
+                String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
 
-            System.out.println("File downloaded successfully.");
-        } catch (IOException | InterruptedException e) {
+                // Create output stream to save the file
+                FileOutputStream outputStream = new FileOutputStream(saveDir + File.separator + fileName);
+
+                // Read from input stream and write to output stream
+                int bytesRead;
+                byte[] buffer = new byte[4096];
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+
+                // Close streams
+                outputStream.close();
+                inputStream.close();
+
+                System.out.println("File downloaded successfully.");
+            } else {
+                System.out.println("Failed to download file. Server returned response code: " + responseCode);
+            }
+            httpConn.disconnect();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
