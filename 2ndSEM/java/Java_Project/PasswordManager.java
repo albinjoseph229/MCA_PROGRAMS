@@ -9,11 +9,6 @@ import java.sql.*;
 import java.util.Base64;
 import java.util.Scanner;
 
-/**
- * The PasswordManager class is responsible for managing passwords in a database.
- * It provides functionality to set up a username and password, login, add, retrieve,
- * edit, and remove passwords.
- */
 public class PasswordManager {
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/passwords_db";
     private static final String USERNAME = "root";
@@ -193,7 +188,8 @@ public class PasswordManager {
         try {
             try (Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD)) {
                 String sql = "DELETE FROM passwords WHERE name = ?";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                try
+                (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, name);
                     int rowsAffected = preparedStatement.executeUpdate();
                     if (rowsAffected > 0) {
@@ -241,7 +237,8 @@ public class PasswordManager {
             e.printStackTrace();
         }
     }
-     private static String hashPassword(String password) {
+    
+    private static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes("UTF-8"));
