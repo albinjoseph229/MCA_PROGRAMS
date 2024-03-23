@@ -3,8 +3,8 @@ import java.net.*;
 
 public class FileDownloader {
     public static void main(String[] args) {
-        String fileUrl = "https://example.com/path/to/file.txt"; // Replace with the URL of the file you want to download
-        String saveDir = "downloads"; // Directory where you want to save the downloaded file
+        String fileUrl = "https://example.com/path/to/file.txt"; 
+        String saveDir = "downloads";
 
         try {
             URL url = new URL(fileUrl);
