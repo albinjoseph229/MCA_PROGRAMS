@@ -19,6 +19,5 @@ public class AWT_Example{
                 System.exit(0);
             }
         });
-
     }
 }
