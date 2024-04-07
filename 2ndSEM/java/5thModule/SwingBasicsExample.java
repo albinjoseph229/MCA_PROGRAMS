@@ -12,7 +12,6 @@ public class SwingBasicsExample extends JFrame implements ActionListener {
     private JColorChooser colorChooser;
     private JProgressBar progressBar;
     private JSlider slider;
-
     public SwingBasicsExample() {
         setTitle("Swing Basics Example");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
