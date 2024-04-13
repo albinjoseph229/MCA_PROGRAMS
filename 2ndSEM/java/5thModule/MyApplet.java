@@ -29,6 +29,7 @@ public class MyApplet extends Applet implements ActionListener {
         // Applet stopping
         System.out.println("Applet stopped");
     }
+    
 
     public void paint(Graphics g) {
         // Draw image
