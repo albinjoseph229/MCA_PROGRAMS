@@ -12,7 +12,7 @@ public class SwingBasicsExample extends JFrame implements ActionListener {
     private JColorChooser colorChooser;
     private JProgressBar progressBar;
     private JSlider slider;
-    
+
     public SwingBasicsExample() {
         setTitle("Swing Basics Example");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +35,6 @@ public class SwingBasicsExample extends JFrame implements ActionListener {
         // JTextArea
         textArea = new JTextArea(5, 20);
         add(new JScrollPane(textArea));
-
         // JComboBox
         comboBox = new JComboBox<>(new String[]{"Item 1", "Item 2", "Item 3"});
         add(comboBox);
