@@ -51,6 +51,7 @@ public class AWTControlsExample extends Frame {
             }
         });
     }
+    
     public static void main(String[] args) {
         new AWTControlsExample(); // Create an instance of the AWTControlsExample class
     }
