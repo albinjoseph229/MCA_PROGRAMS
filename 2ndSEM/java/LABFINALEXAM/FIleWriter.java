@@ -1,5 +1,5 @@
 import java.io.*;
-public class FIleInputOutput {
+public class FIleWriter {
     public static void main(String[] args) {
 		try {
 		File fe= new File("a.txt");
