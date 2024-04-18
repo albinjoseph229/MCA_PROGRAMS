@@ -16,7 +16,8 @@ class B extends A{
         this.subject=subject;
     }
     public void disp(){
-        System.out.println("Age:"+age+"\nName:"+name+"\nSubject:"+subject);
+        super.disp();
+        System.out.println("Subject:"+subject);
     }
 }
 public class InheritanceExmp {
