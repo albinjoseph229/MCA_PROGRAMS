@@ -17,6 +17,7 @@ public class program1 {
             Statement statement = connection.createStatement();
 
             // Executing a simple SQL query to insert data
+            Scanner sc=new Scanner(System.in);
             String insertQuery = "INSERT INTO mytable (id, name) VALUES (1, 'albin')";
             int rowsAffected = statement.executeUpdate(insertQuery);
             if (rowsAffected > 0) {
