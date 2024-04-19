@@ -1,0 +1,22 @@
+CREATE OR REPLACE PROCEDURE create_employee(
+    p_emp_id IN NUMBER,
+    p_emp_name IN VARCHAR2,
+    p_department IN VARCHAR2
+)
+AS
+BEGIN
+    -- Insert the employee record into the employees table
+    INSERT INTO employees(emp_id, emp_name, department)
+    VALUES(p_emp_id, p_emp_name, p_department);
+    
+    -- Commit the transaction
+    COMMIT;
+    
+    -- Display a message
+    DBMS_OUTPUT.PUT_LINE('Employee created successfully!');
+EXCEPTION
+    WHEN OTHERS THEN
+        -- Display error message
+        DBMS_OUTPUT.PUT_LINE('Error creating employee: ' || SQLERRM);
+END;
+/
