@@ -10,6 +10,7 @@ public class FileCopier {
 
             String line;
             while ((line = reader.readLine()) != null) {
+                System.out.println(line);
                 writer.write(line); // Write current line to destination file
                 writer.newLine(); // Add newline character
             }
